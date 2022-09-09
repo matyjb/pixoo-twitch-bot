@@ -1,27 +1,27 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:get_storage/get_storage.dart';
-import 'package:pixoo_twitch_emotes_displayer/store/emotes.dart';
-import 'cache_server/cache_server.dart';
+import 'package:pixoo_twitch_emotes_displayer/pages/app_config_page.dart';
+import 'package:pixoo_twitch_emotes_displayer/store/app_config.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  startHostingCache();
   await GetStorage.init();
-  //startListeningChat("wirtual");
+  // startHostingCache();
+  // startListeningChat("wirtual");
   runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
 
-  // This widget is the root of your application.
+  final title = 'Emote Pixoo Displayer';
+
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      title: 'Emote Pixoo Displayer',
-      themeMode: ThemeMode.dark,
-      home: MyHomePage(title: 'Emote Pixoo Displayer'),
+    return MaterialApp(
+      title: title,
+      theme: ThemeData.dark(),
+      home: MyHomePage(title: title),
     );
   }
 }
@@ -35,7 +35,7 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  final emotes = Emotes();
+  final appConfig = AppConfig();
 
   @override
   Widget build(BuildContext context) {
@@ -44,60 +44,14 @@ class _MyHomePageState extends State<MyHomePage> {
         title: Text(widget.title),
       ),
       body: FutureBuilder(
-          future: emotes.init(),
-          builder: (context, snapshot) {
-            if (snapshot.connectionState == ConnectionState.done) {
-              return Settings();
-            } else {
-              return const CircularProgressIndicator();
-            }
-          }),
-    );
-  }
-}
-
-class Settings extends StatelessWidget {
-  Settings({Key? key}) : super(key: key);
-
-  final emotes = Emotes();
-
-  @override
-  Widget build(BuildContext context) {
-    return Center(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: <Widget>[
-          Observer(
-            builder: (context) => DropdownButton<int>(
-              value: emotes.selectedNetworkInterfaceIndex,
-              items: emotes.networkInterfaces.asMap().entries
-                  .map<DropdownMenuItem<int>>(
-                    (e) => DropdownMenuItem<int>(
-                      value: e.key,
-                      child: Text(e.value.name),
-                    ),
-                  )
-                  .toList(),
-              onChanged: emotes.selectNetworkInterface,
-            ),
-          ),
-          Observer(
-            builder: (context) => DropdownButton<int>(
-              value: emotes.selectedPixooDeviceIndex,
-              items: emotes.pixooDevices
-                  .asMap()
-                  .entries
-                  .map<DropdownMenuItem<int>>(
-                    (e) => DropdownMenuItem<int>(
-                      value: e.key,
-                      child: Text(e.value.DeviceName),
-                    ),
-                  )
-                  .toList(),
-              onChanged: emotes.selectPixooDevice,
-            ),
-          ),
-        ],
+        future: appConfig.init(),
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.done) {
+            return const AppConfigPage();
+          } else {
+            return const CircularProgressIndicator();
+          }
+        },
       ),
     );
   }

@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'emotes.dart';
+part of 'app_config.dart';
 
 // **************************************************************************
 // StoreGenerator
@@ -8,25 +8,25 @@ part of 'emotes.dart';
 
 // ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic, no_leading_underscores_for_local_identifiers
 
-mixin _$Emotes on _EmotesBase, Store {
+mixin _$AppConfig on _AppConfigBase, Store {
   Computed<NetworkInterface?>? _$selectedNetworkInterfaceComputed;
 
   @override
   NetworkInterface? get selectedNetworkInterface =>
       (_$selectedNetworkInterfaceComputed ??= Computed<NetworkInterface?>(
               () => super.selectedNetworkInterface,
-              name: '_EmotesBase.selectedNetworkInterface'))
+              name: '_AppConfigBase.selectedNetworkInterface'))
           .value;
   Computed<PixooDevice?>? _$selectedPixooDeviceComputed;
 
   @override
   PixooDevice? get selectedPixooDevice => (_$selectedPixooDeviceComputed ??=
           Computed<PixooDevice?>(() => super.selectedPixooDevice,
-              name: '_EmotesBase.selectedPixooDevice'))
+              name: '_AppConfigBase.selectedPixooDevice'))
       .value;
 
   late final _$networkInterfacesAtom =
-      Atom(name: '_EmotesBase.networkInterfaces', context: context);
+      Atom(name: '_AppConfigBase.networkInterfaces', context: context);
 
   @override
   List<NetworkInterface> get networkInterfaces {
@@ -41,8 +41,8 @@ mixin _$Emotes on _EmotesBase, Store {
     });
   }
 
-  late final _$selectedNetworkInterfaceIndexAtom =
-      Atom(name: '_EmotesBase.selectedNetworkInterfaceIndex', context: context);
+  late final _$selectedNetworkInterfaceIndexAtom = Atom(
+      name: '_AppConfigBase.selectedNetworkInterfaceIndex', context: context);
 
   @override
   int? get selectedNetworkInterfaceIndex {
@@ -59,7 +59,7 @@ mixin _$Emotes on _EmotesBase, Store {
   }
 
   late final _$pixooDevicesAtom =
-      Atom(name: '_EmotesBase.pixooDevices', context: context);
+      Atom(name: '_AppConfigBase.pixooDevices', context: context);
 
   @override
   List<PixooDevice> get pixooDevices {
@@ -75,7 +75,7 @@ mixin _$Emotes on _EmotesBase, Store {
   }
 
   late final _$selectedPixooDeviceIndexAtom =
-      Atom(name: '_EmotesBase.selectedPixooDeviceIndex', context: context);
+      Atom(name: '_AppConfigBase.selectedPixooDeviceIndex', context: context);
 
   @override
   int? get selectedPixooDeviceIndex {
@@ -91,7 +91,7 @@ mixin _$Emotes on _EmotesBase, Store {
     });
   }
 
-  late final _$sizeAtom = Atom(name: '_EmotesBase.size', context: context);
+  late final _$sizeAtom = Atom(name: '_AppConfigBase.size', context: context);
 
   @override
   PixooSize get size {
@@ -107,7 +107,7 @@ mixin _$Emotes on _EmotesBase, Store {
   }
 
   late final _$channelNameAtom =
-      Atom(name: '_EmotesBase.channelName', context: context);
+      Atom(name: '_AppConfigBase.channelName', context: context);
 
   @override
   String? get channelName {
@@ -122,16 +122,8 @@ mixin _$Emotes on _EmotesBase, Store {
     });
   }
 
-  late final _$initAsyncAction =
-      AsyncAction('_EmotesBase.init', context: context);
-
-  @override
-  Future<void> init() {
-    return _$initAsyncAction.run(() => super.init());
-  }
-
   late final _$getNetworkInterfacesAsyncAction =
-      AsyncAction('_EmotesBase.getNetworkInterfaces', context: context);
+      AsyncAction('_AppConfigBase.getNetworkInterfaces', context: context);
 
   @override
   Future<void> getNetworkInterfaces() {
@@ -140,57 +132,57 @@ mixin _$Emotes on _EmotesBase, Store {
   }
 
   late final _$getPixooDevicesAsyncAction =
-      AsyncAction('_EmotesBase.getPixooDevices', context: context);
+      AsyncAction('_AppConfigBase.getPixooDevices', context: context);
 
   @override
   Future<void> getPixooDevices() {
     return _$getPixooDevicesAsyncAction.run(() => super.getPixooDevices());
   }
 
-  late final _$_EmotesBaseActionController =
-      ActionController(name: '_EmotesBase', context: context);
+  late final _$_AppConfigBaseActionController =
+      ActionController(name: '_AppConfigBase', context: context);
 
   @override
   void setChannelName(String? channelName) {
-    final _$actionInfo = _$_EmotesBaseActionController.startAction(
-        name: '_EmotesBase.setChannelName');
+    final _$actionInfo = _$_AppConfigBaseActionController.startAction(
+        name: '_AppConfigBase.setChannelName');
     try {
       return super.setChannelName(channelName);
     } finally {
-      _$_EmotesBaseActionController.endAction(_$actionInfo);
+      _$_AppConfigBaseActionController.endAction(_$actionInfo);
     }
   }
 
   @override
   void selectNetworkInterface(int? index) {
-    final _$actionInfo = _$_EmotesBaseActionController.startAction(
-        name: '_EmotesBase.selectNetworkInteface');
+    final _$actionInfo = _$_AppConfigBaseActionController.startAction(
+        name: '_AppConfigBase.selectNetworkInterface');
     try {
       return super.selectNetworkInterface(index);
     } finally {
-      _$_EmotesBaseActionController.endAction(_$actionInfo);
+      _$_AppConfigBaseActionController.endAction(_$actionInfo);
     }
   }
 
   @override
   void selectPixooDevice(int? index) {
-    final _$actionInfo = _$_EmotesBaseActionController.startAction(
-        name: '_EmotesBase.selectPixooDevice');
+    final _$actionInfo = _$_AppConfigBaseActionController.startAction(
+        name: '_AppConfigBase.selectPixooDevice');
     try {
       return super.selectPixooDevice(index);
     } finally {
-      _$_EmotesBaseActionController.endAction(_$actionInfo);
+      _$_AppConfigBaseActionController.endAction(_$actionInfo);
     }
   }
 
   @override
   void setPixooSize(PixooSize size) {
-    final _$actionInfo = _$_EmotesBaseActionController.startAction(
-        name: '_EmotesBase.setPixooSize');
+    final _$actionInfo = _$_AppConfigBaseActionController.startAction(
+        name: '_AppConfigBase.setPixooSize');
     try {
       return super.setPixooSize(size);
     } finally {
-      _$_EmotesBaseActionController.endAction(_$actionInfo);
+      _$_AppConfigBaseActionController.endAction(_$actionInfo);
     }
   }
 

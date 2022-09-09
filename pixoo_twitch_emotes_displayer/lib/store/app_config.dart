@@ -4,20 +4,19 @@ import 'package:get_storage/get_storage.dart';
 import 'package:mobx/mobx.dart';
 import 'package:pixoo_twitch_emotes_displayer/models/pixoo_device/pixoo_device.dart';
 
-part 'emotes.g.dart';
+part 'app_config.g.dart';
 
-class Emotes extends _EmotesBase with _$Emotes {
-  static final Emotes _singleton = Emotes._internal();
+class AppConfig extends _AppConfigBase with _$AppConfig {
+  static final AppConfig _singleton = AppConfig._internal();
 
-  factory Emotes() {
+  factory AppConfig() {
     return _singleton;
   }
 
-  Emotes._internal();
+  AppConfig._internal();
 }
 
-abstract class _EmotesBase with Store {
-  // #region App settings
+abstract class _AppConfigBase with Store {
   @observable
   List<NetworkInterface> networkInterfaces = List<NetworkInterface>.of([]);
 
@@ -52,6 +51,7 @@ abstract class _EmotesBase with Store {
 
   Future<void> init() async {
     await getNetworkInterfaces();
+    await getPixooDevices();
     int? selectedNetworkInterfaceIndex =
         box.read<int?>("selectedNetworkInterfaceIndex");
     if (selectedNetworkInterfaceIndex != null &&
@@ -70,16 +70,12 @@ abstract class _EmotesBase with Store {
   void setChannelName(String? channelName) {
     this.channelName = channelName;
     box.write("channelName", channelName);
-    // TODO: emote listener reconnect
   }
 
   @action
   void selectNetworkInterface(int? index) {
     selectedNetworkInterfaceIndex = index;
     box.write("selectedNetworkInterfaceIndex", index);
-    if (selectedNetworkInterfaceIndex != null) {
-      getPixooDevices();
-    }
   }
 
   @action
@@ -92,7 +88,6 @@ abstract class _EmotesBase with Store {
   void setPixooSize(PixooSize size) {
     this.size = size;
     box.write("size", size);
-    // TODO: refresh cache
   }
 
   @action
@@ -101,7 +96,6 @@ abstract class _EmotesBase with Store {
         await NetworkInterface.list(type: InternetAddressType.IPv4);
     if (networkInterfaces.isNotEmpty) {
       selectedNetworkInterfaceIndex ??= 0;
-      await getPixooDevices();
     } else {
       selectedNetworkInterfaceIndex = null;
     }
