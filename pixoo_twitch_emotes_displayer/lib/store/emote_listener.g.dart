@@ -40,17 +40,6 @@ mixin _$EmoteListener on _EmoteListenerBase, Store {
   }
 
   @override
-  void connect() {
-    final _$actionInfo = _$_EmoteListenerBaseActionController.startAction(
-        name: '_EmoteListenerBase.connect');
-    try {
-      return super.connect();
-    } finally {
-      _$_EmoteListenerBaseActionController.endAction(_$actionInfo);
-    }
-  }
-
-  @override
   String toString() {
     return '''
 status: ${status}

@@ -3,7 +3,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 part 'twitch_msg.freezed.dart';
 part 'twitch_msg.g.dart';
 
-enum MsgType {msg, unknown}
+enum MsgType { msg, unknown }
 
 @freezed
 class TwitchMessage with _$TwitchMessage {
@@ -13,5 +13,13 @@ class TwitchMessage with _$TwitchMessage {
     required String content,
   }) = _TwitchMessage;
 
-  factory TwitchMessage.fromJson(Map<String, Object?> json) => _$TwitchMessageFromJson(json);
+  factory TwitchMessage.fromJson(Map<String, Object?> json) =>
+      _$TwitchMessageFromJson(json);
+  factory TwitchMessage.fromLine(String line) {
+    return TwitchMessage(
+      type: MsgType.msg,
+      author: "test author",
+      content: line,
+    );
+  }
 }

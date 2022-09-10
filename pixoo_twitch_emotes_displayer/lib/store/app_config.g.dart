@@ -24,6 +24,12 @@ mixin _$AppConfig on _AppConfigBase, Store {
           Computed<PixooDevice?>(() => super.selectedPixooDevice,
               name: '_AppConfigBase.selectedPixooDevice'))
       .value;
+  Computed<bool>? _$isReadyComputed;
+
+  @override
+  bool get isReady => (_$isReadyComputed ??=
+          Computed<bool>(() => super.isReady, name: '_AppConfigBase.isReady'))
+      .value;
 
   late final _$networkInterfacesAtom =
       Atom(name: '_AppConfigBase.networkInterfaces', context: context);
@@ -110,13 +116,13 @@ mixin _$AppConfig on _AppConfigBase, Store {
       Atom(name: '_AppConfigBase.channelName', context: context);
 
   @override
-  String? get channelName {
+  String get channelName {
     _$channelNameAtom.reportRead();
     return super.channelName;
   }
 
   @override
-  set channelName(String? value) {
+  set channelName(String value) {
     _$channelNameAtom.reportWrite(value, super.channelName, () {
       super.channelName = value;
     });
@@ -143,7 +149,7 @@ mixin _$AppConfig on _AppConfigBase, Store {
       ActionController(name: '_AppConfigBase', context: context);
 
   @override
-  void setChannelName(String? channelName) {
+  void setChannelName(String channelName) {
     final _$actionInfo = _$_AppConfigBaseActionController.startAction(
         name: '_AppConfigBase.setChannelName');
     try {
@@ -196,7 +202,8 @@ selectedPixooDeviceIndex: ${selectedPixooDeviceIndex},
 size: ${size},
 channelName: ${channelName},
 selectedNetworkInterface: ${selectedNetworkInterface},
-selectedPixooDevice: ${selectedPixooDevice}
+selectedPixooDevice: ${selectedPixooDevice},
+isReady: ${isReady}
     ''';
   }
 }

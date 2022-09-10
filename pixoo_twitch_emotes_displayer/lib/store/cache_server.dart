@@ -26,6 +26,10 @@ abstract class _CacheServerBase with Store {
   HttpServer? server;
 
   Future<void> start() async {
+    if(server != null) {
+      server!.close(force: true);
+    }
+
     Directory cache =
         Directory("${(await getTemporaryDirectory()).path}/emotes");
     cache.createSync();

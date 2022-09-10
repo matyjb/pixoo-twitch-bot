@@ -44,8 +44,14 @@ abstract class _AppConfigBase with Store {
   PixooSize size = PixooSize.p64;
 
   @observable
-  String? channelName;
+  String channelName = "";
   // #endregion ####################
+
+  @computed
+  bool get isReady =>
+      channelName != "" &&
+      selectedPixooDevice != null &&
+      selectedNetworkInterface != null;
 
   final box = GetStorage();
 
@@ -67,7 +73,7 @@ abstract class _AppConfigBase with Store {
   }
 
   @action
-  void setChannelName(String? channelName) {
+  void setChannelName(String channelName) {
     this.channelName = channelName;
     box.write("channelName", channelName);
   }
