@@ -44,10 +44,11 @@ abstract class _EmoteListenerBase with Store {
   void _setupSocket() {
     socket.stream.listen(
       (message) {
-        if (kDebugMode) {
-          print(message);
-        }
         TwitchMessage parsedMsg = TwitchMessage.fromLine(message);
+        if (kDebugMode && parsedMsg.type == MsgType.msg) {
+          // ignore: avoid_print
+          print(parsedMsg);
+        }
         // TODO: scan for emotes, add to the list and map
       },
       onError: (error) {
