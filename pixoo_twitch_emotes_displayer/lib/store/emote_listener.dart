@@ -34,23 +34,39 @@ IOWebSocketChannel buildSocket() => IOWebSocketChannel.connect(
 abstract class _EmoteListenerBase with Store {
   IOWebSocketChannel socket = buildSocket();
 
-  _EmoteListenerBase() : super() {
-    _setupSocket();
-  }
+  @observable
+  List<String> emoteHistory = [];
 
   @observable
   EmoteListenerStatus status = EmoteListenerStatus.stopped;
 
+  @computed
+  Map<String, int> get ranking =>
+      emoteHistory.fold(<String, int>{}, (previousValue, element) {
+        previousValue[element] == null
+            ? previousValue[element] = 1
+            : previousValue[element] = previousValue[element]! + 1;
+        return previousValue;
+      });
+
+  _EmoteListenerBase() : super() {
+    _setupSocket();
+  }
+
+  void _parseMessage(dynamic message) {
+    TwitchMessage parsedMsg = TwitchMessage.fromLine(message as String);
+    if (kDebugMode && parsedMsg.type == MsgType.msg) {
+      // ignore: avoid_print
+      print(parsedMsg);
+    }
+    if(parsedMsg.type == MsgType.msg){
+      
+    }
+  }
+
   void _setupSocket() {
     socket.stream.listen(
-      (message) {
-        TwitchMessage parsedMsg = TwitchMessage.fromLine(message);
-        if (kDebugMode && parsedMsg.type == MsgType.msg) {
-          // ignore: avoid_print
-          print(parsedMsg);
-        }
-        // TODO: scan for emotes, add to the list and map
-      },
+      _parseMessage,
       onError: (error) {
         if (kDebugMode) {
           print(error);
@@ -59,6 +75,19 @@ abstract class _EmoteListenerBase with Store {
       },
       onDone: () => _changeStatus(EmoteListenerStatus.stopped),
     );
+  }
+
+  @action
+  void _reportEmote(String emote) {
+    emoteHistory.add(emote);
+    if (emoteHistory.length > 10) {
+      emoteHistory.removeLast();
+    }
+  }
+
+  @action
+  void _clearEmoteHistory() {
+    emoteHistory.clear();
   }
 
   @action

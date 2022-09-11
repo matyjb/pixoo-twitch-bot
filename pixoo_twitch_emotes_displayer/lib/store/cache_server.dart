@@ -30,8 +30,10 @@ abstract class _CacheServerBase with Store {
       server!.close(force: true);
     }
 
+    String path = "${(await getTemporaryDirectory()).path}\\emotes";
+
     Directory cache =
-        Directory("${(await getTemporaryDirectory()).path}/emotes");
+        Directory(path);
     cache.createSync();
     
     var handler =
@@ -43,6 +45,7 @@ abstract class _CacheServerBase with Store {
       server = await io.serve(handler, localIp, 8080).then((server) {
         if (kDebugMode) {
           print('Serving at http://${server.address.host}:${server.port}');
+          print("Server root: $path");
         }
         return server;
       });
