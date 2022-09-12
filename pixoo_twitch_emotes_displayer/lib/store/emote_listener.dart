@@ -4,7 +4,7 @@ import 'package:pixoo_twitch_emotes_displayer/models/emote/emote.dart';
 import 'package:pixoo_twitch_emotes_displayer/models/emote_history_entry/emote_history_entry.dart';
 import 'package:pixoo_twitch_emotes_displayer/models/helpers/pair.dart';
 import 'package:pixoo_twitch_emotes_displayer/models/twitch_msg/twitch_msg.dart';
-import 'package:pixoo_twitch_emotes_displayer/services/tEmotes_api.dart';
+import 'package:pixoo_twitch_emotes_displayer/services/t_emotes_api.dart';
 // ignore: depend_on_referenced_packages
 import 'package:web_socket_channel/io.dart';
 
@@ -145,7 +145,9 @@ abstract class _EmoteListenerBase with Store {
 
   @action
   void _changeStatus(EmoteListenerStatus newStatus) {
-    print('$status -> $newStatus');
+    if (kDebugMode) {
+      print('$status -> $newStatus');
+    }
     status = newStatus;
   }
 
@@ -181,7 +183,9 @@ abstract class _EmoteListenerBase with Store {
     try {
       socket.sink.close();
     } catch (e) {
-      print(e);
+      if (kDebugMode) {
+        print(e);
+      }
     }
     _changeStatus(EmoteListenerStatus.stopped);
     _clearEmoteHistory();

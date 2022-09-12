@@ -33,14 +33,14 @@ class ServiceControllerIconButton extends StatelessWidget {
                     emoteListener.connect();
                     CacheServer().start();
                     pushWidget(
-                      newPage: DashboardPage(),
+                      newPage: const DashboardPage(),
                       context: context,
                     );
                     break;
                 }
               }
             : null,
-        icon: Builder(builder: (context) {
+        icon: Observer(builder: (context) {
           switch (emoteListener.status) {
             case EmoteListenerStatus.running:
               return const Icon(Icons.pause_rounded);
