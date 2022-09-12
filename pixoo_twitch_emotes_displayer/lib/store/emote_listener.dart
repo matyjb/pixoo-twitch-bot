@@ -5,6 +5,7 @@ import 'package:pixoo_twitch_emotes_displayer/models/emote_history_entry/emote_h
 import 'package:pixoo_twitch_emotes_displayer/models/helpers/pair.dart';
 import 'package:pixoo_twitch_emotes_displayer/models/twitch_msg/twitch_msg.dart';
 import 'package:pixoo_twitch_emotes_displayer/services/t_emotes_api.dart';
+import 'package:pixoo_twitch_emotes_displayer/store/emote_chooser.dart';
 // ignore: depend_on_referenced_packages
 import 'package:web_socket_channel/io.dart';
 
@@ -43,18 +44,17 @@ abstract class _EmoteListenerBase with Store {
   ObservableList<EmoteHistoryEntry> emoteHistory = ObservableList.of([]);
 
   @observable
-  int maxEmoteHistoryEntryLifetimeSec = 20;
-
-  @observable
   Map<String, Emote> emotes = {};
 
   @observable
   EmoteListenerStatus status = EmoteListenerStatus.stopped;
 
   @computed
-  List<MapEntry<Emote, Pair<DateTime,int>>> get ranking {
-    var rank = emoteHistory.fold(<Emote, Pair<DateTime,int>>{}, (previousValue, element) {
-      Map<Emote, Pair<DateTime,int>> next = previousValue as Map<Emote, Pair<DateTime,int>>;
+  List<MapEntry<Emote, Pair<DateTime, int>>> get ranking {
+    var rank = emoteHistory.fold(<Emote, Pair<DateTime, int>>{},
+        (previousValue, element) {
+      Map<Emote, Pair<DateTime, int>> next =
+          previousValue as Map<Emote, Pair<DateTime, int>>;
       if (next[element.emote] == null) {
         next[element.emote] = Pair(element.time, 1);
       } else {
@@ -115,11 +115,12 @@ abstract class _EmoteListenerBase with Store {
   void _reportEmote(Emote emote) {
     emoteHistory.insert(
         0, EmoteHistoryEntry(emote: emote, time: DateTime.now()));
-    _filterEmoteHistory();
+    filterEmoteHistory();
+    EmoteChooser().refreshDisplayedEmote();
   }
 
   @action
-  void _filterEmoteHistory() {
+  void filterEmoteHistory() {
     if (emoteHistory.length > maxHistorySize) {
       emoteHistory = emoteHistory.sublist(0, maxHistorySize).asObservable();
     }
@@ -127,15 +128,9 @@ abstract class _EmoteListenerBase with Store {
     emoteHistory = emoteHistory
         .where((element) =>
             now.difference(element.time).inSeconds <
-            maxEmoteHistoryEntryLifetimeSec)
+            AppConfig().maxEmoteHistoryEntryLifetimeSec)
         .toList()
         .asObservable();
-  }
-
-  @action
-  void setMaxEmoteHistoryEntryLifetimeSec(int seconds) {
-    maxEmoteHistoryEntryLifetimeSec = seconds;
-    _filterEmoteHistory();
   }
 
   @action
@@ -189,5 +184,6 @@ abstract class _EmoteListenerBase with Store {
     }
     _changeStatus(EmoteListenerStatus.stopped);
     _clearEmoteHistory();
+    EmoteChooser().refreshDisplayedEmote();
   }
 }

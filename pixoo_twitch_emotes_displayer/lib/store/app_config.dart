@@ -4,6 +4,9 @@ import 'package:get_storage/get_storage.dart';
 import 'package:mobx/mobx.dart';
 import 'package:pixoo_twitch_emotes_displayer/models/pixoo_device/pixoo_device.dart';
 
+import 'emote_chooser.dart';
+import 'emote_listener.dart';
+
 part 'app_config.g.dart';
 
 class AppConfig extends _AppConfigBase with _$AppConfig {
@@ -45,6 +48,12 @@ abstract class _AppConfigBase with Store {
 
   @observable
   String channelName = "";
+
+  @observable
+  int emoteOccurancesThreshold = 5;
+
+  @observable
+  int maxEmoteHistoryEntryLifetimeSec = 20;
   // #endregion ####################
 
   @computed
@@ -70,12 +79,36 @@ abstract class _AppConfigBase with Store {
         pixooDevices.length > selectedPixooDeviceIndex) {
       selectPixooDevice(selectedPixooDeviceIndex);
     }
+
+    int? emoteOccurancesThreshold = box.read<int?>("emoteOccurancesThreshold");
+    if (emoteOccurancesThreshold != null) {
+      setEmoteOccurancesThreshold(emoteOccurancesThreshold);
+    }
+
+    int? maxEmoteHistoryEntryLifetimeSec = box.read<int?>("maxEmoteHistoryEntryLifetimeSec");
+    if (maxEmoteHistoryEntryLifetimeSec != null) {
+      setMaxEmoteHistoryEntryLifetimeSec(maxEmoteHistoryEntryLifetimeSec);
+    }
   }
 
   @action
   void setChannelName(String channelName) {
     this.channelName = channelName;
     box.write("channelName", channelName);
+  }
+
+  @action
+  void setEmoteOccurancesThreshold(int t) {
+    emoteOccurancesThreshold = t;
+    box.write("emoteOccurancesThreshold", t);
+    EmoteChooser().refreshDisplayedEmote();
+  }
+
+  @action
+  void setMaxEmoteHistoryEntryLifetimeSec(int seconds) {
+    maxEmoteHistoryEntryLifetimeSec = seconds;
+    box.write("maxEmoteHistoryEntryLifetimeSec", seconds);
+    EmoteListener().filterEmoteHistory();
   }
 
   @action

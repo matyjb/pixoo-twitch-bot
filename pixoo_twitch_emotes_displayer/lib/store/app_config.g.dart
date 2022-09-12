@@ -128,6 +128,40 @@ mixin _$AppConfig on _AppConfigBase, Store {
     });
   }
 
+  late final _$emoteOccurancesThresholdAtom =
+      Atom(name: '_AppConfigBase.emoteOccurancesThreshold', context: context);
+
+  @override
+  int get emoteOccurancesThreshold {
+    _$emoteOccurancesThresholdAtom.reportRead();
+    return super.emoteOccurancesThreshold;
+  }
+
+  @override
+  set emoteOccurancesThreshold(int value) {
+    _$emoteOccurancesThresholdAtom
+        .reportWrite(value, super.emoteOccurancesThreshold, () {
+      super.emoteOccurancesThreshold = value;
+    });
+  }
+
+  late final _$maxEmoteHistoryEntryLifetimeSecAtom = Atom(
+      name: '_AppConfigBase.maxEmoteHistoryEntryLifetimeSec', context: context);
+
+  @override
+  int get maxEmoteHistoryEntryLifetimeSec {
+    _$maxEmoteHistoryEntryLifetimeSecAtom.reportRead();
+    return super.maxEmoteHistoryEntryLifetimeSec;
+  }
+
+  @override
+  set maxEmoteHistoryEntryLifetimeSec(int value) {
+    _$maxEmoteHistoryEntryLifetimeSecAtom
+        .reportWrite(value, super.maxEmoteHistoryEntryLifetimeSec, () {
+      super.maxEmoteHistoryEntryLifetimeSec = value;
+    });
+  }
+
   late final _$getNetworkInterfacesAsyncAction =
       AsyncAction('_AppConfigBase.getNetworkInterfaces', context: context);
 
@@ -154,6 +188,28 @@ mixin _$AppConfig on _AppConfigBase, Store {
         name: '_AppConfigBase.setChannelName');
     try {
       return super.setChannelName(channelName);
+    } finally {
+      _$_AppConfigBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void setEmoteOccurancesThreshold(int t) {
+    final _$actionInfo = _$_AppConfigBaseActionController.startAction(
+        name: '_AppConfigBase.setEmoteOccurancesThreshold');
+    try {
+      return super.setEmoteOccurancesThreshold(t);
+    } finally {
+      _$_AppConfigBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void setMaxEmoteHistoryEntryLifetimeSec(int seconds) {
+    final _$actionInfo = _$_AppConfigBaseActionController.startAction(
+        name: '_AppConfigBase.setMaxEmoteHistoryEntryLifetimeSec');
+    try {
+      return super.setMaxEmoteHistoryEntryLifetimeSec(seconds);
     } finally {
       _$_AppConfigBaseActionController.endAction(_$actionInfo);
     }
@@ -201,6 +257,8 @@ pixooDevices: ${pixooDevices},
 selectedPixooDeviceIndex: ${selectedPixooDeviceIndex},
 size: ${size},
 channelName: ${channelName},
+emoteOccurancesThreshold: ${emoteOccurancesThreshold},
+maxEmoteHistoryEntryLifetimeSec: ${maxEmoteHistoryEntryLifetimeSec},
 selectedNetworkInterface: ${selectedNetworkInterface},
 selectedPixooDevice: ${selectedPixooDevice},
 isReady: ${isReady}

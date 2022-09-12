@@ -35,24 +35,6 @@ mixin _$EmoteListener on _EmoteListenerBase, Store {
     });
   }
 
-  late final _$maxEmoteHistoryEntryLifetimeSecAtom = Atom(
-      name: '_EmoteListenerBase.maxEmoteHistoryEntryLifetimeSec',
-      context: context);
-
-  @override
-  int get maxEmoteHistoryEntryLifetimeSec {
-    _$maxEmoteHistoryEntryLifetimeSecAtom.reportRead();
-    return super.maxEmoteHistoryEntryLifetimeSec;
-  }
-
-  @override
-  set maxEmoteHistoryEntryLifetimeSec(int value) {
-    _$maxEmoteHistoryEntryLifetimeSecAtom
-        .reportWrite(value, super.maxEmoteHistoryEntryLifetimeSec, () {
-      super.maxEmoteHistoryEntryLifetimeSec = value;
-    });
-  }
-
   late final _$emotesAtom =
       Atom(name: '_EmoteListenerBase.emotes', context: context);
 
@@ -108,22 +90,11 @@ mixin _$EmoteListener on _EmoteListenerBase, Store {
   }
 
   @override
-  void _filterEmoteHistory() {
+  void filterEmoteHistory() {
     final _$actionInfo = _$_EmoteListenerBaseActionController.startAction(
-        name: '_EmoteListenerBase._filterEmoteHistory');
+        name: '_EmoteListenerBase.filterEmoteHistory');
     try {
-      return super._filterEmoteHistory();
-    } finally {
-      _$_EmoteListenerBaseActionController.endAction(_$actionInfo);
-    }
-  }
-
-  @override
-  void setMaxEmoteHistoryEntryLifetimeSec(int seconds) {
-    final _$actionInfo = _$_EmoteListenerBaseActionController.startAction(
-        name: '_EmoteListenerBase.setMaxEmoteHistoryEntryLifetimeSec');
-    try {
-      return super.setMaxEmoteHistoryEntryLifetimeSec(seconds);
+      return super.filterEmoteHistory();
     } finally {
       _$_EmoteListenerBaseActionController.endAction(_$actionInfo);
     }
@@ -155,7 +126,6 @@ mixin _$EmoteListener on _EmoteListenerBase, Store {
   String toString() {
     return '''
 emoteHistory: ${emoteHistory},
-maxEmoteHistoryEntryLifetimeSec: ${maxEmoteHistoryEntryLifetimeSec},
 emotes: ${emotes},
 status: ${status},
 ranking: ${ranking}

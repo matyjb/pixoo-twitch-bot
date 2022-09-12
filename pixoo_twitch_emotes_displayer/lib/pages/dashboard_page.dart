@@ -5,6 +5,7 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:pixoo_twitch_emotes_displayer/models/channel_identifiers/channel_identifiers.dart';
 import 'package:pixoo_twitch_emotes_displayer/services/t_emotes_api.dart';
 import 'package:pixoo_twitch_emotes_displayer/store/app_config.dart';
+import 'package:pixoo_twitch_emotes_displayer/store/emote_chooser.dart';
 import 'package:pixoo_twitch_emotes_displayer/store/emote_listener.dart';
 import 'package:pixoo_twitch_emotes_displayer/widgets/service_controller_icon_button.dart';
 
@@ -55,11 +56,21 @@ class DashboardBody extends StatelessWidget {
   }) : super(key: key);
 
   final EmoteListener _emoteListener = EmoteListener();
+  final EmoteChooser _emoteChooser = EmoteChooser();
+  final AppConfig _appConfig = AppConfig();
 
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
+        Observer(builder: (context) {
+          return SizedBox(
+            height: 100,
+            child: _emoteChooser.displayedEmote != null
+                ? Image.network(_emoteChooser.displayedEmote!.urls.last.url)
+                : const Placeholder(),
+          );
+        }),
         Expanded(
           child: Observer(
             builder: (context) {
@@ -95,21 +106,43 @@ class DashboardBody extends StatelessWidget {
           margin: const EdgeInsets.symmetric(horizontal: 8),
           alignment: Alignment.bottomLeft,
           child: Text(
-            "długość historii",
+            "Emote occurances threshold",
             style: Theme.of(context).textTheme.caption,
           ),
         ),
-        Observer(builder: (context) {
-          return Slider(
-            label: _emoteListener.maxEmoteHistoryEntryLifetimeSec.toString(),
-            value: _emoteListener.maxEmoteHistoryEntryLifetimeSec.toDouble(),
-            onChanged: (value) => _emoteListener
-                .setMaxEmoteHistoryEntryLifetimeSec(value.toInt()),
-            divisions: 59,
-            min: 1,
-            max: 60,
-          );
-        })
+        Observer(
+          builder: (context) {
+            return Slider(
+              label: _appConfig.emoteOccurancesThreshold.toString(),
+              value: _appConfig.emoteOccurancesThreshold.toDouble(),
+              onChanged: (value) => _appConfig.setEmoteOccurancesThreshold(value.toInt()),
+              divisions: 4,
+              min: 1,
+              max: 5,
+            );
+          },
+        ),
+        Container(
+          margin: const EdgeInsets.symmetric(horizontal: 8),
+          alignment: Alignment.bottomLeft,
+          child: Text(
+            "Emote ttl",
+            style: Theme.of(context).textTheme.caption,
+          ),
+        ),
+        Observer(
+          builder: (context) {
+            return Slider(
+              label: _appConfig.maxEmoteHistoryEntryLifetimeSec.toString(),
+              value: _appConfig.maxEmoteHistoryEntryLifetimeSec.toDouble(),
+              onChanged: (value) => _appConfig
+                  .setMaxEmoteHistoryEntryLifetimeSec(value.toInt()),
+              divisions: 59,
+              min: 1,
+              max: 60,
+            );
+          },
+        )
       ],
     );
   }

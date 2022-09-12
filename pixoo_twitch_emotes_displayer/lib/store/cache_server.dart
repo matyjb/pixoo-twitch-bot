@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:mobx/mobx.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:pixoo_twitch_emotes_displayer/models/emote/emote.dart';
 import 'package:shelf_static/shelf_static.dart';
 import 'app_config.dart';
 import 'dart:io';
@@ -52,5 +53,11 @@ abstract class _CacheServerBase with Store {
     }else{
       throw "Select NetworkInterface first before starting a server";
     }
+  }
+
+  Future<void> prepareEmote(Emote emote) async {
+    // TODO: check cache if emote exists
+    // if not: download it and scale it
+    // save it to cache
   }
 }
