@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:pixoo_twitch_emotes_displayer/models/channel_identifiers/channel_identifiers.dart';
 import '../models/emote/emote.dart';
 
 class TEmotesAPI {
@@ -20,11 +21,9 @@ class TEmotesAPI {
         .toList();
   }
 
-  static Future<List<Emote>> getChannelIdentifiers(String channelName) async {
+  static Future<ChannelIdentifiers> getChannelIdentifiers(String channelName) async {
     var response = await _dio
         .get('https://emotes.adamcy.pl/v1/channel/$channelName/id');
-    return (response.data as List<dynamic>)
-        .map((e) => Emote.fromJson(e))
-        .toList();
+    return ChannelIdentifiers.fromJson(response.data);
   }
 }

@@ -44,6 +44,7 @@ dependencies:
   get_storage: ^2.0.3
   route_transitions: ^2.0.1
   dio: ^4.0.6
+  animated_list_plus: ^0.4.4
 
 dev_dependencies:
   flutter_test:

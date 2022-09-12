@@ -22,7 +22,12 @@ class AppConfigPage extends StatelessWidget {
               NetworkInterfacesDropdown(),
               PixooDevicesDropdown(),
               ChannelNameTextField(),
-              ServiceControllerIconButton(),
+              Container(
+                margin: const EdgeInsets.all(18.0),
+                child: ServiceControllerIconButton(
+                  iconSize: 50,
+                ),
+              ),
             ],
           ),
         ),
