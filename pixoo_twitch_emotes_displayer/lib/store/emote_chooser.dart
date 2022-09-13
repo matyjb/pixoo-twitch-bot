@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:mobx/mobx.dart';
 import 'package:pixoo_twitch_emotes_displayer/models/emote/emote.dart';
 import 'package:pixoo_twitch_emotes_displayer/store/app_config.dart';
@@ -25,12 +26,13 @@ abstract class _EmoteChooserBase with Store {
   @action
   void refreshDisplayedEmote() {
     if (_emoteListener.ranking.isNotEmpty) {
-      var emote =
-          _emoteListener.ranking.first.value.v2 >= _appConfig.emoteOccurancesThreshold
-              ? _emoteListener.ranking.first.key
-              : null;
+      var emote = _emoteListener.ranking.first.value.v2 >=
+              _appConfig.emoteOccurancesThreshold
+          ? _emoteListener.ranking.first.key
+          : null;
       if (emote != null && emote != displayedEmote) {
         displayedEmote = emote;
+        _sendEmoteToDevice();
       }
       displayedEmote ??= _emoteListener.ranking.first.key;
     } else {
@@ -40,8 +42,21 @@ abstract class _EmoteChooserBase with Store {
 
   Future<void> _sendEmoteToDevice() async {
     if (displayedEmote != null) {
-      await CacheServer().prepareEmote(displayedEmote!);
-      // then send request to devices api
+      try {
+        bool isOk = await CacheServer().prepareEmote(displayedEmote!);
+        // then send request to devices api
+        if (isOk) {
+          print("${displayedEmote?.code} prepared");
+        } else {
+          if (kDebugMode) {
+            print("Could not prepare emote");
+          }
+        }
+      } catch (e) {
+        if (kDebugMode) {
+          print(e);
+        }
+      }
     }
   }
 }
