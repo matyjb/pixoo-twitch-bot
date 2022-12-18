@@ -1,7 +1,7 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
-// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'channel_identifiers.dart';
 
@@ -35,44 +35,47 @@ mixin _$ChannelIdentifiers {
 abstract class $ChannelIdentifiersCopyWith<$Res> {
   factory $ChannelIdentifiersCopyWith(
           ChannelIdentifiers value, $Res Function(ChannelIdentifiers) then) =
-      _$ChannelIdentifiersCopyWithImpl<$Res>;
+      _$ChannelIdentifiersCopyWithImpl<$Res, ChannelIdentifiers>;
+  @useResult
   $Res call({int id, String login, String display_name, String avatar});
 }
 
 /// @nodoc
-class _$ChannelIdentifiersCopyWithImpl<$Res>
+class _$ChannelIdentifiersCopyWithImpl<$Res, $Val extends ChannelIdentifiers>
     implements $ChannelIdentifiersCopyWith<$Res> {
   _$ChannelIdentifiersCopyWithImpl(this._value, this._then);
 
-  final ChannelIdentifiers _value;
   // ignore: unused_field
-  final $Res Function(ChannelIdentifiers) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = freezed,
-    Object? login = freezed,
-    Object? display_name = freezed,
-    Object? avatar = freezed,
+    Object? id = null,
+    Object? login = null,
+    Object? display_name = null,
+    Object? avatar = null,
   }) {
     return _then(_value.copyWith(
-      id: id == freezed
+      id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as int,
-      login: login == freezed
+      login: null == login
           ? _value.login
           : login // ignore: cast_nullable_to_non_nullable
               as String,
-      display_name: display_name == freezed
+      display_name: null == display_name
           ? _value.display_name
           : display_name // ignore: cast_nullable_to_non_nullable
               as String,
-      avatar: avatar == freezed
+      avatar: null == avatar
           ? _value.avatar
           : avatar // ignore: cast_nullable_to_non_nullable
               as String,
-    ));
+    ) as $Val);
   }
 }
 
@@ -83,41 +86,40 @@ abstract class _$$_ChannelIdentifiersCopyWith<$Res>
           $Res Function(_$_ChannelIdentifiers) then) =
       __$$_ChannelIdentifiersCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call({int id, String login, String display_name, String avatar});
 }
 
 /// @nodoc
 class __$$_ChannelIdentifiersCopyWithImpl<$Res>
-    extends _$ChannelIdentifiersCopyWithImpl<$Res>
+    extends _$ChannelIdentifiersCopyWithImpl<$Res, _$_ChannelIdentifiers>
     implements _$$_ChannelIdentifiersCopyWith<$Res> {
   __$$_ChannelIdentifiersCopyWithImpl(
       _$_ChannelIdentifiers _value, $Res Function(_$_ChannelIdentifiers) _then)
-      : super(_value, (v) => _then(v as _$_ChannelIdentifiers));
+      : super(_value, _then);
 
-  @override
-  _$_ChannelIdentifiers get _value => super._value as _$_ChannelIdentifiers;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = freezed,
-    Object? login = freezed,
-    Object? display_name = freezed,
-    Object? avatar = freezed,
+    Object? id = null,
+    Object? login = null,
+    Object? display_name = null,
+    Object? avatar = null,
   }) {
     return _then(_$_ChannelIdentifiers(
-      id: id == freezed
+      id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as int,
-      login: login == freezed
+      login: null == login
           ? _value.login
           : login // ignore: cast_nullable_to_non_nullable
               as String,
-      display_name: display_name == freezed
+      display_name: null == display_name
           ? _value.display_name
           : display_name // ignore: cast_nullable_to_non_nullable
               as String,
-      avatar: avatar == freezed
+      avatar: null == avatar
           ? _value.avatar
           : avatar // ignore: cast_nullable_to_non_nullable
               as String,
@@ -156,24 +158,20 @@ class _$_ChannelIdentifiers implements _ChannelIdentifiers {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_ChannelIdentifiers &&
-            const DeepCollectionEquality().equals(other.id, id) &&
-            const DeepCollectionEquality().equals(other.login, login) &&
-            const DeepCollectionEquality()
-                .equals(other.display_name, display_name) &&
-            const DeepCollectionEquality().equals(other.avatar, avatar));
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.login, login) || other.login == login) &&
+            (identical(other.display_name, display_name) ||
+                other.display_name == display_name) &&
+            (identical(other.avatar, avatar) || other.avatar == avatar));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(id),
-      const DeepCollectionEquality().hash(login),
-      const DeepCollectionEquality().hash(display_name),
-      const DeepCollectionEquality().hash(avatar));
+  int get hashCode => Object.hash(runtimeType, id, login, display_name, avatar);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_ChannelIdentifiersCopyWith<_$_ChannelIdentifiers> get copyWith =>
       __$$_ChannelIdentifiersCopyWithImpl<_$_ChannelIdentifiers>(
           this, _$identity);

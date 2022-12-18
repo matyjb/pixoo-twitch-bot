@@ -1,11 +1,29 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:pixoo_twitch_emotes_displayer/pages/app_config_page.dart';
 import 'package:pixoo_twitch_emotes_displayer/store/app_config.dart';
-
+import 'package:pixoo_twitch_emotes_displayer/store/cache_server.dart';
+import 'package:pixoo_twitch_emotes_displayer/store/emote_chooser.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await GetStorage.init();
+  String emoteCachePath = await getTemporaryDirectory().then((value) {
+    String path = "${value.path}\\PixooEmoteDisplayer\\emotes";
+    Directory(path).createSync(recursive: true);
+    return path;
+  });
+  String tmpCachePath = await getTemporaryDirectory().then((value) {
+    String path = "${value.path}\\PixooEmoteDisplayer\\tmp";
+    Directory(path).createSync(recursive: true);
+    return path;
+  });
+  CacheServer().emoteCachePath = emoteCachePath;
+  CacheServer().tmpCachePath = tmpCachePath;
+  EmoteChooser().startDirWatch();
+  EmoteChooser().startMagickService();
   // startHostingCache();
   // startListeningChat("wirtual");
   runApp(const MyApp());

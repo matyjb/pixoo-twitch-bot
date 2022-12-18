@@ -1,7 +1,7 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
-// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'twitch_msg.dart';
 
@@ -34,39 +34,42 @@ mixin _$TwitchMessage {
 abstract class $TwitchMessageCopyWith<$Res> {
   factory $TwitchMessageCopyWith(
           TwitchMessage value, $Res Function(TwitchMessage) then) =
-      _$TwitchMessageCopyWithImpl<$Res>;
+      _$TwitchMessageCopyWithImpl<$Res, TwitchMessage>;
+  @useResult
   $Res call({MsgType type, String author, String content});
 }
 
 /// @nodoc
-class _$TwitchMessageCopyWithImpl<$Res>
+class _$TwitchMessageCopyWithImpl<$Res, $Val extends TwitchMessage>
     implements $TwitchMessageCopyWith<$Res> {
   _$TwitchMessageCopyWithImpl(this._value, this._then);
 
-  final TwitchMessage _value;
   // ignore: unused_field
-  final $Res Function(TwitchMessage) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? type = freezed,
-    Object? author = freezed,
-    Object? content = freezed,
+    Object? type = null,
+    Object? author = null,
+    Object? content = null,
   }) {
     return _then(_value.copyWith(
-      type: type == freezed
+      type: null == type
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
               as MsgType,
-      author: author == freezed
+      author: null == author
           ? _value.author
           : author // ignore: cast_nullable_to_non_nullable
               as String,
-      content: content == freezed
+      content: null == content
           ? _value.content
           : content // ignore: cast_nullable_to_non_nullable
               as String,
-    ));
+    ) as $Val);
   }
 }
 
@@ -77,36 +80,35 @@ abstract class _$$_TwitchMessageCopyWith<$Res>
           _$_TwitchMessage value, $Res Function(_$_TwitchMessage) then) =
       __$$_TwitchMessageCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call({MsgType type, String author, String content});
 }
 
 /// @nodoc
 class __$$_TwitchMessageCopyWithImpl<$Res>
-    extends _$TwitchMessageCopyWithImpl<$Res>
+    extends _$TwitchMessageCopyWithImpl<$Res, _$_TwitchMessage>
     implements _$$_TwitchMessageCopyWith<$Res> {
   __$$_TwitchMessageCopyWithImpl(
       _$_TwitchMessage _value, $Res Function(_$_TwitchMessage) _then)
-      : super(_value, (v) => _then(v as _$_TwitchMessage));
+      : super(_value, _then);
 
-  @override
-  _$_TwitchMessage get _value => super._value as _$_TwitchMessage;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? type = freezed,
-    Object? author = freezed,
-    Object? content = freezed,
+    Object? type = null,
+    Object? author = null,
+    Object? content = null,
   }) {
     return _then(_$_TwitchMessage(
-      type: type == freezed
+      type: null == type
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
               as MsgType,
-      author: author == freezed
+      author: null == author
           ? _value.author
           : author // ignore: cast_nullable_to_non_nullable
               as String,
-      content: content == freezed
+      content: null == content
           ? _value.content
           : content // ignore: cast_nullable_to_non_nullable
               as String,
@@ -140,21 +142,18 @@ class _$_TwitchMessage implements _TwitchMessage {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_TwitchMessage &&
-            const DeepCollectionEquality().equals(other.type, type) &&
-            const DeepCollectionEquality().equals(other.author, author) &&
-            const DeepCollectionEquality().equals(other.content, content));
+            (identical(other.type, type) || other.type == type) &&
+            (identical(other.author, author) || other.author == author) &&
+            (identical(other.content, content) || other.content == content));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(type),
-      const DeepCollectionEquality().hash(author),
-      const DeepCollectionEquality().hash(content));
+  int get hashCode => Object.hash(runtimeType, type, author, content);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_TwitchMessageCopyWith<_$_TwitchMessage> get copyWith =>
       __$$_TwitchMessageCopyWithImpl<_$_TwitchMessage>(this, _$identity);
 

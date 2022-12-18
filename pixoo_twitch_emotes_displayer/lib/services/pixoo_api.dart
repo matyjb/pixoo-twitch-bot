@@ -7,13 +7,15 @@ class PixooAPI {
   static final Dio _dio = Dio();
 
   static Future<bool> playGifFile(String deviceIp, String emoteUrl) async {
+    String pixooDeviceUrl = 'http://$deviceIp:80/post';
+    print("[EMOTE SEND] $emoteUrl -> $pixooDeviceUrl");
     dynamic data = {
       "Command": "Device/PlayTFGif",
       "FileType": 2,
-      "FileName": emoteUrl
+      "FileName": Uri.parse(emoteUrl)
     };
     try {
-      await _dio.post('http://$deviceIp:80/post', data: data);
+      await _dio.post(pixooDeviceUrl, data: data);
       return true;
     } catch (e) {
       if (kDebugMode) {

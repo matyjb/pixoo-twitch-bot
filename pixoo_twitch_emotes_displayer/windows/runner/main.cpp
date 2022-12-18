@@ -27,7 +27,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE instance, _In_opt_ HINSTANCE prev,
   FlutterWindow window(project);
   Win32Window::Point origin(10, 10);
   Win32Window::Size size(400, 720);
-  if (!window.CreateAndShow(L"pixoo_twitch_emotes_displayer", origin, size)) {
+  if (!window.CreateAndShow(L"Pixoo Twitch Emote Displayer", origin, size)) {
     return EXIT_FAILURE;
   }
   window.SetQuitOnClose(true);

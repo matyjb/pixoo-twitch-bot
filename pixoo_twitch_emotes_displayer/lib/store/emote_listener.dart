@@ -76,6 +76,7 @@ abstract class _EmoteListenerBase with Store {
   }
 
   void _parseMessage(dynamic message) {
+    print(message);
     var messageStr = message as String;
     if (messageStr.startsWith("PING")) {
       socket.sink.add(messageStr.replaceFirst("PING", "PONG"));

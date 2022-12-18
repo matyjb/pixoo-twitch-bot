@@ -27,6 +27,11 @@ class DashboardPage extends StatelessWidget {
               leading: ServiceControllerIconButton(),
               title: Text(snapshot.data!.display_name),
               actions: [
+                IconButton(
+                  icon: const Icon(Icons.refresh_rounded),
+                  onPressed: () =>
+                      EmoteListener().getEmotes(AppConfig().channelName),
+                ),
                 Container(
                   margin: const EdgeInsets.symmetric(horizontal: 4),
                   child: CircleAvatar(
@@ -115,7 +120,8 @@ class DashboardBody extends StatelessWidget {
             return Slider(
               label: _appConfig.emoteOccurancesThreshold.toString(),
               value: _appConfig.emoteOccurancesThreshold.toDouble(),
-              onChanged: (value) => _appConfig.setEmoteOccurancesThreshold(value.toInt()),
+              onChanged: (value) =>
+                  _appConfig.setEmoteOccurancesThreshold(value.toInt()),
               divisions: 4,
               min: 1,
               max: 5,
@@ -135,8 +141,8 @@ class DashboardBody extends StatelessWidget {
             return Slider(
               label: _appConfig.maxEmoteHistoryEntryLifetimeSec.toString(),
               value: _appConfig.maxEmoteHistoryEntryLifetimeSec.toDouble(),
-              onChanged: (value) => _appConfig
-                  .setMaxEmoteHistoryEntryLifetimeSec(value.toInt()),
+              onChanged: (value) =>
+                  _appConfig.setMaxEmoteHistoryEntryLifetimeSec(value.toInt()),
               divisions: 59,
               min: 1,
               max: 60,

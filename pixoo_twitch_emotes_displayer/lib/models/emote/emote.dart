@@ -1,7 +1,9 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:pixoo_twitch_emotes_displayer/models/pixoo_device/pixoo_device.dart';
 part 'emote.freezed.dart';
 
 enum EmoteSize { x1, x2, x4 }
+
 enum EmoteProvider { twitch, seventv, bttv, ffz }
 
 @freezed
@@ -32,6 +34,15 @@ class EmoteUrl with _$EmoteUrl {
   }
 }
 
+String encodeFileName(String name) {
+  List<String> forbiddenChars = ["<", ">", ":", "\"", "/", "\\", "|", "?", "*"];
+  String result = name;
+  for (var c in forbiddenChars) {
+    result = result.replaceAll(c, "[${c.codeUnitAt(0)}]");
+  }
+  return result;
+}
+
 @freezed
 class Emote with _$Emote {
   const factory Emote({
@@ -39,6 +50,9 @@ class Emote with _$Emote {
     required String code,
     required List<EmoteUrl> urls,
   }) = _Emote;
+
+  static String emoteFileName(Emote e, PixooSize pixooSize) =>
+      encodeFileName("${e.code}_${e.urls.last.hashCode}_${e.provider.name}_${pixooSize.name}");
 
   factory Emote.fromJson(Map<String, Object?> json) {
     return Emote(

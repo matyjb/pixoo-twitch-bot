@@ -1,7 +1,7 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
-// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'emote_history_entry.dart';
 
@@ -28,42 +28,46 @@ mixin _$EmoteHistoryEntry {
 abstract class $EmoteHistoryEntryCopyWith<$Res> {
   factory $EmoteHistoryEntryCopyWith(
           EmoteHistoryEntry value, $Res Function(EmoteHistoryEntry) then) =
-      _$EmoteHistoryEntryCopyWithImpl<$Res>;
+      _$EmoteHistoryEntryCopyWithImpl<$Res, EmoteHistoryEntry>;
+  @useResult
   $Res call({Emote emote, DateTime time});
 
   $EmoteCopyWith<$Res> get emote;
 }
 
 /// @nodoc
-class _$EmoteHistoryEntryCopyWithImpl<$Res>
+class _$EmoteHistoryEntryCopyWithImpl<$Res, $Val extends EmoteHistoryEntry>
     implements $EmoteHistoryEntryCopyWith<$Res> {
   _$EmoteHistoryEntryCopyWithImpl(this._value, this._then);
 
-  final EmoteHistoryEntry _value;
   // ignore: unused_field
-  final $Res Function(EmoteHistoryEntry) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? emote = freezed,
-    Object? time = freezed,
+    Object? emote = null,
+    Object? time = null,
   }) {
     return _then(_value.copyWith(
-      emote: emote == freezed
+      emote: null == emote
           ? _value.emote
           : emote // ignore: cast_nullable_to_non_nullable
               as Emote,
-      time: time == freezed
+      time: null == time
           ? _value.time
           : time // ignore: cast_nullable_to_non_nullable
               as DateTime,
-    ));
+    ) as $Val);
   }
 
   @override
+  @pragma('vm:prefer-inline')
   $EmoteCopyWith<$Res> get emote {
     return $EmoteCopyWith<$Res>(_value.emote, (value) {
-      return _then(_value.copyWith(emote: value));
+      return _then(_value.copyWith(emote: value) as $Val);
     });
   }
 }
@@ -75,6 +79,7 @@ abstract class _$$_EmoteHistoryEntryCopyWith<$Res>
           $Res Function(_$_EmoteHistoryEntry) then) =
       __$$_EmoteHistoryEntryCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call({Emote emote, DateTime time});
 
   @override
@@ -83,26 +88,24 @@ abstract class _$$_EmoteHistoryEntryCopyWith<$Res>
 
 /// @nodoc
 class __$$_EmoteHistoryEntryCopyWithImpl<$Res>
-    extends _$EmoteHistoryEntryCopyWithImpl<$Res>
+    extends _$EmoteHistoryEntryCopyWithImpl<$Res, _$_EmoteHistoryEntry>
     implements _$$_EmoteHistoryEntryCopyWith<$Res> {
   __$$_EmoteHistoryEntryCopyWithImpl(
       _$_EmoteHistoryEntry _value, $Res Function(_$_EmoteHistoryEntry) _then)
-      : super(_value, (v) => _then(v as _$_EmoteHistoryEntry));
+      : super(_value, _then);
 
-  @override
-  _$_EmoteHistoryEntry get _value => super._value as _$_EmoteHistoryEntry;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? emote = freezed,
-    Object? time = freezed,
+    Object? emote = null,
+    Object? time = null,
   }) {
     return _then(_$_EmoteHistoryEntry(
-      emote: emote == freezed
+      emote: null == emote
           ? _value.emote
           : emote // ignore: cast_nullable_to_non_nullable
               as Emote,
-      time: time == freezed
+      time: null == time
           ? _value.time
           : time // ignore: cast_nullable_to_non_nullable
               as DateTime,
@@ -130,18 +133,16 @@ class _$_EmoteHistoryEntry implements _EmoteHistoryEntry {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_EmoteHistoryEntry &&
-            const DeepCollectionEquality().equals(other.emote, emote) &&
-            const DeepCollectionEquality().equals(other.time, time));
+            (identical(other.emote, emote) || other.emote == emote) &&
+            (identical(other.time, time) || other.time == time));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(emote),
-      const DeepCollectionEquality().hash(time));
+  int get hashCode => Object.hash(runtimeType, emote, time);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_EmoteHistoryEntryCopyWith<_$_EmoteHistoryEntry> get copyWith =>
       __$$_EmoteHistoryEntryCopyWithImpl<_$_EmoteHistoryEntry>(
           this, _$identity);

@@ -44,8 +44,11 @@ FlutterWindow::MessageHandler(HWND hwnd, UINT const message,
   // Give Flutter, including plugins, an opportunity to handle window messages.
   if (flutter_controller_) {
     std::optional<LRESULT> result =
-        flutter_controller_->HandleTopLevelWindowProc(hwnd, message, wparam,
-                                                      lparam);
+      flutter_controller_->HandleTopLevelWindowProc(hwnd,
+        message,
+        wparam,
+        lparam
+      );
     if (result) {
       return *result;
     }

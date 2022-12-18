@@ -1,7 +1,7 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
-// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'emote.dart';
 
@@ -27,33 +27,37 @@ mixin _$EmoteUrl {
 /// @nodoc
 abstract class $EmoteUrlCopyWith<$Res> {
   factory $EmoteUrlCopyWith(EmoteUrl value, $Res Function(EmoteUrl) then) =
-      _$EmoteUrlCopyWithImpl<$Res>;
+      _$EmoteUrlCopyWithImpl<$Res, EmoteUrl>;
+  @useResult
   $Res call({EmoteSize size, String url});
 }
 
 /// @nodoc
-class _$EmoteUrlCopyWithImpl<$Res> implements $EmoteUrlCopyWith<$Res> {
+class _$EmoteUrlCopyWithImpl<$Res, $Val extends EmoteUrl>
+    implements $EmoteUrlCopyWith<$Res> {
   _$EmoteUrlCopyWithImpl(this._value, this._then);
 
-  final EmoteUrl _value;
   // ignore: unused_field
-  final $Res Function(EmoteUrl) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? size = freezed,
-    Object? url = freezed,
+    Object? size = null,
+    Object? url = null,
   }) {
     return _then(_value.copyWith(
-      size: size == freezed
+      size: null == size
           ? _value.size
           : size // ignore: cast_nullable_to_non_nullable
               as EmoteSize,
-      url: url == freezed
+      url: null == url
           ? _value.url
           : url // ignore: cast_nullable_to_non_nullable
               as String,
-    ));
+    ) as $Val);
   }
 }
 
@@ -63,30 +67,30 @@ abstract class _$$_EmoteUrlCopyWith<$Res> implements $EmoteUrlCopyWith<$Res> {
           _$_EmoteUrl value, $Res Function(_$_EmoteUrl) then) =
       __$$_EmoteUrlCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call({EmoteSize size, String url});
 }
 
 /// @nodoc
-class __$$_EmoteUrlCopyWithImpl<$Res> extends _$EmoteUrlCopyWithImpl<$Res>
+class __$$_EmoteUrlCopyWithImpl<$Res>
+    extends _$EmoteUrlCopyWithImpl<$Res, _$_EmoteUrl>
     implements _$$_EmoteUrlCopyWith<$Res> {
   __$$_EmoteUrlCopyWithImpl(
       _$_EmoteUrl _value, $Res Function(_$_EmoteUrl) _then)
-      : super(_value, (v) => _then(v as _$_EmoteUrl));
+      : super(_value, _then);
 
-  @override
-  _$_EmoteUrl get _value => super._value as _$_EmoteUrl;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? size = freezed,
-    Object? url = freezed,
+    Object? size = null,
+    Object? url = null,
   }) {
     return _then(_$_EmoteUrl(
-      size: size == freezed
+      size: null == size
           ? _value.size
           : size // ignore: cast_nullable_to_non_nullable
               as EmoteSize,
-      url: url == freezed
+      url: null == url
           ? _value.url
           : url // ignore: cast_nullable_to_non_nullable
               as String,
@@ -114,18 +118,16 @@ class _$_EmoteUrl implements _EmoteUrl {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_EmoteUrl &&
-            const DeepCollectionEquality().equals(other.size, size) &&
-            const DeepCollectionEquality().equals(other.url, url));
+            (identical(other.size, size) || other.size == size) &&
+            (identical(other.url, url) || other.url == url));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(size),
-      const DeepCollectionEquality().hash(url));
+  int get hashCode => Object.hash(runtimeType, size, url);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_EmoteUrlCopyWith<_$_EmoteUrl> get copyWith =>
       __$$_EmoteUrlCopyWithImpl<_$_EmoteUrl>(this, _$identity);
 }
@@ -157,38 +159,42 @@ mixin _$Emote {
 /// @nodoc
 abstract class $EmoteCopyWith<$Res> {
   factory $EmoteCopyWith(Emote value, $Res Function(Emote) then) =
-      _$EmoteCopyWithImpl<$Res>;
+      _$EmoteCopyWithImpl<$Res, Emote>;
+  @useResult
   $Res call({EmoteProvider provider, String code, List<EmoteUrl> urls});
 }
 
 /// @nodoc
-class _$EmoteCopyWithImpl<$Res> implements $EmoteCopyWith<$Res> {
+class _$EmoteCopyWithImpl<$Res, $Val extends Emote>
+    implements $EmoteCopyWith<$Res> {
   _$EmoteCopyWithImpl(this._value, this._then);
 
-  final Emote _value;
   // ignore: unused_field
-  final $Res Function(Emote) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? provider = freezed,
-    Object? code = freezed,
-    Object? urls = freezed,
+    Object? provider = null,
+    Object? code = null,
+    Object? urls = null,
   }) {
     return _then(_value.copyWith(
-      provider: provider == freezed
+      provider: null == provider
           ? _value.provider
           : provider // ignore: cast_nullable_to_non_nullable
               as EmoteProvider,
-      code: code == freezed
+      code: null == code
           ? _value.code
           : code // ignore: cast_nullable_to_non_nullable
               as String,
-      urls: urls == freezed
+      urls: null == urls
           ? _value.urls
           : urls // ignore: cast_nullable_to_non_nullable
               as List<EmoteUrl>,
-    ));
+    ) as $Val);
   }
 }
 
@@ -197,34 +203,33 @@ abstract class _$$_EmoteCopyWith<$Res> implements $EmoteCopyWith<$Res> {
   factory _$$_EmoteCopyWith(_$_Emote value, $Res Function(_$_Emote) then) =
       __$$_EmoteCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call({EmoteProvider provider, String code, List<EmoteUrl> urls});
 }
 
 /// @nodoc
-class __$$_EmoteCopyWithImpl<$Res> extends _$EmoteCopyWithImpl<$Res>
+class __$$_EmoteCopyWithImpl<$Res> extends _$EmoteCopyWithImpl<$Res, _$_Emote>
     implements _$$_EmoteCopyWith<$Res> {
   __$$_EmoteCopyWithImpl(_$_Emote _value, $Res Function(_$_Emote) _then)
-      : super(_value, (v) => _then(v as _$_Emote));
+      : super(_value, _then);
 
-  @override
-  _$_Emote get _value => super._value as _$_Emote;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? provider = freezed,
-    Object? code = freezed,
-    Object? urls = freezed,
+    Object? provider = null,
+    Object? code = null,
+    Object? urls = null,
   }) {
     return _then(_$_Emote(
-      provider: provider == freezed
+      provider: null == provider
           ? _value.provider
           : provider // ignore: cast_nullable_to_non_nullable
               as EmoteProvider,
-      code: code == freezed
+      code: null == code
           ? _value.code
           : code // ignore: cast_nullable_to_non_nullable
               as String,
-      urls: urls == freezed
+      urls: null == urls
           ? _value._urls
           : urls // ignore: cast_nullable_to_non_nullable
               as List<EmoteUrl>,
@@ -248,6 +253,7 @@ class _$_Emote implements _Emote {
   final List<EmoteUrl> _urls;
   @override
   List<EmoteUrl> get urls {
+    if (_urls is EqualUnmodifiableListView) return _urls;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_urls);
   }
@@ -262,20 +268,19 @@ class _$_Emote implements _Emote {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_Emote &&
-            const DeepCollectionEquality().equals(other.provider, provider) &&
-            const DeepCollectionEquality().equals(other.code, code) &&
+            (identical(other.provider, provider) ||
+                other.provider == provider) &&
+            (identical(other.code, code) || other.code == code) &&
             const DeepCollectionEquality().equals(other._urls, _urls));
   }
 
   @override
   int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(provider),
-      const DeepCollectionEquality().hash(code),
-      const DeepCollectionEquality().hash(_urls));
+      runtimeType, provider, code, const DeepCollectionEquality().hash(_urls));
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_EmoteCopyWith<_$_Emote> get copyWith =>
       __$$_EmoteCopyWithImpl<_$_Emote>(this, _$identity);
 }

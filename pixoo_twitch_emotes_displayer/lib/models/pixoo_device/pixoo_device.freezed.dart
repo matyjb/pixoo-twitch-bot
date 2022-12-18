@@ -1,7 +1,7 @@
 // coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: type=lint
-// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
 part of 'pixoo_device.dart';
 
@@ -35,7 +35,8 @@ mixin _$PixooDevice {
 abstract class $PixooDeviceCopyWith<$Res> {
   factory $PixooDeviceCopyWith(
           PixooDevice value, $Res Function(PixooDevice) then) =
-      _$PixooDeviceCopyWithImpl<$Res>;
+      _$PixooDeviceCopyWithImpl<$Res, PixooDevice>;
+  @useResult
   $Res call(
       {String DeviceName,
       int DeviceId,
@@ -44,38 +45,41 @@ abstract class $PixooDeviceCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$PixooDeviceCopyWithImpl<$Res> implements $PixooDeviceCopyWith<$Res> {
+class _$PixooDeviceCopyWithImpl<$Res, $Val extends PixooDevice>
+    implements $PixooDeviceCopyWith<$Res> {
   _$PixooDeviceCopyWithImpl(this._value, this._then);
 
-  final PixooDevice _value;
   // ignore: unused_field
-  final $Res Function(PixooDevice) _then;
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
 
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? DeviceName = freezed,
-    Object? DeviceId = freezed,
-    Object? DevicePrivateIP = freezed,
-    Object? DeviceMac = freezed,
+    Object? DeviceName = null,
+    Object? DeviceId = null,
+    Object? DevicePrivateIP = null,
+    Object? DeviceMac = null,
   }) {
     return _then(_value.copyWith(
-      DeviceName: DeviceName == freezed
+      DeviceName: null == DeviceName
           ? _value.DeviceName
           : DeviceName // ignore: cast_nullable_to_non_nullable
               as String,
-      DeviceId: DeviceId == freezed
+      DeviceId: null == DeviceId
           ? _value.DeviceId
           : DeviceId // ignore: cast_nullable_to_non_nullable
               as int,
-      DevicePrivateIP: DevicePrivateIP == freezed
+      DevicePrivateIP: null == DevicePrivateIP
           ? _value.DevicePrivateIP
           : DevicePrivateIP // ignore: cast_nullable_to_non_nullable
               as String,
-      DeviceMac: DeviceMac == freezed
+      DeviceMac: null == DeviceMac
           ? _value.DeviceMac
           : DeviceMac // ignore: cast_nullable_to_non_nullable
               as String,
-    ));
+    ) as $Val);
   }
 }
 
@@ -86,6 +90,7 @@ abstract class _$$_PixooDeviceCopyWith<$Res>
           _$_PixooDevice value, $Res Function(_$_PixooDevice) then) =
       __$$_PixooDeviceCopyWithImpl<$Res>;
   @override
+  @useResult
   $Res call(
       {String DeviceName,
       int DeviceId,
@@ -94,36 +99,35 @@ abstract class _$$_PixooDeviceCopyWith<$Res>
 }
 
 /// @nodoc
-class __$$_PixooDeviceCopyWithImpl<$Res> extends _$PixooDeviceCopyWithImpl<$Res>
+class __$$_PixooDeviceCopyWithImpl<$Res>
+    extends _$PixooDeviceCopyWithImpl<$Res, _$_PixooDevice>
     implements _$$_PixooDeviceCopyWith<$Res> {
   __$$_PixooDeviceCopyWithImpl(
       _$_PixooDevice _value, $Res Function(_$_PixooDevice) _then)
-      : super(_value, (v) => _then(v as _$_PixooDevice));
+      : super(_value, _then);
 
-  @override
-  _$_PixooDevice get _value => super._value as _$_PixooDevice;
-
+  @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? DeviceName = freezed,
-    Object? DeviceId = freezed,
-    Object? DevicePrivateIP = freezed,
-    Object? DeviceMac = freezed,
+    Object? DeviceName = null,
+    Object? DeviceId = null,
+    Object? DevicePrivateIP = null,
+    Object? DeviceMac = null,
   }) {
     return _then(_$_PixooDevice(
-      DeviceName: DeviceName == freezed
+      DeviceName: null == DeviceName
           ? _value.DeviceName
           : DeviceName // ignore: cast_nullable_to_non_nullable
               as String,
-      DeviceId: DeviceId == freezed
+      DeviceId: null == DeviceId
           ? _value.DeviceId
           : DeviceId // ignore: cast_nullable_to_non_nullable
               as int,
-      DevicePrivateIP: DevicePrivateIP == freezed
+      DevicePrivateIP: null == DevicePrivateIP
           ? _value.DevicePrivateIP
           : DevicePrivateIP // ignore: cast_nullable_to_non_nullable
               as String,
-      DeviceMac: DeviceMac == freezed
+      DeviceMac: null == DeviceMac
           ? _value.DeviceMac
           : DeviceMac // ignore: cast_nullable_to_non_nullable
               as String,
@@ -162,25 +166,24 @@ class _$_PixooDevice implements _PixooDevice {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_PixooDevice &&
-            const DeepCollectionEquality()
-                .equals(other.DeviceName, DeviceName) &&
-            const DeepCollectionEquality().equals(other.DeviceId, DeviceId) &&
-            const DeepCollectionEquality()
-                .equals(other.DevicePrivateIP, DevicePrivateIP) &&
-            const DeepCollectionEquality().equals(other.DeviceMac, DeviceMac));
+            (identical(other.DeviceName, DeviceName) ||
+                other.DeviceName == DeviceName) &&
+            (identical(other.DeviceId, DeviceId) ||
+                other.DeviceId == DeviceId) &&
+            (identical(other.DevicePrivateIP, DevicePrivateIP) ||
+                other.DevicePrivateIP == DevicePrivateIP) &&
+            (identical(other.DeviceMac, DeviceMac) ||
+                other.DeviceMac == DeviceMac));
   }
 
   @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(DeviceName),
-      const DeepCollectionEquality().hash(DeviceId),
-      const DeepCollectionEquality().hash(DevicePrivateIP),
-      const DeepCollectionEquality().hash(DeviceMac));
+      runtimeType, DeviceName, DeviceId, DevicePrivateIP, DeviceMac);
 
   @JsonKey(ignore: true)
   @override
+  @pragma('vm:prefer-inline')
   _$$_PixooDeviceCopyWith<_$_PixooDevice> get copyWith =>
       __$$_PixooDeviceCopyWithImpl<_$_PixooDevice>(this, _$identity);
 
