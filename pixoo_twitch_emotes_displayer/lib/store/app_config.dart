@@ -148,13 +148,13 @@ abstract class _AppConfigBase with Store {
       const PixooDevice(
         DeviceName: "Pixoo64",
         DeviceId: 4324324,
-        DevicePrivateIP: "192.169.1.40",
+        DevicePrivateIP: "192.168.1.40",
         DeviceMac: "e4324324gf",
       ),
       const PixooDevice(
         DeviceName: "Pixoo16",
         DeviceId: 5435436,
-        DevicePrivateIP: "192.169.1.41",
+        DevicePrivateIP: "192.168.1.41",
         DeviceMac: "eghfds654645",
       ),
     ];

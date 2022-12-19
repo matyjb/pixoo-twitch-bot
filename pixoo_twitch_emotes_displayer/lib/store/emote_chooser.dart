@@ -68,8 +68,16 @@ abstract class _EmoteChooserBase with Store {
   StreamController<Emote> emotesToMinifyAndSend = StreamController();
   StreamSubscription<Emote>? _subscription;
 
+  int currentRequestId = 0;
+  int reportNewRequest() {
+    currentRequestId = ++currentRequestId % 100000;
+    return currentRequestId;
+  }
+
   void startMagickService() {
-    _subscription ??= emotesToMinifyAndSend.stream.distinct().listen((emote) async {
+    _subscription ??=
+        emotesToMinifyAndSend.stream.distinct().listen((emote) async {
+      int thisRequestId = reportNewRequest();
       // check if needs minifying
       // if yes then run process
       // then send the emote
@@ -79,7 +87,7 @@ abstract class _EmoteChooserBase with Store {
         String emoteFileName = Emote.emoteFileName(emote, _appConfig.size);
         String emoteFilePath = "$emoteCachePath\\$emoteFileName.gif";
         bool emoteExists = emotesFilePaths.contains(emoteFilePath);
-        // then send request to devices api
+        //
         if (!emoteExists) {
           int size = _appConfig.size == PixooSize.p32 ? 32 : 64;
           // download image
@@ -119,8 +127,6 @@ abstract class _EmoteChooserBase with Store {
             });
             if (isOk) {
               print("${emote.code} prepared. ( $emoteFilePath )");
-              // all good, send request to pixoo with path to emote gif
-              CacheServer().emotesToSend.sink.add("$emoteFileName.gif");
             } else {
               print("${emote.code} NOT prepared");
             }
@@ -130,6 +136,10 @@ abstract class _EmoteChooserBase with Store {
             if (original.existsSync()) original.deleteSync();
             if (tmpCoalesce.existsSync()) tmpCoalesce.deleteSync();
           }
+        }
+        // emote is prepared or it existed before
+        if (currentRequestId == thisRequestId) {
+          CacheServer().emotesToSend.sink.add("$emoteFileName.gif");
         }
       } catch (e) {
         if (kDebugMode) {

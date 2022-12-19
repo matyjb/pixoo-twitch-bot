@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:pixoo_twitch_emotes_displayer/models/pixoo_device/pixoo_device.dart';
@@ -8,14 +10,17 @@ class PixooAPI {
 
   static Future<bool> playGifFile(String deviceIp, String emoteUrl) async {
     String pixooDeviceUrl = 'http://$deviceIp:80/post';
-    print("[EMOTE SEND] $emoteUrl -> $pixooDeviceUrl");
+
     dynamic data = {
       "Command": "Device/PlayTFGif",
       "FileType": 2,
-      "FileName": Uri.parse(emoteUrl)
+      "FileName": Uri.parse(emoteUrl).toString()
     };
     try {
-      await _dio.post(pixooDeviceUrl, data: data);
+      await _dio.post(pixooDeviceUrl, data: jsonEncode(data)).then((value) {
+        print("[${value.statusCode} EMOTE SEND] $emoteUrl -> $pixooDeviceUrl");
+        return value;
+      });
       return true;
     } catch (e) {
       if (kDebugMode) {
