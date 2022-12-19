@@ -22,7 +22,11 @@ class PixooServer extends _PixooServerBase with _$PixooServer {
 }
 
 abstract class _PixooServerBase with Store {
+  @observable
   HttpServer? _server;
+
+  @computed
+  String? get listeningOn => _server != null ? "${_server!.address.host}:${_server!.port}" : null;
 
   final StreamController<String> _requestedImageUrlsController =
       StreamController();
@@ -49,6 +53,7 @@ abstract class _PixooServerBase with Store {
         'Requested operation for "${request.url}" not found');
   }
 
+  @action
   Future<void> start() async {
     if (_server != null) {
       _server!.close(force: true);

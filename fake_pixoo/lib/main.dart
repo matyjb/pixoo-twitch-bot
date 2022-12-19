@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:fake_pixoo/store/pixoo_server.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
 
 void main() async {
   await PixooServer().start();
@@ -15,7 +16,9 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Fake Pixoo',
-      theme: ThemeData.dark(),
+      debugShowCheckedModeBanner: false,
+      theme: ThemeData.from(
+          colorScheme: const ColorScheme.dark(background: Colors.black)),
       home: const MyHomePage(title: 'Fake Pixoo'),
     );
   }
@@ -55,16 +58,37 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
-        constraints: const BoxConstraints.expand(),
+      body: Stack(
+        children: [
+          Observer(
+            builder: (_) =>
+                Text(PixooServer().listeningOn ?? "server not started"),
+          ),
+          Container(
+            constraints: const BoxConstraints.expand(),
+            child: Display(_imageUrl),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class Display extends StatelessWidget {
+  final String? imageUrl;
+  const Display(this.imageUrl, {super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return FittedBox(
+      fit: BoxFit.contain,
+      child: Container(
         decoration: BoxDecoration(
-          image: _imageUrl != null
-              ? DecorationImage(
-                  image: NetworkImage(_imageUrl!),
-                  fit: BoxFit.contain,
-                  filterQuality: FilterQuality.none
-                )
-              : null,
+          border: Border.all(color: Colors.grey, width: 0.05),
+        ),
+        child: Image.asset(
+          "assets/pepeds.webp",
+          filterQuality: FilterQuality.none,
         ),
       ),
     );
