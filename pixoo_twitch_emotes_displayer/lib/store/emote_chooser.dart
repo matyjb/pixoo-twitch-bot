@@ -2,15 +2,15 @@ import 'dart:async';
 import 'dart:io';
 import 'package:flutter/foundation.dart';
 import 'package:mobx/mobx.dart';
-import 'package:pixoo_twitch_emotes_displayer/models/emote/emote.dart';
-import 'package:pixoo_twitch_emotes_displayer/models/pixoo_device/pixoo_device.dart';
+import 'package:pixoo_twitch_emotes_displayer/models/emote.dart';
+import 'package:pixoo_twitch_emotes_displayer/models/pixoo_device.dart';
 import 'package:pixoo_twitch_emotes_displayer/services/t_emotes_api.dart';
 import 'package:pixoo_twitch_emotes_displayer/store/app_config.dart';
 import 'package:pixoo_twitch_emotes_displayer/store/cache_server.dart';
 import 'package:pixoo_twitch_emotes_displayer/store/emote_listener.dart';
 import 'package:process_run/shell_run.dart';
 
-part 'emote_chooser.g.dart';
+part '../generated/emote_chooser.g.dart';
 
 class EmoteChooser extends _EmoteChooserBase with _$EmoteChooser {
   static final EmoteChooser _singleton = EmoteChooser._internal();

@@ -2,8 +2,8 @@
 
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-import '../emote/emote.dart';
-part 'emote_history_entry.freezed.dart';
+import 'emote.dart';
+part '../generated/emote_history_entry.freezed.dart';
 
 @freezed
 class EmoteHistoryEntry with _$EmoteHistoryEntry {

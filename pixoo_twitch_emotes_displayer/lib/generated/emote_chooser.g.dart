@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'emote_chooser.dart';
+part of '../store/emote_chooser.dart';
 
 // **************************************************************************
 // StoreGenerator

@@ -2,15 +2,15 @@ import 'package:animated_list_plus/animated_list_plus.dart';
 import 'package:animated_list_plus/transitions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-import 'package:pixoo_twitch_emotes_displayer/models/channel_identifiers/channel_identifiers.dart';
+import 'package:pixoo_twitch_emotes_displayer/models/channel_identifiers.dart';
 import 'package:pixoo_twitch_emotes_displayer/services/t_emotes_api.dart';
 import 'package:pixoo_twitch_emotes_displayer/store/app_config.dart';
 import 'package:pixoo_twitch_emotes_displayer/store/emote_chooser.dart';
 import 'package:pixoo_twitch_emotes_displayer/store/emote_listener.dart';
 import 'package:pixoo_twitch_emotes_displayer/widgets/service_controller_icon_button.dart';
 
-import '../models/emote/emote.dart';
-import '../models/helpers/pair.dart';
+import '../models/emote.dart';
+import '../helpers/pair.dart';
 
 class DashboardPage extends StatelessWidget {
   const DashboardPage({Key? key}) : super(key: key);

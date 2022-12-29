@@ -1,8 +1,8 @@
 // ignore_for_file: non_constant_identifier_names
 
 import 'package:freezed_annotation/freezed_annotation.dart';
-part 'pixoo_device.freezed.dart';
-part 'pixoo_device.g.dart';
+part '../generated/pixoo_device.freezed.dart';
+part '../generated/pixoo_device.g.dart';
 
 enum PixooSize { p32, p64 }
 

@@ -1,6 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:pixoo_twitch_emotes_displayer/models/pixoo_device/pixoo_device.dart';
-part 'emote.freezed.dart';
+import 'package:pixoo_twitch_emotes_displayer/models/pixoo_device.dart';
+part '../generated/emote.freezed.dart';
 
 enum EmoteSize { x1, x2, x4 }
 

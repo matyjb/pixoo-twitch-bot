@@ -1,8 +1,8 @@
 import 'dart:io';
 
 import 'package:dio/dio.dart';
-import 'package:pixoo_twitch_emotes_displayer/models/channel_identifiers/channel_identifiers.dart';
-import '../models/emote/emote.dart';
+import 'package:pixoo_twitch_emotes_displayer/models/channel_identifiers.dart';
+import '../models/emote.dart';
 
 class TEmotesAPI {
   static final Dio _dio = Dio();

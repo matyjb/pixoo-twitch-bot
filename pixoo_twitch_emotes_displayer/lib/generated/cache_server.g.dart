@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'cache_server.dart';
+part of '../store/cache_server.dart';
 
 // **************************************************************************
 // StoreGenerator

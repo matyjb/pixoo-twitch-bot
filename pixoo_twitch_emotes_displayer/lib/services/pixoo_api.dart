@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
-import 'package:pixoo_twitch_emotes_displayer/models/pixoo_device/pixoo_device.dart';
+import 'package:pixoo_twitch_emotes_displayer/models/pixoo_device.dart';
 
 // http://doc.divoom-gz.com/web/#/12?page_id=195
 class PixooAPI {

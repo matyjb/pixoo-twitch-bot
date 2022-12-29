@@ -1,8 +1,8 @@
 // ignore_for_file: non_constant_identifier_names
 
 import 'package:freezed_annotation/freezed_annotation.dart';
-part 'channel_identifiers.freezed.dart';
-part 'channel_identifiers.g.dart';
+part '../generated/channel_identifiers.freezed.dart';
+part '../generated/channel_identifiers.g.dart';
 
 @freezed
 class ChannelIdentifiers with _$ChannelIdentifiers {

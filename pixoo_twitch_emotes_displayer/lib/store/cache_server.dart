@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/foundation.dart';
 import 'package:mobx/mobx.dart';
-import 'package:pixoo_twitch_emotes_displayer/models/pixoo_device/pixoo_device.dart';
+import 'package:pixoo_twitch_emotes_displayer/models/pixoo_device.dart';
 import 'package:shelf_static/shelf_static.dart';
 import '../services/pixoo_api.dart';
 import 'app_config.dart';
@@ -11,7 +11,7 @@ import 'dart:io';
 // ignore: depend_on_referenced_packages
 import 'package:shelf/shelf_io.dart' as io;
 
-part 'cache_server.g.dart';
+part '../generated/cache_server.g.dart';
 
 class CacheServer extends _CacheServerBase with _$CacheServer {
   static final CacheServer _singleton = CacheServer._internal();

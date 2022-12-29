@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'emote_listener.dart';
+part of '../store/emote_listener.dart';
 
 // **************************************************************************
 // StoreGenerator

@@ -1,9 +1,9 @@
 import 'package:flutter/foundation.dart';
 import 'package:mobx/mobx.dart';
-import 'package:pixoo_twitch_emotes_displayer/models/emote/emote.dart';
-import 'package:pixoo_twitch_emotes_displayer/models/emote_history_entry/emote_history_entry.dart';
-import 'package:pixoo_twitch_emotes_displayer/models/helpers/pair.dart';
-import 'package:pixoo_twitch_emotes_displayer/models/twitch_msg/twitch_msg.dart';
+import 'package:pixoo_twitch_emotes_displayer/models/emote.dart';
+import 'package:pixoo_twitch_emotes_displayer/models/emote_history_entry.dart';
+import 'package:pixoo_twitch_emotes_displayer/helpers/pair.dart';
+import 'package:pixoo_twitch_emotes_displayer/models/twitch_msg.dart';
 import 'package:pixoo_twitch_emotes_displayer/services/t_emotes_api.dart';
 import 'package:pixoo_twitch_emotes_displayer/store/emote_chooser.dart';
 // ignore: depend_on_referenced_packages
@@ -11,7 +11,7 @@ import 'package:web_socket_channel/io.dart';
 
 import 'app_config.dart';
 
-part 'emote_listener.g.dart';
+part '../generated/emote_listener.g.dart';
 
 const oauthKey = "YOUR_TWITCH_API_KEY_HERE";
 const botName = "pixoo_displayer";

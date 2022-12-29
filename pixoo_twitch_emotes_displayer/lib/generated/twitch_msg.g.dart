@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'twitch_msg.dart';
+part of '../models/twitch_msg.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator

@@ -3,12 +3,12 @@ import 'dart:io';
 import 'package:flutter/foundation.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:mobx/mobx.dart';
-import 'package:pixoo_twitch_emotes_displayer/models/pixoo_device/pixoo_device.dart';
+import 'package:pixoo_twitch_emotes_displayer/models/pixoo_device.dart';
 
 import 'emote_chooser.dart';
 import 'emote_listener.dart';
 
-part 'app_config.g.dart';
+part '../generated/app_config.g.dart';
 
 class AppConfig extends _AppConfigBase with _$AppConfig {
   static final AppConfig _singleton = AppConfig._internal();

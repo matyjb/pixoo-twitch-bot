@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'pixoo_device.dart';
+part of '../models/pixoo_device.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator

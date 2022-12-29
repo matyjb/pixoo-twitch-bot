@@ -1,7 +1,7 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-part 'twitch_msg.freezed.dart';
-part 'twitch_msg.g.dart';
+part '../generated/twitch_msg.freezed.dart';
+part '../generated/twitch_msg.g.dart';
 
 enum MsgType { msg, unknown }
 
