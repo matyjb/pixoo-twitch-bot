@@ -72,8 +72,8 @@ class DashboardBody extends StatelessWidget {
           return SizedBox(
             height: 100,
             child: _emoteChooser.displayedEmote != null
-                ? Image.network(_emoteChooser.displayedEmote!.urls.last.url)
-                : const Placeholder(),
+                ? EmoteWithStatusWidget(_emoteChooser.displayedEmote!)
+                : const SizedBox(width: 100, height: 100, child: Placeholder()),
           );
         }),
         Expanded(
@@ -149,6 +149,58 @@ class DashboardBody extends StatelessWidget {
             );
           },
         )
+      ],
+    );
+  }
+}
+
+class EmoteWithStatusWidget extends StatelessWidget {
+  final Emote emote;
+  EmoteWithStatusWidget(this.emote, {super.key});
+
+  final AppConfig _appConfig = AppConfig();
+  final EmoteChooser _emoteChooser = EmoteChooser();
+
+  @override
+  Widget build(BuildContext context) {
+    String fileName = Emote.emoteFileName(emote, _appConfig.size);
+    return Stack(
+      alignment: AlignmentDirectional.center,
+      children: [
+        Padding(
+          padding: const EdgeInsets.all(5.0),
+          child: Image.network(
+            emote.urls.last.url,
+            fit: BoxFit.cover,
+          ),
+        ),
+        Observer(builder: (_) {
+          bool isProcessing =
+              _emoteChooser.currentlyProcessed.contains(fileName);
+          bool isFailed = _emoteChooser.failedProcessing.contains(fileName);
+
+          if (isProcessing || isFailed) {
+            return Positioned(
+              bottom: 0,
+              right: 0,
+              child: SizedBox(
+                width: 15,
+                height: 15,
+                child: isProcessing
+                    ? const CircularProgressIndicator(
+                        strokeWidth: 2,
+                      )
+                    : Icon(
+                        Icons.highlight_off_rounded,
+                        color: Colors.red.shade400,
+                        size: 19,
+                      ),
+              ),
+            );
+          } else {
+            return Container();
+          }
+        })
       ],
     );
   }

@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:flutter/foundation.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:mobx/mobx.dart';
 import 'package:pixoo_twitch_emotes_displayer/models/pixoo_device/pixoo_device.dart';
@@ -85,7 +86,8 @@ abstract class _AppConfigBase with Store {
       setEmoteOccurancesThreshold(emoteOccurancesThreshold);
     }
 
-    int? maxEmoteHistoryEntryLifetimeSec = box.read<int?>("maxEmoteHistoryEntryLifetimeSec");
+    int? maxEmoteHistoryEntryLifetimeSec =
+        box.read<int?>("maxEmoteHistoryEntryLifetimeSec");
     if (maxEmoteHistoryEntryLifetimeSec != null) {
       setMaxEmoteHistoryEntryLifetimeSec(maxEmoteHistoryEntryLifetimeSec);
     }
@@ -144,20 +146,29 @@ abstract class _AppConfigBase with Store {
   @action
   Future<void> getPixooDevices() async {
     // TODO: get request
-    pixooDevices = [
-      const PixooDevice(
-        DeviceName: "Pixoo64",
+    const List<PixooDevice> debugPixooDevices = [
+      PixooDevice(
+        DeviceName: "P64 192.168.1.40",
         DeviceId: 4324324,
         DevicePrivateIP: "192.168.1.40",
         DeviceMac: "e4324324gf",
       ),
-      const PixooDevice(
-        DeviceName: "Pixoo16",
+      PixooDevice(
+        DeviceName: "P64 192.168.1.57:8080",
         DeviceId: 5435436,
-        DevicePrivateIP: "192.168.1.41",
+        DevicePrivateIP: "192.168.1.57:8080",
         DeviceMac: "eghfds654645",
       ),
+      PixooDevice(
+        DeviceName: "P64 192.168.1.12:8080",
+        DeviceId: 4365524,
+        DevicePrivateIP: "192.168.1.12:8080",
+        DeviceMac: "e43243424gf",
+      ),
     ];
+    if(kDebugMode){
+      pixooDevices.addAll(debugPixooDevices);
+    }
     if (pixooDevices.isNotEmpty) {
       selectedPixooDeviceIndex ??= 0;
     } else {

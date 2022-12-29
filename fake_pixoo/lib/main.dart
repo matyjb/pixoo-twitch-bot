@@ -38,6 +38,7 @@ class _MyHomePageState extends State<MyHomePage> {
   StreamSubscription<String>? _subscription;
 
   void _setImageUrl(String url) {
+    print("[POST] $_imageUrl");
     setState(() {
       _imageUrl = url;
     });
@@ -57,18 +58,20 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Stack(
-        children: [
-          Observer(
-            builder: (_) =>
-                Text(PixooServer().listeningOn ?? "server not started"),
-          ),
-          Container(
-            constraints: const BoxConstraints.expand(),
-            child: Display(_imageUrl),
-          ),
-        ],
+    return SafeArea(
+      child: Scaffold(
+        body: Stack(
+          children: [
+            Observer(
+              builder: (_) =>
+                  Text(PixooServer().listeningOn ?? "server not started"),
+            ),
+            Container(
+              constraints: const BoxConstraints.expand(),
+              child: Display(_imageUrl),
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -86,10 +89,15 @@ class Display extends StatelessWidget {
         decoration: BoxDecoration(
           border: Border.all(color: Colors.grey, width: 0.05),
         ),
-        child: Image.asset(
-          "assets/pepeds.webp",
-          filterQuality: FilterQuality.none,
-        ),
+        child: imageUrl == null
+            ? Image.asset(
+                "assets/pepeds.webp",
+                filterQuality: FilterQuality.none,
+              )
+            : Image.network(
+                imageUrl!,
+                filterQuality: FilterQuality.none,
+              ),
       ),
     );
   }

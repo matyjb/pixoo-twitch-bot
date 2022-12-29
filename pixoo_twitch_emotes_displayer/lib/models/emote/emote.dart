@@ -51,8 +51,8 @@ class Emote with _$Emote {
     required List<EmoteUrl> urls,
   }) = _Emote;
 
-  static String emoteFileName(Emote e, PixooSize pixooSize) =>
-      encodeFileName("${e.code}_${e.urls.last.hashCode}_${e.provider.name}_${pixooSize.name}");
+  static String emoteFileName(Emote e, PixooSize pixooSize) => encodeFileName(
+      "${e.code}_${e.provider.name}_${pixooSize.name}_${e.urls.last.url.hashCode}");
 
   factory Emote.fromJson(Map<String, Object?> json) {
     return Emote(

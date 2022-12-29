@@ -25,6 +25,22 @@ mixin _$CacheServer on _CacheServerBase, Store {
     });
   }
 
+  late final _$tmpCachePathAtom =
+      Atom(name: '_CacheServerBase.tmpCachePath', context: context);
+
+  @override
+  String? get tmpCachePath {
+    _$tmpCachePathAtom.reportRead();
+    return super.tmpCachePath;
+  }
+
+  @override
+  set tmpCachePath(String? value) {
+    _$tmpCachePathAtom.reportWrite(value, super.tmpCachePath, () {
+      super.tmpCachePath = value;
+    });
+  }
+
   late final _$_CacheServerBaseActionController =
       ActionController(name: '_CacheServerBase', context: context);
 
@@ -40,9 +56,21 @@ mixin _$CacheServer on _CacheServerBase, Store {
   }
 
   @override
+  void setTmpCachePath(String path) {
+    final _$actionInfo = _$_CacheServerBaseActionController.startAction(
+        name: '_CacheServerBase.setTmpCachePath');
+    try {
+      return super.setTmpCachePath(path);
+    } finally {
+      _$_CacheServerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   String toString() {
     return '''
-emoteCachePath: ${emoteCachePath}
+emoteCachePath: ${emoteCachePath},
+tmpCachePath: ${tmpCachePath}
     ''';
   }
 }

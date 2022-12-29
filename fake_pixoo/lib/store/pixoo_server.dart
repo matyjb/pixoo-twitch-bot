@@ -64,7 +64,7 @@ abstract class _PixooServerBase with Store {
 
     var interfaces = await NetworkInterface.list(type: InternetAddressType.IPv4);
 
-    _server = await io.serve(handler, interfaces.first.addresses.first.address, 80).then((server) {
+    _server = await io.serve(handler, interfaces.first.addresses.first.address, 8080).then((server) {
       if (kDebugMode) {
         print('Serving at http://${server.address.host}:${server.port}');
       }

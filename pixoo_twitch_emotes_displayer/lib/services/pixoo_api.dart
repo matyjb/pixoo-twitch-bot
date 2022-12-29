@@ -9,7 +9,7 @@ class PixooAPI {
   static final Dio _dio = Dio();
 
   static Future<bool> playGifFile(String deviceIp, String emoteUrl) async {
-    String pixooDeviceUrl = 'http://$deviceIp:80/post';
+    String pixooDeviceUrl = 'http://$deviceIp/post';
 
     dynamic data = {
       "Command": "Device/PlayTFGif",

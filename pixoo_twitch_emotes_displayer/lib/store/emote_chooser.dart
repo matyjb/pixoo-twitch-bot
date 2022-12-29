@@ -28,7 +28,13 @@ abstract class _EmoteChooserBase with Store {
   final CacheServer _cacheServer = CacheServer();
 
   @observable
-  List<String> emotesFilePaths = [];
+  ObservableList<String> emotesFilePaths = ObservableList.of([]);
+
+  @observable
+  ObservableSet<String> currentlyProcessed = ObservableSet.of({});
+
+  @observable
+  ObservableSet<String> failedProcessing = ObservableSet.of({});
 
   @observable
   Emote? displayedEmote;
@@ -44,8 +50,28 @@ abstract class _EmoteChooserBase with Store {
   }
 
   @action
+  void addCurrentlyProcessed(String emoteFileName) {
+    currentlyProcessed.add(emoteFileName);
+  }
+
+  @action
+  void removeCurrentlyProcessed(String emoteFileName) {
+    currentlyProcessed.remove(emoteFileName);
+  }
+
+  @action
+  void addFailedProcessing(String emoteFileName) {
+    failedProcessing.add(emoteFileName);
+  }
+
+  @action
+  void removeFailedProcessing(String emoteFileName) {
+    failedProcessing.remove(emoteFileName);
+  }
+
+  @action
   void setEmotesFiles(List<String> paths) {
-    emotesFilePaths = paths;
+    emotesFilePaths = paths.asObservable();
   }
 
   @action
@@ -88,7 +114,8 @@ abstract class _EmoteChooserBase with Store {
         String emoteFilePath = "$emoteCachePath\\$emoteFileName.gif";
         bool emoteExists = emotesFilePaths.contains(emoteFilePath);
         //
-        if (!emoteExists) {
+        if (!emoteExists && !currentlyProcessed.contains(emoteFileName)) {
+          addCurrentlyProcessed(emoteFileName);
           int size = _appConfig.size == PixooSize.p32 ? 32 : 64;
           // download image
           String? newEmoteFilePath = await TEmotesAPI.downloadFile(
@@ -127,8 +154,12 @@ abstract class _EmoteChooserBase with Store {
             });
             if (isOk) {
               print("${emote.code} prepared. ( $emoteFilePath )");
+              // emote processing done
+              removeCurrentlyProcessed(emoteFileName);
+              removeFailedProcessing(emoteFileName);
             } else {
               print("${emote.code} NOT prepared");
+              addFailedProcessing(emoteFileName);
             }
             // clear stuff
             File original = File(newEmoteFilePath);
