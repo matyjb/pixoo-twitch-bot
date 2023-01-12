@@ -8,6 +8,7 @@ import 'package:pixoo_twitch_emotes_displayer/models/pixoo_device.dart';
 class PixooAPI {
   static final Dio _dio = Dio();
 
+  // max 60 animation frames and 64 by 64 pixels
   static Future<bool> playGifFile(String deviceIp, String emoteUrl) async {
     String pixooDeviceUrl = 'http://$deviceIp/post';
 

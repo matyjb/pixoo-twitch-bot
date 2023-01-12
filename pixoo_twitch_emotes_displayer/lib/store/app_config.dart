@@ -148,25 +148,26 @@ abstract class _AppConfigBase with Store {
     // TODO: get request
     const List<PixooDevice> debugPixooDevices = [
       PixooDevice(
-        DeviceName: "P64 192.168.1.40",
+        DeviceName: "P64 192.168.1.40:8081",
         DeviceId: 4324324,
-        DevicePrivateIP: "192.168.1.40",
+        DevicePrivateIP: "192.168.1.40:8081",
         DeviceMac: "e4324324gf",
       ),
       PixooDevice(
-        DeviceName: "P64 192.168.1.57:8080",
+        DeviceName: "P64 192.168.1.57:8081",
         DeviceId: 5435436,
-        DevicePrivateIP: "192.168.1.57:8080",
+        DevicePrivateIP: "192.168.1.57:8081",
         DeviceMac: "eghfds654645",
       ),
       PixooDevice(
-        DeviceName: "P64 192.168.1.12:8080",
+        DeviceName: "P64 192.168.1.12:8081",
         DeviceId: 4365524,
-        DevicePrivateIP: "192.168.1.12:8080",
+        DevicePrivateIP: "192.168.1.12:8081",
         DeviceMac: "e43243424gf",
       ),
     ];
     if(kDebugMode){
+      pixooDevices.clear();
       pixooDevices.addAll(debugPixooDevices);
     }
     if (pixooDevices.isNotEmpty) {

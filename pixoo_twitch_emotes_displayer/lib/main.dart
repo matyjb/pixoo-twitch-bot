@@ -10,13 +10,13 @@ import 'package:pixoo_twitch_emotes_displayer/store/emote_chooser.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await GetStorage.init();
-  String emoteCachePath = await getTemporaryDirectory().then((value) {
+  String emoteCachePath = await getApplicationDocumentsDirectory().then((value) {
     String path = "${value.path}\\PixooEmoteDisplayer\\emotes";
     Directory(path).createSync(recursive: true);
     return path;
   });
   String tmpCachePath = await getTemporaryDirectory().then((value) {
-    String path = "${value.path}\\PixooEmoteDisplayer\\tmp";
+    String path = "${value.path}\\PixooEmoteDisplayer";
     Directory(path).createSync(recursive: true);
     return path;
   });

@@ -4,6 +4,7 @@ import 'package:flutter/foundation.dart';
 import 'package:mobx/mobx.dart';
 import 'package:pixoo_twitch_emotes_displayer/models/emote.dart';
 import 'package:pixoo_twitch_emotes_displayer/models/pixoo_device.dart';
+import 'package:pixoo_twitch_emotes_displayer/services/imagick_scripts.dart';
 import 'package:pixoo_twitch_emotes_displayer/services/t_emotes_api.dart';
 import 'package:pixoo_twitch_emotes_displayer/store/app_config.dart';
 import 'package:pixoo_twitch_emotes_displayer/store/cache_server.dart';
@@ -113,10 +114,9 @@ abstract class _EmoteChooserBase with Store {
         String emoteFileName = Emote.emoteFileName(emote, _appConfig.size);
         String emoteFilePath = "$emoteCachePath\\$emoteFileName.gif";
         bool emoteExists = emotesFilePaths.contains(emoteFilePath);
-        //
+
         if (!emoteExists && !currentlyProcessed.contains(emoteFileName)) {
           addCurrentlyProcessed(emoteFileName);
-          int size = _appConfig.size == PixooSize.p32 ? 32 : 64;
           // download image
           String? newEmoteFilePath = await TEmotesAPI.downloadFile(
             emote.urls.last.url,
@@ -128,10 +128,13 @@ abstract class _EmoteChooserBase with Store {
             // String cmd =
             //     "magick \"$newEmoteFilePath\" -coalesce gif:- | magick - -resize ${size}x$size^ -gravity Center -crop ${size}x$size+0+0 +repage \"${newEmoteFilePath.replaceRange(newEmoteFilePath.lastIndexOf("."), null, ".gif")}\"";
             String tmpFile = "$tmpCachePath\\$emoteFileName.tmp.gif";
-            bool isOk = await run('''
-              magick "$newEmoteFilePath" -coalesce "$tmpFile"
-              magick "$tmpFile" -resize ${size}x$size^ -gravity Center -crop ${size}x$size+0+0 +repage "$emoteFilePath"
-            ''').then((result) {
+            List<String> scriptCmds = await ImagickScripts.getEmotePrepCommands(
+              newEmoteFilePath,
+              tmpFile,
+              emoteFilePath,
+              _appConfig.size,
+            );
+            bool isOk = await run(scriptCmds.join("\n")).then((result) {
               for (var cmdResult in result) {
                 bool didFail = false;
                 if (cmdResult.stderr is String) {
@@ -168,8 +171,11 @@ abstract class _EmoteChooserBase with Store {
             if (tmpCoalesce.existsSync()) tmpCoalesce.deleteSync();
           }
         }
-        // emote is prepared or it existed before
-        if (currentRequestId == thisRequestId) {
+        // emote existed before and is not being prepared
+        if (currentRequestId == thisRequestId &&
+            displayedEmote != null &&
+            Emote.emoteFileName(displayedEmote!, _appConfig.size) ==
+                emoteFileName) {
           CacheServer().emotesToSend.sink.add("$emoteFileName.gif");
         }
       } catch (e) {
