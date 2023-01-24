@@ -31,28 +31,30 @@ class TEmotesAPI {
   }
 
   // returns path to created file
-  static Future<String?> downloadFile(String url, String savePath) async {
-    try {
-      Response response = await _dio.download(url, savePath);
-      String? ct = response.headers.map["content-type"]?.first;
-      String? cd = response.headers.map["content-disposition"]?.first;
-      String originalExtension;
-      if(cd != null) {
-        RegExp filenameRegex = RegExp(r'\.\w+');
-        originalExtension =  filenameRegex.allMatches(cd).last.group(0).toString();
-      }else{
-        RegExp filenameRegex = RegExp(r'\/\w+');
-        originalExtension = filenameRegex.allMatches(ct!).last.group(0).toString().replaceAll("/", ".");
-      }
-      String newFilePath = "$savePath$originalExtension";
-      File(savePath).renameSync(newFilePath);
-      int? statusCode = response.statusCode;
-      if (statusCode != null && statusCode >= 200 && statusCode < 300) {
-        return newFilePath;
-      }
-    } catch (e) {
-      print(e);
+  static Future<String> downloadFile(String url, String savePath) async {
+    Response response = await _dio.download(url, savePath);
+    String? ct = response.headers.map["content-type"]?.first;
+    String? cd = response.headers.map["content-disposition"]?.first;
+    String originalExtension;
+    if (cd != null) {
+      RegExp filenameRegex = RegExp(r'\.\w+');
+      originalExtension = filenameRegex.allMatches(cd).last.group(0).toString();
+    } else {
+      RegExp filenameRegex = RegExp(r'\/\w+');
+      originalExtension = filenameRegex
+          .allMatches(ct!)
+          .last
+          .group(0)
+          .toString()
+          .replaceAll("/", ".");
     }
-    return null;
+    String newFilePath = "$savePath$originalExtension";
+    File(savePath).renameSync(newFilePath);
+    int? statusCode = response.statusCode;
+    if (statusCode != null && statusCode >= 200 && statusCode < 300) {
+      return newFilePath;
+    } else {
+      throw "Failed to download file";
+    }
   }
 }

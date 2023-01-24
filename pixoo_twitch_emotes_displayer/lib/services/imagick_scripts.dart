@@ -122,7 +122,7 @@ class ImagickScripts {
     List<String> commands = [
       convertToGif(inputPath, tmpPath),
     ];
-    print("DELAYS: ${delays.length}");
+    
     if (delays.length > 60) {
       // remove frames
       var framesToDelete = _getFramesToDelete(delays.length);

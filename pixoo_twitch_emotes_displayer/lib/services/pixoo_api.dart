@@ -19,7 +19,9 @@ class PixooAPI {
     };
     try {
       await _dio.post(pixooDeviceUrl, data: jsonEncode(data)).then((value) {
-        print("[${value.statusCode} EMOTE SEND] $emoteUrl -> $pixooDeviceUrl");
+        if(kDebugMode) {
+          print("[${value.statusCode} EMOTE SEND] $emoteUrl -> $pixooDeviceUrl");
+        }
         return value;
       });
       return true;
@@ -31,8 +33,7 @@ class PixooAPI {
     }
   }
 
-  static Future<List<PixooDevice>> findSameLANDevices(
-      String deviceIp, String emoteUrl) async {
+  static Future<List<PixooDevice>> findSameLANDevices() async {
     var response =
         await _dio.post('https://app.divoom-gz.com/Device/ReturnSameLANDevice');
     return (response.data["DeviceList"] as List<dynamic>)

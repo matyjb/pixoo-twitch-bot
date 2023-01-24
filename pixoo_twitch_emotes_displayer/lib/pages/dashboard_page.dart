@@ -4,13 +4,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:pixoo_twitch_emotes_displayer/models/channel_identifiers.dart';
 import 'package:pixoo_twitch_emotes_displayer/services/t_emotes_api.dart';
-import 'package:pixoo_twitch_emotes_displayer/store/app_config.dart';
-import 'package:pixoo_twitch_emotes_displayer/store/emote_chooser.dart';
-import 'package:pixoo_twitch_emotes_displayer/store/emote_listener.dart';
+import 'package:pixoo_twitch_emotes_displayer/store/channel_resources.dart';
+import 'package:pixoo_twitch_emotes_displayer/store/emotes_manager.dart';
 import 'package:pixoo_twitch_emotes_displayer/widgets/service_controller_icon_button.dart';
 
 import '../models/emote.dart';
 import '../helpers/pair.dart';
+import '../store/user_settings.dart';
 
 class DashboardPage extends StatelessWidget {
   const DashboardPage({Key? key}) : super(key: key);
@@ -18,7 +18,7 @@ class DashboardPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<ChannelIdentifiers>(
-      future: TEmotesAPI.getChannelIdentifiers(AppConfig().channelName),
+      future: TEmotesAPI.getChannelIdentifiers(UserSettings.instance.channelName!),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.done &&
             snapshot.hasData) {
@@ -30,7 +30,7 @@ class DashboardPage extends StatelessWidget {
                 IconButton(
                   icon: const Icon(Icons.refresh_rounded),
                   onPressed: () =>
-                      EmoteListener().getEmotes(AppConfig().channelName),
+                      ChannelResources.instance.getEmotes(UserSettings.instance.channelName!),
                 ),
                 Container(
                   margin: const EdgeInsets.symmetric(horizontal: 4),
@@ -60,9 +60,8 @@ class DashboardBody extends StatelessWidget {
     Key? key,
   }) : super(key: key);
 
-  final EmoteListener _emoteListener = EmoteListener();
-  final EmoteChooser _emoteChooser = EmoteChooser();
-  final AppConfig _appConfig = AppConfig();
+  final EmotesManager _emotesManager = EmotesManager.instance;
+  final UserSettings _userSettings = UserSettings.instance;
 
   @override
   Widget build(BuildContext context) {
@@ -71,8 +70,8 @@ class DashboardBody extends StatelessWidget {
         Observer(builder: (context) {
           return SizedBox(
             height: 100,
-            child: _emoteChooser.displayedEmote != null
-                ? EmoteWithStatusWidget(_emoteChooser.displayedEmote!)
+            child: _emotesManager.displayedEmote != null
+                ? EmoteWithStatusWidget(_emotesManager.displayedEmote!)
                 : const SizedBox(width: 100, height: 100, child: Placeholder()),
           );
         }),
@@ -81,7 +80,7 @@ class DashboardBody extends StatelessWidget {
             builder: (context) {
               return ImplicitlyAnimatedList<
                   MapEntry<Emote, Pair<DateTime, int>>>(
-                items: _emoteListener.ranking,
+                items: _emotesManager.ranking,
                 areItemsTheSame: (oldItem, newItem) =>
                     oldItem.key == newItem.key,
                 itemBuilder: (context, animation, item, index) =>
@@ -118,10 +117,10 @@ class DashboardBody extends StatelessWidget {
         Observer(
           builder: (context) {
             return Slider(
-              label: _appConfig.emoteOccurancesThreshold.toString(),
-              value: _appConfig.emoteOccurancesThreshold.toDouble(),
+              label: _userSettings.emoteActivationThreshold.toString(),
+              value: _userSettings.emoteActivationThreshold.toDouble(),
               onChanged: (value) =>
-                  _appConfig.setEmoteOccurancesThreshold(value.toInt()),
+                  _userSettings.setEmoteActivationThreshold(value.toInt()),
               divisions: 4,
               min: 1,
               max: 5,
@@ -139,10 +138,10 @@ class DashboardBody extends StatelessWidget {
         Observer(
           builder: (context) {
             return Slider(
-              label: _appConfig.maxEmoteHistoryEntryLifetimeSec.toString(),
-              value: _appConfig.maxEmoteHistoryEntryLifetimeSec.toDouble(),
+              label: _userSettings.emoteTTL.toString(),
+              value: _userSettings.emoteTTL.toDouble(),
               onChanged: (value) =>
-                  _appConfig.setMaxEmoteHistoryEntryLifetimeSec(value.toInt()),
+                  _userSettings.setEmoteTTL(value.toInt()),
               divisions: 59,
               min: 1,
               max: 60,
@@ -158,12 +157,10 @@ class EmoteWithStatusWidget extends StatelessWidget {
   final Emote emote;
   EmoteWithStatusWidget(this.emote, {super.key});
 
-  final AppConfig _appConfig = AppConfig();
-  final EmoteChooser _emoteChooser = EmoteChooser();
+  final EmotesManager _emotesManager = EmotesManager.instance;
 
   @override
   Widget build(BuildContext context) {
-    String fileName = Emote.emoteFileName(emote, _appConfig.size);
     return Stack(
       alignment: AlignmentDirectional.center,
       children: [
@@ -176,8 +173,8 @@ class EmoteWithStatusWidget extends StatelessWidget {
         ),
         Observer(builder: (_) {
           bool isProcessing =
-              _emoteChooser.currentlyProcessed.contains(fileName);
-          bool isFailed = _emoteChooser.failedProcessing.contains(fileName);
+              _emotesManager.emotesPrepared.contains(emote);
+          bool isFailed = _emotesManager.emotesFailed.contains(emote);
 
           if (isProcessing || isFailed) {
             return Positioned(

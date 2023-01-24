@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:pixoo_twitch_emotes_displayer/store/app_resources.dart';
+import 'package:pixoo_twitch_emotes_displayer/store/user_settings.dart';
 
-import '../store/app_config.dart';
 import '../widgets/service_controller_icon_button.dart';
 
 class AppConfigPage extends StatelessWidget {
@@ -22,6 +23,7 @@ class AppConfigPage extends StatelessWidget {
               NetworkInterfacesDropdown(),
               PixooDevicesDropdown(),
               ChannelNameTextField(),
+              TwitchApiKeyTextField(),
               Container(
                 margin: const EdgeInsets.all(18.0),
                 child: ServiceControllerIconButton(
@@ -39,15 +41,15 @@ class AppConfigPage extends StatelessWidget {
 class ChannelNameTextField extends StatelessWidget {
   ChannelNameTextField({Key? key}) : super(key: key);
 
-  final appConfig = AppConfig();
+  final UserSettings _userSettings = UserSettings.instance;
   final TextEditingController textarea = TextEditingController()
-    ..text = AppConfig().channelName;
+    ..text = UserSettings.instance.channelName ?? "";
 
   @override
   Widget build(BuildContext context) {
     return TextField(
       controller: textarea,
-      onChanged: appConfig.setChannelName,
+      onChanged: _userSettings.setChannelName,
     );
   }
 }
@@ -55,11 +57,12 @@ class ChannelNameTextField extends StatelessWidget {
 class PixooDevicesDropdown extends StatelessWidget {
   PixooDevicesDropdown({Key? key}) : super(key: key);
 
-  final appConfig = AppConfig();
+  final UserSettings _userSettings = UserSettings.instance;
+  final AppResources _appResources = AppResources.instance;
 
-  bool _enabled(AppConfig appConfig) {
-    return appConfig.selectedNetworkInterfaceIndex != null &&
-        appConfig.pixooDevices.isNotEmpty;
+  bool _enabled() {
+    return _userSettings.selectedNetworkInterface != null &&
+        _appResources.pixooDevices.isNotEmpty;
   }
 
   @override
@@ -67,18 +70,16 @@ class PixooDevicesDropdown extends StatelessWidget {
     return Observer(
       builder: (context) => DropdownButton<int>(
         isExpanded: true,
-        value: appConfig.selectedPixooDeviceIndex,
-        items: appConfig.pixooDevices
-            .asMap()
-            .entries
+        value: _userSettings.selectedPixooDevice?.DeviceId,
+        items: _appResources.pixooDevices
             .map<DropdownMenuItem<int>>(
               (e) => DropdownMenuItem<int>(
-                value: e.key,
-                child: Text(e.value.DeviceName),
+                value: e.DeviceId,
+                child: Text(e.DeviceName),
               ),
             )
             .toList(),
-        onChanged: _enabled(appConfig) ? appConfig.selectPixooDevice : null,
+        onChanged: _enabled() ? _userSettings.setSelectedPixooDeviceId : null,
       ),
     );
   }
@@ -87,26 +88,41 @@ class PixooDevicesDropdown extends StatelessWidget {
 class NetworkInterfacesDropdown extends StatelessWidget {
   NetworkInterfacesDropdown({Key? key}) : super(key: key);
 
-  final appConfig = AppConfig();
+  final UserSettings _userSettings = UserSettings.instance;
+  final AppResources _appResources = AppResources.instance;
 
   @override
   Widget build(BuildContext context) {
     return Observer(
-      builder: (context) => DropdownButton<int>(
+      builder: (context) => DropdownButton<String>(
         isExpanded: true,
-        value: appConfig.selectedNetworkInterfaceIndex,
-        items: appConfig.networkInterfaces
-            .asMap()
-            .entries
-            .map<DropdownMenuItem<int>>(
-              (e) => DropdownMenuItem<int>(
-                value: e.key,
-                child: Text(e.value.name),
+        value: _userSettings.selectedNetworkInterface?.name,
+        items: _appResources.networkInterfaces
+            .map<DropdownMenuItem<String>>(
+              (e) => DropdownMenuItem<String>(
+                value: e.name,
+                child: Text(e.name),
               ),
             )
             .toList(),
-        onChanged: appConfig.selectNetworkInterface,
+        onChanged: _userSettings.setSelectedNetworkInterfaceName,
       ),
+    );
+  }
+}
+
+class TwitchApiKeyTextField extends StatelessWidget {
+  TwitchApiKeyTextField({Key? key}) : super(key: key);
+
+  final UserSettings _userSettings = UserSettings.instance;
+  final TextEditingController textarea = TextEditingController()
+    ..text = UserSettings.instance.twitchApiKey ?? "";
+
+  @override
+  Widget build(BuildContext context) {
+    return TextField(
+      controller: textarea,
+      onChanged: _userSettings.setApiKey,
     );
   }
 }
