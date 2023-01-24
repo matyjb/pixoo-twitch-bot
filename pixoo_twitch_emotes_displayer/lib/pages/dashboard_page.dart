@@ -2,23 +2,23 @@ import 'package:animated_list_plus/animated_list_plus.dart';
 import 'package:animated_list_plus/transitions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:pixoo_twitch_emotes_displayer/helpers/pair.dart';
 import 'package:pixoo_twitch_emotes_displayer/models/channel_identifiers.dart';
+import 'package:pixoo_twitch_emotes_displayer/models/emote.dart';
 import 'package:pixoo_twitch_emotes_displayer/services/t_emotes_api.dart';
 import 'package:pixoo_twitch_emotes_displayer/store/channel_resources.dart';
 import 'package:pixoo_twitch_emotes_displayer/store/emotes_manager.dart';
+import 'package:pixoo_twitch_emotes_displayer/store/user_settings.dart';
 import 'package:pixoo_twitch_emotes_displayer/widgets/service_controller_icon_button.dart';
 
-import '../models/emote.dart';
-import '../helpers/pair.dart';
-import '../store/user_settings.dart';
-
 class DashboardPage extends StatelessWidget {
-  const DashboardPage({Key? key}) : super(key: key);
+  const DashboardPage({super.key});
 
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<ChannelIdentifiers>(
-      future: TEmotesAPI.getChannelIdentifiers(UserSettings.instance.channelName!),
+      future:
+          TEmotesAPI.getChannelIdentifiers(UserSettings.instance.channelName!),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.done &&
             snapshot.hasData) {
@@ -29,8 +29,8 @@ class DashboardPage extends StatelessWidget {
               actions: [
                 IconButton(
                   icon: const Icon(Icons.refresh_rounded),
-                  onPressed: () =>
-                      ChannelResources.instance.getEmotes(UserSettings.instance.channelName!),
+                  onPressed: () => ChannelResources.instance
+                      .getEmotes(UserSettings.instance.channelName!),
                 ),
                 Container(
                   margin: const EdgeInsets.symmetric(horizontal: 4),
@@ -56,9 +56,7 @@ class DashboardPage extends StatelessWidget {
 }
 
 class DashboardBody extends StatelessWidget {
-  DashboardBody({
-    Key? key,
-  }) : super(key: key);
+  DashboardBody({super.key});
 
   final EmotesManager _emotesManager = EmotesManager.instance;
   final UserSettings _userSettings = UserSettings.instance;
@@ -67,14 +65,20 @@ class DashboardBody extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Observer(builder: (context) {
-          return SizedBox(
-            height: 100,
-            child: _emotesManager.displayedEmote != null
-                ? EmoteWithStatusWidget(_emotesManager.displayedEmote!)
-                : const SizedBox(width: 100, height: 100, child: Placeholder()),
-          );
-        }),
+        Observer(
+          builder: (context) {
+            return SizedBox(
+              height: 100,
+              child: _emotesManager.displayedEmote != null
+                  ? EmoteWithStatusWidget(_emotesManager.displayedEmote!)
+                  : const SizedBox(
+                      width: 100,
+                      height: 100,
+                      child: Placeholder(),
+                    ),
+            );
+          },
+        ),
         Expanded(
           child: Observer(
             builder: (context) {
@@ -140,8 +144,7 @@ class DashboardBody extends StatelessWidget {
             return Slider(
               label: _userSettings.emoteTTL.toString(),
               value: _userSettings.emoteTTL.toDouble(),
-              onChanged: (value) =>
-                  _userSettings.setEmoteTTL(value.toInt()),
+              onChanged: (value) => _userSettings.setEmoteTTL(value.toInt()),
               divisions: 59,
               min: 1,
               max: 60,
@@ -171,33 +174,35 @@ class EmoteWithStatusWidget extends StatelessWidget {
             fit: BoxFit.cover,
           ),
         ),
-        Observer(builder: (_) {
-          bool isProcessing =
-              _emotesManager.emotesPrepared.contains(emote);
-          bool isFailed = _emotesManager.emotesFailed.contains(emote);
+        Observer(
+          builder: (_) {
+            final bool isProcessing =
+                _emotesManager.emotesPrepared.contains(emote);
+            final bool isFailed = _emotesManager.emotesFailed.contains(emote);
 
-          if (isProcessing || isFailed) {
-            return Positioned(
-              bottom: 0,
-              right: 0,
-              child: SizedBox(
-                width: 15,
-                height: 15,
-                child: isProcessing
-                    ? const CircularProgressIndicator(
-                        strokeWidth: 2,
-                      )
-                    : Icon(
-                        Icons.highlight_off_rounded,
-                        color: Colors.red.shade400,
-                        size: 19,
-                      ),
-              ),
-            );
-          } else {
-            return Container();
-          }
-        })
+            if (isProcessing || isFailed) {
+              return Positioned(
+                bottom: 0,
+                right: 0,
+                child: SizedBox(
+                  width: 15,
+                  height: 15,
+                  child: isProcessing
+                      ? const CircularProgressIndicator(
+                          strokeWidth: 2,
+                        )
+                      : Icon(
+                          Icons.highlight_off_rounded,
+                          color: Colors.red.shade400,
+                          size: 19,
+                        ),
+                ),
+              );
+            } else {
+              return Container();
+            }
+          },
+        )
       ],
     );
   }
@@ -208,10 +213,10 @@ class EmoteListTile extends StatelessWidget {
   final int value;
 
   const EmoteListTile({
-    Key? key,
+    super.key,
     required this.emote,
     required this.value,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

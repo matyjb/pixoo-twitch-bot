@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-
-import '../services/emote_host_server.dart';
+import 'package:pixoo_twitch_emotes_displayer/services/emote_host_server.dart';
 
 const Map<EmoteHostServerStatus, Color> statusToColorMap = {
   EmoteHostServerStatus.stopped: Colors.grey,

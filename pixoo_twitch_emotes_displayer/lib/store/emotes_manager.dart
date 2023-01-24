@@ -3,18 +3,17 @@ import 'dart:io';
 
 import 'package:flutter/foundation.dart';
 import 'package:mobx/mobx.dart';
+import 'package:pixoo_twitch_emotes_displayer/helpers/pair.dart';
+import 'package:pixoo_twitch_emotes_displayer/models/emote.dart';
 import 'package:pixoo_twitch_emotes_displayer/models/pixoo_device.dart';
+import 'package:pixoo_twitch_emotes_displayer/services/emote_host_server.dart';
+import 'package:pixoo_twitch_emotes_displayer/services/imagick_scripts.dart';
+import 'package:pixoo_twitch_emotes_displayer/services/pixoo_api.dart';
+import 'package:pixoo_twitch_emotes_displayer/services/t_emotes_api.dart';
 import 'package:pixoo_twitch_emotes_displayer/store/app_resources.dart';
 import 'package:pixoo_twitch_emotes_displayer/store/channel_resources.dart';
 import 'package:pixoo_twitch_emotes_displayer/store/user_settings.dart';
 import 'package:process_run/shell_run.dart';
-
-import '../helpers/pair.dart';
-import '../models/emote.dart';
-import '../services/imagick_scripts.dart';
-import '../services/pixoo_api.dart';
-import '../services/t_emotes_api.dart';
-import '../services/emote_host_server.dart';
 
 part '../generated/emotes_manager.g.dart';
 
@@ -29,10 +28,10 @@ class EmotesManager extends _EmoteManagerBase with _$EmotesManager {
         prepAndSendEmoteStream.stream.distinct().listen(_handleEmoteSending);
 
     ChannelResources.instance.emoteHistory.observe((_) {
-      var rank = ChannelResources.instance.emoteHistory
-          .fold(<Emote, Pair<DateTime, int>>{}, (previousValue, element) {
-        Map<Emote, Pair<DateTime, int>> next =
-            previousValue as Map<Emote, Pair<DateTime, int>>;
+      final rank = ChannelResources.instance.emoteHistory
+          .fold<Map<Emote, Pair<DateTime, int>>>(<Emote, Pair<DateTime, int>>{},
+              (previousValue, element) {
+        final Map<Emote, Pair<DateTime, int>> next = previousValue;
         if (next[element.emote] == null) {
           next[element.emote] = Pair(element.time, 1);
         } else {
@@ -40,7 +39,7 @@ class EmotesManager extends _EmoteManagerBase with _$EmotesManager {
         }
         return next;
       });
-      var rankEntries = rank.entries.toList();
+      final rankEntries = rank.entries.toList();
       rankEntries.sort(
         (a, b) => b.value.v1.compareTo(a.value.v1),
       );
@@ -53,23 +52,29 @@ class EmotesManager extends _EmoteManagerBase with _$EmotesManager {
     });
   }
 
-  _handleEmoteSending(Emote emote) {
-    AppResources appResources = AppResources.instance;
-    String emoteFileName = Emote.emoteFileName(emote, PixooSize.p64);
-    String emoteFilePath = "${appResources.documentsPath}\\$emoteFileName.gif";
+  void _handleEmoteSending(Emote emote) {
+    final AppResources appResources = AppResources.instance;
+    final String emoteFileName = Emote.emoteFileName(emote, PixooSize.p64);
+    final String emoteFilePath =
+        "${appResources.documentsPath}\\$emoteFileName.gif";
 
     try {
-      bool emoteExists = appResources.emotesPaths.contains(emoteFilePath);
-      bool isBeingPrepared = emotesPrepared.contains(emote);
+      final bool emoteExists = appResources.emotesPaths.contains(emoteFilePath);
+      final bool isBeingPrepared = emotesPrepared.contains(emote);
 
       // delay for the hosting server to get their s together (404 problem)
-      if(emoteExists) {
+      if (emoteExists) {
         if (displayedEmote == emote) _sendEmote(emoteFileName);
-      }else if(isBeingPrepared) {
+      } else if (isBeingPrepared) {
         // do nothing
-      }else{
+      } else {
         _prepEmote(emote).then((_) {
-          if (displayedEmote == emote) Future.delayed(const Duration(milliseconds: 200), ()=>_sendEmote(emoteFileName));
+          if (displayedEmote == emote) {
+            Future.delayed(
+              const Duration(milliseconds: 200),
+              () => _sendEmote(emoteFileName),
+            );
+          }
         });
       }
     } catch (e) {
@@ -84,9 +89,9 @@ class EmotesManager extends _EmoteManagerBase with _$EmotesManager {
       emotesFailed.remove(emote);
       emotesPrepared.add(emote);
 
-      AppResources appResources = AppResources.instance;
-      String emoteFileName = Emote.emoteFileName(emote, PixooSize.p64);
-      String emoteFilePath =
+      final AppResources appResources = AppResources.instance;
+      final String emoteFileName = Emote.emoteFileName(emote, PixooSize.p64);
+      final String emoteFilePath =
           "${appResources.documentsPath}\\$emoteFileName.gif";
 
       // 1. download emote
@@ -96,17 +101,18 @@ class EmotesManager extends _EmoteManagerBase with _$EmotesManager {
         emote.urls.last.url,
         "${appResources.tmpCachePath}\\$emoteFileName", //extension is added after download
       ).then((String newEmoteFilePath) async {
-        String tmpFile = "${appResources.tmpCachePath}\\$emoteFileName.tmp.gif";
-        List<String> scriptCmds = await ImagickScripts.getEmotePrepCommands(
+        final String tmpFile =
+            "${appResources.tmpCachePath}\\$emoteFileName.tmp.gif";
+        final List<String> scriptCmds =
+            await ImagickScripts.getEmotePrepCommands(
           newEmoteFilePath,
           tmpFile,
           emoteFilePath,
-          PixooSize.p64,
         );
         return run(scriptCmds.join("\n"))
             .then((List<ProcessResult> procResults) {
-          Iterable<ProcessResult> errors = procResults.where((element) {
-            dynamic err = element.stderr;
+          final Iterable<ProcessResult> errors = procResults.where((element) {
+            final dynamic err = element.stderr;
             return err is String && err.isNotEmpty ||
                 err is List && err.isNotEmpty;
           });
@@ -116,12 +122,13 @@ class EmotesManager extends _EmoteManagerBase with _$EmotesManager {
           }
         }).catchError((err) {
           emotesFailed.add(emote);
+          // ignore: invalid_return_type_for_catch_error
           return err;
         }).then((err) {
           // clean up temp files
           emotesPrepared.remove(emote);
-          File original = File(newEmoteFilePath);
-          File tmpCoalesce = File(tmpFile);
+          final File original = File(newEmoteFilePath);
+          final File tmpCoalesce = File(tmpFile);
           if (original.existsSync()) original.deleteSync();
           if (tmpCoalesce.existsSync()) tmpCoalesce.deleteSync();
           if (err != null) {
@@ -133,14 +140,16 @@ class EmotesManager extends _EmoteManagerBase with _$EmotesManager {
   }
 
   Future _sendEmote(String emoteFileName) async {
-    PixooDevice? device = UserSettings.instance.selectedPixooDevice;
+    final PixooDevice? device = UserSettings.instance.selectedPixooDevice;
     if (device != null) {
-      PixooAPI.playGifFile(device.DevicePrivateIP,
-          "${EmoteHostServer.instance.url}/$emoteFileName.gif");
+      PixooAPI.playGifFile(
+        device.DevicePrivateIP,
+        "${EmoteHostServer.instance.url}/$emoteFileName.gif",
+      );
     }
   }
 
-  dispose() {
+  void dispose() {
     _subscription.cancel();
   }
 }
@@ -149,14 +158,16 @@ abstract class _EmoteManagerBase with Store {
   @observable
   List<MapEntry<Emote, Pair<DateTime, int>>> ranking = [];
   @action
-  _setRanking(List<MapEntry<Emote, Pair<DateTime, int>>> value) =>
+  List<MapEntry<Emote, Pair<DateTime, int>>> _setRanking(
+    List<MapEntry<Emote, Pair<DateTime, int>>> value,
+  ) =>
       ranking = value;
 
   @observable
   Emote? displayedEmote;
   @action
   bool _refreshDisplayedEmote() {
-    MapEntry<Emote, Pair<DateTime, int>>? candidate =
+    final MapEntry<Emote, Pair<DateTime, int>>? candidate =
         ranking.isNotEmpty ? ranking.first : null;
     if (candidate != null &&
         candidate.value.v2 >= UserSettings.instance.emoteActivationThreshold &&
@@ -170,10 +181,12 @@ abstract class _EmoteManagerBase with Store {
   @observable
   ObservableSet<Emote> emotesPrepared = ObservableSet.of({});
   @action
-  setPreparedEmotes(Set<Emote> value) => emotesPrepared = value.asObservable();
+  ObservableSet<Emote> setPreparedEmotes(Set<Emote> value) =>
+      emotesPrepared = value.asObservable();
 
   @observable
   ObservableSet<Emote> emotesFailed = ObservableSet.of({});
   @action
-  setEmotesFailed(Set<Emote> value) => emotesFailed = value.asObservable();
+  ObservableSet<Emote> setEmotesFailed(Set<Emote> value) =>
+      emotesFailed = value.asObservable();
 }

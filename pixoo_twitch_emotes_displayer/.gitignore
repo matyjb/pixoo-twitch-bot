@@ -1,4 +1,5 @@
 .vscode
+.secrets
 
 # Miscellaneous
 *.class

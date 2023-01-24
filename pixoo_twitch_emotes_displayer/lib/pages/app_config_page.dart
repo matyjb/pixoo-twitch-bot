@@ -2,11 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:pixoo_twitch_emotes_displayer/store/app_resources.dart';
 import 'package:pixoo_twitch_emotes_displayer/store/user_settings.dart';
-
-import '../widgets/service_controller_icon_button.dart';
+import 'package:pixoo_twitch_emotes_displayer/widgets/service_controller_icon_button.dart';
 
 class AppConfigPage extends StatelessWidget {
-  const AppConfigPage({Key? key}) : super(key: key);
+  const AppConfigPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -39,7 +38,7 @@ class AppConfigPage extends StatelessWidget {
 }
 
 class ChannelNameTextField extends StatelessWidget {
-  ChannelNameTextField({Key? key}) : super(key: key);
+  ChannelNameTextField({super.key});
 
   final UserSettings _userSettings = UserSettings.instance;
   final TextEditingController textarea = TextEditingController()
@@ -55,7 +54,7 @@ class ChannelNameTextField extends StatelessWidget {
 }
 
 class PixooDevicesDropdown extends StatelessWidget {
-  PixooDevicesDropdown({Key? key}) : super(key: key);
+  PixooDevicesDropdown({super.key});
 
   final UserSettings _userSettings = UserSettings.instance;
   final AppResources _appResources = AppResources.instance;
@@ -86,7 +85,7 @@ class PixooDevicesDropdown extends StatelessWidget {
 }
 
 class NetworkInterfacesDropdown extends StatelessWidget {
-  NetworkInterfacesDropdown({Key? key}) : super(key: key);
+  NetworkInterfacesDropdown({super.key});
 
   final UserSettings _userSettings = UserSettings.instance;
   final AppResources _appResources = AppResources.instance;
@@ -112,7 +111,7 @@ class NetworkInterfacesDropdown extends StatelessWidget {
 }
 
 class TwitchApiKeyTextField extends StatelessWidget {
-  TwitchApiKeyTextField({Key? key}) : super(key: key);
+  TwitchApiKeyTextField({super.key});
 
   final UserSettings _userSettings = UserSettings.instance;
   final TextEditingController textarea = TextEditingController()

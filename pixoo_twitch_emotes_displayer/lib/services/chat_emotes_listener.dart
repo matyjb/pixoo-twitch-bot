@@ -2,11 +2,10 @@ import 'dart:async';
 
 import 'package:flutter/foundation.dart';
 import 'package:mobx/mobx.dart';
+import 'package:pixoo_twitch_emotes_displayer/models/twitch_msg.dart';
 import 'package:pixoo_twitch_emotes_displayer/store/channel_resources.dart';
 import 'package:pixoo_twitch_emotes_displayer/store/user_settings.dart';
 import 'package:web_socket_channel/io.dart';
-
-import '../models/twitch_msg.dart';
 
 part '../generated/chat_emotes_listener.g.dart';
 
@@ -41,7 +40,7 @@ class ChatEmotesListener extends _ChatEmotesListenerBase
     await ChannelResources.instance.getEmotes(channelName);
   }
 
-  _setupSocket() {
+  void _setupSocket() {
     _socketSub = socket.stream.listen(
       _parseMessage,
       // onError: (error) {
@@ -58,7 +57,7 @@ class ChatEmotesListener extends _ChatEmotesListenerBase
     if (kDebugMode) {
       print(message);
     }
-    var messageStr = message as String;
+    final messageStr = message as String;
     if (messageStr.startsWith("PING")) {
       socket.sink.add(messageStr.replaceFirst("PING", "PONG"));
       return;
@@ -68,15 +67,15 @@ class ChatEmotesListener extends _ChatEmotesListenerBase
       setStatus(ChatEmotesListenerStatus.joined);
     }
 
-    TwitchMessage parsedMsg = TwitchMessage.fromLine(messageStr);
+    final TwitchMessage parsedMsg = TwitchMessage.fromLine(messageStr);
     if (kDebugMode && parsedMsg.type == MsgType.msg) {
       // ignore: avoid_print
       // print(parsedMsg);
     }
-    var channelResources = ChannelResources.instance;
+    final channelResources = ChannelResources.instance;
 
     if (parsedMsg.type == MsgType.msg) {
-      for (var e in channelResources.emotes.keys) {
+      for (final e in channelResources.emotes.keys) {
         if (parsedMsg.content.startsWith("$e ") ||
             parsedMsg.content.contains(" $e ") ||
             parsedMsg.content.endsWith(" $e") ||
@@ -87,7 +86,7 @@ class ChatEmotesListener extends _ChatEmotesListenerBase
     }
   }
 
-  disconnect() {
+  void disconnect() {
     _socketSub?.cancel();
     setStatus(ChatEmotesListenerStatus.stopped);
     socket.sink.add("LEAVE"); // with channelName?
@@ -99,5 +98,5 @@ abstract class _ChatEmotesListenerBase with Store {
   @observable
   ChatEmotesListenerStatus status = ChatEmotesListenerStatus.stopped;
   @action
-  setStatus(ChatEmotesListenerStatus value) => status = value;
+  void setStatus(ChatEmotesListenerStatus value) => status = value;
 }

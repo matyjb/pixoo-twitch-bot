@@ -4,9 +4,8 @@ import 'dart:io';
 import 'package:flutter/foundation.dart';
 import 'package:mobx/mobx.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:pixoo_twitch_emotes_displayer/models/pixoo_device.dart';
 import 'package:pixoo_twitch_emotes_displayer/services/pixoo_api.dart';
-
-import '../models/pixoo_device.dart';
 
 part '../generated/app_resources.g.dart';
 
@@ -33,9 +32,6 @@ const List<PixooDevice> debugPixooDevices = [
 
 class AppResources extends _AppResourcesBase with _$AppResources {
   static AppResources instance = AppResources._internal();
-  AppResources._internal();
-
-  StreamSubscription<FileSystemEvent>? emoteDirectorySub;
 
   AppResources(
     String tmpCachePath,
@@ -49,43 +45,47 @@ class AppResources extends _AppResourcesBase with _$AppResources {
     this.pixooDevices = pixooDevices.asObservable();
     emoteDirectorySub = Directory(this.documentsPath).watch().listen((event) {
       setEmotesPaths(
-          Directory(this.documentsPath).listSync().map((e) => e.path).toList());
+        Directory(this.documentsPath).listSync().map((e) => e.path).toList(),
+      );
     });
     instance.dispose();
     instance = this;
   }
+  AppResources._internal();
+
+  // ignore: cancel_subscriptions
+  StreamSubscription<FileSystemEvent>? emoteDirectorySub;
 
   static Future<AppResources> init() async {
-    String documentsPath =
+    final String documentsPath =
         await getApplicationDocumentsDirectory().then((value) {
-      String path = "${value.path}\\PixooEmoteDisplayer\\emotes";
+      final String path = "${value.path}\\PixooEmoteDisplayer\\emotes";
       Directory(path).createSync(recursive: true);
       return path;
     });
-    String tmpCachePath = await getTemporaryDirectory().then((value) {
-      String path = "${value.path}\\PixooEmoteDisplayer\\emotes";
+    final String tmpCachePath = await getTemporaryDirectory().then((value) {
+      final String path = "${value.path}\\PixooEmoteDisplayer\\emotes";
       Directory(path).createSync(recursive: true);
       return path;
     });
-    var networkInterfaces =
+    final networkInterfaces =
         (await NetworkInterface.list(type: InternetAddressType.IPv4))
             .asObservable();
-    var pixooDevices = (await PixooAPI.findSameLANDevices()).asObservable();
+    final pixooDevices = (await PixooAPI.findSameLANDevices()).asObservable();
 
     if (kDebugMode) {
       pixooDevices.addAll(debugPixooDevices);
     }
 
-    instance = AppResources(
+    return instance = AppResources(
       tmpCachePath,
       documentsPath,
       networkInterfaces,
       pixooDevices,
     );
-    return instance;
   }
 
-  dispose() {
+  void dispose() {
     instance.emoteDirectorySub?.cancel();
   }
 }
@@ -94,35 +94,31 @@ abstract class _AppResourcesBase with Store {
   @observable
   String tmpCachePath = "";
   @action
-  setTmpCachePath(String value) => tmpCachePath = value;
+  void setTmpCachePath(String value) => tmpCachePath = value;
 
   @observable
   String documentsPath = "";
   @action
-  setDocumentsPath(String value) => documentsPath = value;
+  void setDocumentsPath(String value) => documentsPath = value;
 
   @observable
   ObservableList<NetworkInterface> networkInterfaces =
       ObservableList<NetworkInterface>.of([]);
   @action
-  setNetworkInterfaces(ObservableList<NetworkInterface> interfaces) =>
+  void setNetworkInterfaces(ObservableList<NetworkInterface> interfaces) =>
       networkInterfaces = interfaces.asObservable();
 
   @observable
   ObservableList<PixooDevice> pixooDevices = ObservableList<PixooDevice>.of([]);
   @action
-  setPixooDevices(ObservableList<PixooDevice> devices) =>
+  void setPixooDevices(ObservableList<PixooDevice> devices) =>
       pixooDevices = devices.asObservable();
-
-  
 
   @observable
   ObservableList<String> emotesPaths = ObservableList<String>.of([]);
   @action
-  setEmotesPaths(List<String> paths) => emotesPaths = paths.asObservable();
+  void setEmotesPaths(List<String> paths) => emotesPaths = paths.asObservable();
 
   @computed
-  bool get isReady =>
-      tmpCachePath.isNotEmpty &&
-      documentsPath.isNotEmpty;
+  bool get isReady => tmpCachePath.isNotEmpty && documentsPath.isNotEmpty;
 }

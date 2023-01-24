@@ -1,11 +1,10 @@
 import 'dart:io';
 
+import 'package:collection/collection.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:mobx/mobx.dart';
+import 'package:pixoo_twitch_emotes_displayer/models/pixoo_device.dart';
 import 'package:pixoo_twitch_emotes_displayer/store/app_resources.dart';
-import 'package:collection/collection.dart';
-
-import '../models/pixoo_device.dart';
 
 part '../generated/user_settings.g.dart';
 
@@ -14,18 +13,18 @@ class UserSettings extends _UserSettingsBase with _$UserSettings {
 
   UserSettings._internal();
 
-  load() {
-    var apikey = box.read<String>("twitchApiKey");
+  void load() {
+    final apikey = box.read<String>("twitchApiKey");
     if (apikey != null) setApiKey(apikey);
-    var v0 = box.read<String>("channelName");
+    final v0 = box.read<String>("channelName");
     if (v0 != null) setChannelName(v0);
-    var v1 = box.read<int>("_selectedPixooDeviceId");
+    final v1 = box.read<int>("_selectedPixooDeviceId");
     if (v1 != null) setSelectedPixooDeviceId(v1);
-    var v2 = box.read<String>("_selectedNetworkInterfaceName");
+    final v2 = box.read<String>("_selectedNetworkInterfaceName");
     if (v2 != null) setSelectedNetworkInterfaceName(v2);
-    var v3 = box.read<int>("emoteTTL");
+    final v3 = box.read<int>("emoteTTL");
     if (v3 != null) setEmoteTTL(v3);
-    var v4 = box.read<int>("emoteActivationThreshold");
+    final v4 = box.read<int>("emoteActivationThreshold");
     if (v4 != null) setEmoteActivationThreshold(v4);
   }
 }
@@ -36,7 +35,7 @@ abstract class _UserSettingsBase with Store {
   @observable
   String? twitchApiKey;
   @action
-  setApiKey(String value) {
+  void setApiKey(String value) {
     twitchApiKey = value;
     box.write("twitchApiKey", value);
   }
@@ -44,7 +43,7 @@ abstract class _UserSettingsBase with Store {
   @observable
   String? channelName;
   @action
-  setChannelName(String value) {
+  void setChannelName(String value) {
     channelName = value;
     box.write("channelName", value);
   }
@@ -52,7 +51,7 @@ abstract class _UserSettingsBase with Store {
   @observable
   int? _selectedPixooDeviceId;
   @action
-  setSelectedPixooDeviceId(int? value) {
+  void setSelectedPixooDeviceId(int? value) {
     _selectedPixooDeviceId = value;
     box.write("_selectedPixooDeviceId", value);
   }
@@ -64,7 +63,7 @@ abstract class _UserSettingsBase with Store {
   @observable
   String? _selectedNetworkInterfaceName;
   @action
-  setSelectedNetworkInterfaceName(String? value) {
+  void setSelectedNetworkInterfaceName(String? value) {
     _selectedNetworkInterfaceName = value;
     box.write("_selectedNetworkInterfaceName", value);
   }
@@ -77,7 +76,7 @@ abstract class _UserSettingsBase with Store {
   @observable
   int emoteTTL = 20;
   @action
-  setEmoteTTL(int value) {
+  void setEmoteTTL(int value) {
     emoteTTL = value;
     box.write("emoteTTL", value);
   }
@@ -85,7 +84,7 @@ abstract class _UserSettingsBase with Store {
   @observable
   int emoteActivationThreshold = 5;
   @action
-  setEmoteActivationThreshold(int value) {
+  void setEmoteActivationThreshold(int value) {
     emoteActivationThreshold = value;
     box.write("emoteActivationThreshold", value);
   }

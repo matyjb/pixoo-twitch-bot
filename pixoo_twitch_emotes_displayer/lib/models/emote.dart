@@ -29,15 +29,25 @@ class EmoteUrl with _$EmoteUrl {
     }
     return EmoteUrl(
       size: size,
-      url: json['url'] as String,
+      url: json['url']! as String,
     );
   }
 }
 
 String encodeFileName(String name) {
-  List<String> forbiddenChars = ["<", ">", ":", "\"", "/", "\\", "|", "?", "*"];
+  final List<String> forbiddenChars = [
+    "<",
+    ">",
+    ":",
+    '"',
+    "/",
+    "\\",
+    "|",
+    "?",
+    "*"
+  ];
   String result = name;
-  for (var c in forbiddenChars) {
+  for (final c in forbiddenChars) {
     result = result.replaceAll(c, "[${c.codeUnitAt(0)}]");
   }
   return result;
@@ -52,14 +62,15 @@ class Emote with _$Emote {
   }) = _Emote;
 
   static String emoteFileName(Emote e, PixooSize pixooSize) => encodeFileName(
-      "${e.code}_${e.provider.name}_${pixooSize.name}_${e.urls.last.url.hashCode}");
+        "${e.code}_${e.provider.name}_${pixooSize.name}_${e.urls.last.url.hashCode}",
+      );
 
   factory Emote.fromJson(Map<String, Object?> json) {
     return Emote(
-      provider: EmoteProvider.values[json['provider'] as int],
-      code: json['code'] as String,
-      urls: (json['urls'] as List<dynamic>)
-          .map((e) => EmoteUrl.fromJson(e))
+      provider: EmoteProvider.values[json['provider']! as int],
+      code: json['code']! as String,
+      urls: (json['urls']! as List<dynamic>)
+          .map((e) => EmoteUrl.fromJson(e as Map<String, dynamic>))
           .toList(),
     );
   }

@@ -41,11 +41,44 @@ mixin _$EmotesManager on _EmoteManagerBase, Store {
     });
   }
 
+  late final _$emotesPreparedAtom =
+      Atom(name: '_EmoteManagerBase.emotesPrepared', context: context);
+
+  @override
+  ObservableSet<Emote> get emotesPrepared {
+    _$emotesPreparedAtom.reportRead();
+    return super.emotesPrepared;
+  }
+
+  @override
+  set emotesPrepared(ObservableSet<Emote> value) {
+    _$emotesPreparedAtom.reportWrite(value, super.emotesPrepared, () {
+      super.emotesPrepared = value;
+    });
+  }
+
+  late final _$emotesFailedAtom =
+      Atom(name: '_EmoteManagerBase.emotesFailed', context: context);
+
+  @override
+  ObservableSet<Emote> get emotesFailed {
+    _$emotesFailedAtom.reportRead();
+    return super.emotesFailed;
+  }
+
+  @override
+  set emotesFailed(ObservableSet<Emote> value) {
+    _$emotesFailedAtom.reportWrite(value, super.emotesFailed, () {
+      super.emotesFailed = value;
+    });
+  }
+
   late final _$_EmoteManagerBaseActionController =
       ActionController(name: '_EmoteManagerBase', context: context);
 
   @override
-  dynamic _setRanking(List<MapEntry<Emote, Pair<DateTime, int>>> value) {
+  List<MapEntry<Emote, Pair<DateTime, int>>> _setRanking(
+      List<MapEntry<Emote, Pair<DateTime, int>>> value) {
     final _$actionInfo = _$_EmoteManagerBaseActionController.startAction(
         name: '_EmoteManagerBase._setRanking');
     try {
@@ -67,10 +100,34 @@ mixin _$EmotesManager on _EmoteManagerBase, Store {
   }
 
   @override
+  ObservableSet<Emote> setPreparedEmotes(Set<Emote> value) {
+    final _$actionInfo = _$_EmoteManagerBaseActionController.startAction(
+        name: '_EmoteManagerBase.setPreparedEmotes');
+    try {
+      return super.setPreparedEmotes(value);
+    } finally {
+      _$_EmoteManagerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  ObservableSet<Emote> setEmotesFailed(Set<Emote> value) {
+    final _$actionInfo = _$_EmoteManagerBaseActionController.startAction(
+        name: '_EmoteManagerBase.setEmotesFailed');
+    try {
+      return super.setEmotesFailed(value);
+    } finally {
+      _$_EmoteManagerBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   String toString() {
     return '''
 ranking: ${ranking},
-displayedEmote: ${displayedEmote}
+displayedEmote: ${displayedEmote},
+emotesPrepared: ${emotesPrepared},
+emotesFailed: ${emotesFailed}
     ''';
   }
 }

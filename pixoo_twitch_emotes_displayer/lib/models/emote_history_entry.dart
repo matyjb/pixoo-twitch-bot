@@ -2,7 +2,7 @@
 
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-import 'emote.dart';
+import 'package:pixoo_twitch_emotes_displayer/models/emote.dart';
 part '../generated/emote_history_entry.freezed.dart';
 
 @freezed

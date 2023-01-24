@@ -5,14 +5,15 @@ import 'package:flutter/foundation.dart';
 import 'package:pixoo_twitch_emotes_displayer/models/pixoo_device.dart';
 
 // http://doc.divoom-gz.com/web/#/12?page_id=195
+// ignore: avoid_classes_with_only_static_members
 class PixooAPI {
   static final Dio _dio = Dio();
 
   // max 60 animation frames and 64 by 64 pixels
   static Future<bool> playGifFile(String deviceIp, String emoteUrl) async {
-    String pixooDeviceUrl = 'http://$deviceIp/post';
+    final String pixooDeviceUrl = 'http://$deviceIp/post';
 
-    dynamic data = {
+    final dynamic data = {
       "Command": "Device/PlayTFGif",
       "FileType": 2,
       "FileName": Uri.parse(emoteUrl).toString()
@@ -34,10 +35,11 @@ class PixooAPI {
   }
 
   static Future<List<PixooDevice>> findSameLANDevices() async {
-    var response =
+    final response =
         await _dio.post('https://app.divoom-gz.com/Device/ReturnSameLANDevice');
+    // ignore: avoid_dynamic_calls
     return (response.data["DeviceList"] as List<dynamic>)
-        .map((e) => PixooDevice.fromJson(e))
+        .map((e) => PixooDevice.fromJson(e as Map<String, dynamic>))
         .toList();
   }
 }

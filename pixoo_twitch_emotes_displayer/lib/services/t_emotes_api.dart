@@ -2,45 +2,47 @@ import 'dart:io';
 
 import 'package:dio/dio.dart';
 import 'package:pixoo_twitch_emotes_displayer/models/channel_identifiers.dart';
-import '../models/emote.dart';
+import 'package:pixoo_twitch_emotes_displayer/models/emote.dart';
 
+// ignore: avoid_classes_with_only_static_members
 class TEmotesAPI {
   static final Dio _dio = Dio();
 
   static Future<List<Emote>> getEmotesForChannel(String channelName) async {
-    var response = await _dio
+    final response = await _dio
         .get('https://emotes.adamcy.pl/v1/channel/$channelName/emotes/all');
     return (response.data as List<dynamic>)
-        .map((e) => Emote.fromJson(e))
+        .map((e) => Emote.fromJson(e as Map<String, dynamic>))
         .toList();
   }
 
   static Future<List<Emote>> getEmotesGlobal() async {
-    var response =
+    final response =
         await _dio.get('https://emotes.adamcy.pl/v1/global/emotes/all');
     return (response.data as List<dynamic>)
-        .map((e) => Emote.fromJson(e))
+        .map((e) => Emote.fromJson(e as Map<String, dynamic>))
         .toList();
   }
 
   static Future<ChannelIdentifiers> getChannelIdentifiers(
-      String channelName) async {
-    var response =
+    String channelName,
+  ) async {
+    final response =
         await _dio.get('https://emotes.adamcy.pl/v1/channel/$channelName/id');
-    return ChannelIdentifiers.fromJson(response.data);
+    return ChannelIdentifiers.fromJson(response.data as Map<String, dynamic>);
   }
 
   // returns path to created file
   static Future<String> downloadFile(String url, String savePath) async {
-    Response response = await _dio.download(url, savePath);
-    String? ct = response.headers.map["content-type"]?.first;
-    String? cd = response.headers.map["content-disposition"]?.first;
+    final Response response = await _dio.download(url, savePath);
+    final String? ct = response.headers.map["content-type"]?.first;
+    final String? cd = response.headers.map["content-disposition"]?.first;
     String originalExtension;
     if (cd != null) {
-      RegExp filenameRegex = RegExp(r'\.\w+');
+      final RegExp filenameRegex = RegExp(r'\.\w+');
       originalExtension = filenameRegex.allMatches(cd).last.group(0).toString();
     } else {
-      RegExp filenameRegex = RegExp(r'\/\w+');
+      final RegExp filenameRegex = RegExp(r'\/\w+');
       originalExtension = filenameRegex
           .allMatches(ct!)
           .last
@@ -48,9 +50,9 @@ class TEmotesAPI {
           .toString()
           .replaceAll("/", ".");
     }
-    String newFilePath = "$savePath$originalExtension";
+    final String newFilePath = "$savePath$originalExtension";
     File(savePath).renameSync(newFilePath);
-    int? statusCode = response.statusCode;
+    final int? statusCode = response.statusCode;
     if (statusCode != null && statusCode >= 200 && statusCode < 300) {
       return newFilePath;
     } else {

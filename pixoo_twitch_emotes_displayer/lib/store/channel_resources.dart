@@ -1,9 +1,8 @@
 import 'package:mobx/mobx.dart';
+import 'package:pixoo_twitch_emotes_displayer/models/emote.dart';
+import 'package:pixoo_twitch_emotes_displayer/models/emote_history_entry.dart';
+import 'package:pixoo_twitch_emotes_displayer/services/t_emotes_api.dart';
 import 'package:pixoo_twitch_emotes_displayer/store/user_settings.dart';
-
-import '../models/emote.dart';
-import '../models/emote_history_entry.dart';
-import '../services/t_emotes_api.dart';
 
 part '../generated/channel_resources.g.dart';
 
@@ -15,16 +14,16 @@ class ChannelResources extends _ChannelResourcesBase with _$ChannelResources {
   ChannelResources._internal();
 
   Future getEmotes(String channelName) async {
-    Map<String, Emote> result = {};
+    final Map<String, Emote> result = {};
 
-    List<Emote> globalEmotes = await TEmotesAPI.getEmotesGlobal();
-    for (var element in globalEmotes) {
+    final List<Emote> globalEmotes = await TEmotesAPI.getEmotesGlobal();
+    for (final element in globalEmotes) {
       result[element.code] = element;
     }
 
-    List<Emote> channelEmotes =
+    final List<Emote> channelEmotes =
         await TEmotesAPI.getEmotesForChannel(channelName);
-    for (var element in channelEmotes) {
+    for (final element in channelEmotes) {
       result[element.code] = element;
     }
 
@@ -37,25 +36,29 @@ abstract class _ChannelResourcesBase with Store {
   @observable
   ObservableMap<String, Emote> emotes = ObservableMap.of({});
   @action
-  setEmotes(Map<String, Emote> value) => emotes = value.asObservable();
+  void setEmotes(Map<String, Emote> value) => emotes = value.asObservable();
 
   @observable
   ObservableList<EmoteHistoryEntry> emoteHistory = ObservableList.of([]);
   @action
-  setEmoteHistory(List<EmoteHistoryEntry> value) => emoteHistory
+  void setEmoteHistory(List<EmoteHistoryEntry> value) => emoteHistory
     ..clear()
     ..addAll(value);
 
   @action
-  reportEmote(Emote emote) {
+  void reportEmote(Emote emote) {
     emoteHistory.insert(
-        0, EmoteHistoryEntry(emote: emote, time: DateTime.now()));
+      0,
+      EmoteHistoryEntry(emote: emote, time: DateTime.now()),
+    );
     if (emoteHistory.length > maxHistorySize) {
       emoteHistory.removeRange(maxHistorySize, emoteHistory.length);
     }
-    var now = DateTime.now();
-    emoteHistory.retainWhere((element) =>
-        now.difference(element.time).inSeconds <
-        UserSettings.instance.emoteTTL);
+    final now = DateTime.now();
+    emoteHistory.retainWhere(
+      (element) =>
+          now.difference(element.time).inSeconds <
+          UserSettings.instance.emoteTTL,
+    );
   }
 }
