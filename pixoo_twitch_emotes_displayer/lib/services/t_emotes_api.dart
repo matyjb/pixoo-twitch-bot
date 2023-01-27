@@ -4,8 +4,8 @@ import 'package:dio/dio.dart';
 import 'package:pixoo_twitch_emotes_displayer/models/channel_identifiers.dart';
 import 'package:pixoo_twitch_emotes_displayer/models/emote.dart';
 
-// ignore: avoid_classes_with_only_static_members
-class TEmotesAPI {
+// extension on Never acts as namespace
+extension TEmotesAPI on Never {
   static final Dio _dio = Dio();
 
   static Future<List<Emote>> getEmotesForChannel(String channelName) async {

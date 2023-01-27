@@ -2,8 +2,8 @@ import 'package:pixoo_twitch_emotes_displayer/helpers/pair.dart';
 import 'package:pixoo_twitch_emotes_displayer/models/pixoo_device.dart';
 import 'package:process_run/shell_run.dart';
 
-// ignore: avoid_classes_with_only_static_members
-class ImagickScripts {
+// extension on Never acts as namespace
+extension ImagickScripts on Never {
   // helpers
   static Future<List<Pair<int, int>>> _getDelays(String inputPath) async {
     return run('magick identify -verbose "$inputPath"').then((result) {

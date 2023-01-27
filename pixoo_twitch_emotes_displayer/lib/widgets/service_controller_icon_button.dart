@@ -1,15 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-import 'package:pixoo_twitch_emotes_displayer/pages/dashboard_page.dart';
 import 'package:pixoo_twitch_emotes_displayer/services/chat_emotes_listener.dart';
 import 'package:pixoo_twitch_emotes_displayer/services/emote_host_server.dart';
 import 'package:pixoo_twitch_emotes_displayer/store/app_resources.dart';
 import 'package:pixoo_twitch_emotes_displayer/store/user_settings.dart';
-import 'package:route_transitions/route_transitions.dart';
 
 class ServiceControllerIconButton extends StatelessWidget {
   final double? iconSize;
-  ServiceControllerIconButton({super.key, this.iconSize});
+  final Function() onPressed;
+  final Duration? connectDurationDelay;
+  ServiceControllerIconButton({
+    super.key,
+    this.iconSize,
+    required this.onPressed,
+    this.connectDurationDelay,
+  });
 
   final UserSettings _userSettings = UserSettings.instance;
   final AppResources _appResources = AppResources.instance;
@@ -19,31 +24,30 @@ class ServiceControllerIconButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Observer(
-      builder: (context) => IconButton(
-        onPressed: _userSettings.isReady && _appResources.isReady
+      builder: (_) => IconButton(
+        onPressed: _userSettings.isReady &&
+                _appResources.isReady &&
+                _chatEmotesListener.status == ChatEmotesListenerStatus.stopped
             ? () {
-                if (_chatEmotesListener.status ==
-                    ChatEmotesListenerStatus.joined) {
-                  _chatEmotesListener.disconnect();
-                  _emoteHostServer.stop();
-                  pop(context);
+                onPressed();
+                if (connectDurationDelay != null) {
+                  Future.delayed(connectDurationDelay!, () {
+                    _chatEmotesListener.connect(_userSettings.channelName!);
+                    _emoteHostServer.start();
+                  });
                 } else {
                   _chatEmotesListener.connect(_userSettings.channelName!);
                   _emoteHostServer.start();
-                  pushWidget(
-                    newPage: const DashboardPage(),
-                    context: context,
-                  );
                 }
               }
-            : null,
-        icon: Observer(
-          builder: (context) {
-            return _chatEmotesListener.status == ChatEmotesListenerStatus.joined
-                ? const Icon(Icons.pause_rounded)
-                : const Icon(Icons.play_arrow_rounded);
-          },
-        ),
+            : () {
+                _chatEmotesListener.disconnect();
+                _emoteHostServer.stop();
+                onPressed();
+              },
+        icon: _chatEmotesListener.status == ChatEmotesListenerStatus.joined
+            ? const Icon(Icons.stop_rounded)
+            : const Icon(Icons.play_arrow_rounded),
         iconSize: iconSize,
       ),
     );

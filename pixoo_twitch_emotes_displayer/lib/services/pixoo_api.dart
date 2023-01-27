@@ -5,8 +5,8 @@ import 'package:flutter/foundation.dart';
 import 'package:pixoo_twitch_emotes_displayer/models/pixoo_device.dart';
 
 // http://doc.divoom-gz.com/web/#/12?page_id=195
-// ignore: avoid_classes_with_only_static_members
-class PixooAPI {
+// extension on Never acts as namespace
+extension PixooAPI on Never  {
   static final Dio _dio = Dio();
 
   // max 60 animation frames and 64 by 64 pixels
