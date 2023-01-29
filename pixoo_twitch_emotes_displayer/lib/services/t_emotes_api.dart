@@ -35,7 +35,7 @@ extension TEmotesAPI on Never {
   // returns path to created file
   static Future<String> downloadFile(String url, String savePath) async {
     final Response response = await _dio.download(url, savePath);
-    final String? ct = response.headers.map["content-type"]?.first;
+    final String ct = response.headers.map["content-type"]?.first ?? "image/png";
     final String? cd = response.headers.map["content-disposition"]?.first;
     String originalExtension;
     if (cd != null) {
@@ -44,7 +44,7 @@ extension TEmotesAPI on Never {
     } else {
       final RegExp filenameRegex = RegExp(r'\/\w+');
       originalExtension = filenameRegex
-          .allMatches(ct!)
+          .allMatches(ct)
           .last
           .group(0)
           .toString()

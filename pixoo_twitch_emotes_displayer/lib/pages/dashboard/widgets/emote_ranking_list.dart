@@ -16,7 +16,7 @@ class EmoteRankingList extends StatelessWidget {
     return Observer(
       builder: (context) {
         return ImplicitlyAnimatedList<MapEntry<Emote, Pair<DateTime, int>>>(
-          items: _emotesManager.ranking,
+          items: _emotesManager.ranking.take(10).toList(),
           areItemsTheSame: (oldItem, newItem) => oldItem.key == newItem.key,
           itemBuilder: (context, animation, item, index) => SizeFadeTransition(
             sizeFraction: 0.7,
@@ -61,8 +61,20 @@ class _EmoteListTile extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Image.network(emote.urls[0].url),
-              Text(value.toString()),
+              Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  ConstrainedBox(
+                    constraints: const BoxConstraints(minWidth: 110),
+                    child: Image.network(emote.urls[0].url),
+                  ),
+                  Text(emote.code),
+                ],
+              ),
+              Container(
+                margin: const EdgeInsets.symmetric(horizontal: 10),
+                child: Text(value.toString()),
+              ),
             ],
           ),
         ),

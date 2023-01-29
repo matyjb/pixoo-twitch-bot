@@ -45,18 +45,41 @@ class DashboardPage extends StatelessWidget {
                   )
                 ],
               ),
-              body: Column(
+              body: Stack(
+                alignment: AlignmentDirectional.bottomStart,
                 children: [
-                  SizedBox(
-                    height: 100,
-                    child: DisplayedEmote(),
+                  Column(
+                    children: [
+                      SizedBox(
+                        height: 100,
+                        child: DisplayedEmote(),
+                      ),
+                      Expanded(
+                        child: EmoteRankingList(),
+                      ),
+                    ],
                   ),
-                  Expanded(
-                    child: EmoteRankingList(),
+                  Card(
+                    margin: EdgeInsets.zero,
+                    elevation: 7,
+                    shape: const RoundedRectangleBorder(
+                      borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(10),
+                        topRight: Radius.circular(10),
+                      ),
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          EmoteActivationSlider(),
+                          EmoteTTLSlider(),
+                          const _ServiceControls(),
+                        ],
+                      ),
+                    ),
                   ),
-                  EmoteActivationSlider(),
-                  EmoteTTLSlider(),
-                  const _ServiceControls(),
                 ],
               ),
             );

@@ -99,6 +99,7 @@ class _WaitingForServicesState extends State<_WaitingForServices>
               backgroundImage: widget.avatarUrl != null
                   ? NetworkImage(widget.avatarUrl!)
                   : null,
+              backgroundColor: Colors.transparent,
               radius: 50,
               child: const SizedBox(
                 width: 108,
