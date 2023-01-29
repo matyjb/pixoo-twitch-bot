@@ -53,7 +53,7 @@ mixin _$EmoteHostServer on _EmoteHostServerBase, Store {
       ActionController(name: '_EmoteHostServerBase', context: context);
 
   @override
-  dynamic setStatus(EmoteHostServerStatus value) {
+  void setStatus(EmoteHostServerStatus value) {
     final _$actionInfo = _$_EmoteHostServerBaseActionController.startAction(
         name: '_EmoteHostServerBase.setStatus');
     try {
@@ -64,7 +64,7 @@ mixin _$EmoteHostServer on _EmoteHostServerBase, Store {
   }
 
   @override
-  dynamic stop() {
+  void stop() {
     final _$actionInfo = _$_EmoteHostServerBaseActionController.startAction(
         name: '_EmoteHostServerBase.stop');
     try {

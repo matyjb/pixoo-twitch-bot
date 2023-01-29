@@ -29,7 +29,7 @@ mixin _$ChatEmotesListener on _ChatEmotesListenerBase, Store {
       ActionController(name: '_ChatEmotesListenerBase', context: context);
 
   @override
-  dynamic setStatus(ChatEmotesListenerStatus value) {
+  void setStatus(ChatEmotesListenerStatus value) {
     final _$actionInfo = _$_ChatEmotesListenerBaseActionController.startAction(
         name: '_ChatEmotesListenerBase.setStatus');
     try {

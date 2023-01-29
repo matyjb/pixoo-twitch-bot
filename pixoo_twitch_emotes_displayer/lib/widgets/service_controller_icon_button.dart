@@ -8,12 +8,11 @@ import 'package:pixoo_twitch_emotes_displayer/store/user_settings.dart';
 class ServiceControllerIconButton extends StatelessWidget {
   final double? iconSize;
   final Function() onPressed;
-  final Duration? connectDurationDelay;
+  static const String heroTag = "ServiceControllerIconButton";
   ServiceControllerIconButton({
     super.key,
     this.iconSize,
     required this.onPressed,
-    this.connectDurationDelay,
   });
 
   final UserSettings _userSettings = UserSettings.instance;
@@ -24,32 +23,33 @@ class ServiceControllerIconButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Observer(
-      builder: (_) => IconButton(
-        onPressed: _userSettings.isReady &&
-                _appResources.isReady &&
-                _chatEmotesListener.status == ChatEmotesListenerStatus.stopped
-            ? () {
-                onPressed();
-                if (connectDurationDelay != null) {
-                  Future.delayed(connectDurationDelay!, () {
-                    _chatEmotesListener.connect(_userSettings.channelName!);
-                    _emoteHostServer.start();
-                  });
-                } else {
-                  _chatEmotesListener.connect(_userSettings.channelName!);
-                  _emoteHostServer.start();
-                }
-              }
-            : () {
-                _chatEmotesListener.disconnect();
-                _emoteHostServer.stop();
-                onPressed();
-              },
-        icon: _chatEmotesListener.status == ChatEmotesListenerStatus.joined
-            ? const Icon(Icons.stop_rounded)
-            : const Icon(Icons.play_arrow_rounded),
-        iconSize: iconSize,
-      ),
+      builder: (_) {
+        final bool servicesRunning =
+            _chatEmotesListener.status == ChatEmotesListenerStatus.joined &&
+                _emoteHostServer.status == EmoteHostServerStatus.running;
+        final bool servicesStopped =
+            _chatEmotesListener.status == ChatEmotesListenerStatus.stopped &&
+                _emoteHostServer.status == EmoteHostServerStatus.stopped;
+
+        return IconButton(
+          onPressed:
+              _userSettings.isReady && _appResources.isReady && servicesStopped
+                  ? () {
+                      _chatEmotesListener.connect(_userSettings.channelName!);
+                      _emoteHostServer.start();
+                      onPressed();
+                    }
+                  : () {
+                      _chatEmotesListener.disconnect();
+                      _emoteHostServer.stop();
+                      onPressed();
+                    },
+          icon: servicesRunning || !servicesStopped
+              ? const Icon(Icons.stop_rounded)
+              : const Icon(Icons.play_arrow_rounded),
+          iconSize: iconSize,
+        );
+      },
     );
   }
 }

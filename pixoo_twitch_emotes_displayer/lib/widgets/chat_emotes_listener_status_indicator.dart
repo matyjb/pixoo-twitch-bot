@@ -9,6 +9,7 @@ const Map<ChatEmotesListenerStatus, Color> statusToColorMap = {
 };
 
 class ChatEmotesListenerStatusIndicator extends StatelessWidget {
+  static const String heroTag = "ChatEmotesListenerStatusIndicator";
   ChatEmotesListenerStatusIndicator({super.key});
 
   final ChatEmotesListener _chatEmotesListener = ChatEmotesListener.instance;

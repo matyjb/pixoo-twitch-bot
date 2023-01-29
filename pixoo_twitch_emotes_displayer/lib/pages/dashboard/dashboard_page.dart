@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:pixoo_twitch_emotes_displayer/models/channel_identifiers.dart';
-import 'package:pixoo_twitch_emotes_displayer/pages/dashboard/widgets/channel_avatar.dart';
 import 'package:pixoo_twitch_emotes_displayer/pages/dashboard/widgets/displayed_emote.dart';
 import 'package:pixoo_twitch_emotes_displayer/pages/dashboard/widgets/emote_activation_slider.dart';
 import 'package:pixoo_twitch_emotes_displayer/pages/dashboard/widgets/emote_ranking_list.dart';
@@ -14,114 +14,87 @@ import 'package:pixoo_twitch_emotes_displayer/widgets/service_controller_icon_bu
 import 'package:route_transitions/route_transitions.dart';
 
 class DashboardPage extends StatelessWidget {
-  const DashboardPage({super.key});
+  final String? defaultAvatarUrl;
+  const DashboardPage({super.key, this.defaultAvatarUrl});
 
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder<ChannelIdentifiers>(
-      future:
-          TEmotesAPI.getChannelIdentifiers(UserSettings.instance.channelName!),
-      builder: (context, snapshot) {
-        if (snapshot.connectionState == ConnectionState.done &&
-            snapshot.hasData) {
-          return Scaffold(
-            appBar: AppBar(
-              title: Text(snapshot.data!.display_name),
-              automaticallyImplyLeading: false,
-              actions: [
-                RefreshEmotesIconButton(),
-                ChannelAvatar(snapshot.data!.avatar),
-              ],
-            ),
-            floatingActionButton: const SettingsFAB(),
-            body: Column(
-              children: [
-                SizedBox(
-                  height: 100,
-                  child: DisplayedEmote(),
-                ),
-                Expanded(
-                  child: EmoteRankingList(),
-                ),
-              ],
-            ),
-          );
-        }
-        return Scaffold(
-          appBar: AppBar(
-            leading: ServiceControllerIconButton(
-              onPressed: () => pop(context),
-            ),
-            title: const Text("Dashboard"),
-          ),
-          body: Container(),
+    return Observer(
+      builder: (context) {
+        final String channel = UserSettings.instance.channelName ?? "";
+
+        return FutureBuilder<ChannelIdentifiers>(
+          future: TEmotesAPI.getChannelIdentifiers(channel),
+          builder: (context, snapshot) {
+            final String? avatar = snapshot.data?.avatar ?? defaultAvatarUrl;
+            return Scaffold(
+              appBar: AppBar(
+                title: Text(snapshot.data?.display_name ?? channel),
+                automaticallyImplyLeading: false,
+                actions: [
+                  RefreshEmotesIconButton(),
+                  Padding(
+                    padding: const EdgeInsets.all(4),
+                    child: Hero(
+                      tag: "channel_avatar",
+                      child: CircleAvatar(
+                        backgroundImage:
+                            avatar != null ? NetworkImage(avatar) : null,
+                      ),
+                    ),
+                  )
+                ],
+              ),
+              body: Column(
+                children: [
+                  SizedBox(
+                    height: 100,
+                    child: DisplayedEmote(),
+                  ),
+                  Expanded(
+                    child: EmoteRankingList(),
+                  ),
+                  EmoteActivationSlider(),
+                  EmoteTTLSlider(),
+                  const _ServiceControls(),
+                ],
+              ),
+            );
+          },
         );
       },
     );
   }
 }
 
-class SettingsFAB extends StatefulWidget {
-  const SettingsFAB({super.key});
-
-  @override
-  State<SettingsFAB> createState() => _SettingsFABState();
-}
-
-class _SettingsFABState extends State<SettingsFAB> {
-  PersistentBottomSheetController? _bsController;
-
-  @override
-  Widget build(BuildContext context) {
-    return FloatingActionButton(
-      onPressed: () {
-        if (_bsController != null) {
-          _bsController!.close();
-          setState(() {
-            _bsController = null;
-          });
-        } else {
-          setState(() {
-            _bsController = showBottomSheet(
-              context: context,
-              builder: (_) => Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  EmoteActivationSlider(),
-                  EmoteTTLSlider(),
-                  const ServiceControls(),
-                ],
-              ),
-            );
-          });
-        }
-      },
-      child: Icon(
-        _bsController == null ? Icons.settings : Icons.arrow_downward_rounded,
-      ),
-    );
-  }
-}
-
-class ServiceControls extends StatelessWidget {
-  const ServiceControls({super.key});
+class _ServiceControls extends StatelessWidget {
+  const _ServiceControls();
 
   @override
   Widget build(BuildContext context) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        ServiceControllerIconButton(onPressed: () => pop(context)),
+        Hero(
+          tag: ServiceControllerIconButton.heroTag,
+          child: ServiceControllerIconButton(onPressed: () => pop(context)),
+        ),
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 2.0),
-          child: ChatEmotesListenerStatusIndicator(),
+          child: Hero(
+            tag: ChatEmotesListenerStatusIndicator.heroTag,
+            child: ChatEmotesListenerStatusIndicator(),
+          ),
         ),
         const Expanded(child: Text("TTV bot")),
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 2.0),
-          child: EmoteHostServerStatusIndicator(),
+          child: Hero(
+            tag: EmoteHostServerStatusIndicator.heroTag,
+            child: EmoteHostServerStatusIndicator(),
+          ),
         ),
-        const Expanded(child: Text("Emote server")),
+        const Expanded(child: Text("Server emotek")),
       ],
     );
   }

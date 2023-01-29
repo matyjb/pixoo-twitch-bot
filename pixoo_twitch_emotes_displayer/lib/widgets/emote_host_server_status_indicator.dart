@@ -9,6 +9,7 @@ const Map<EmoteHostServerStatus, Color> statusToColorMap = {
 };
 
 class EmoteHostServerStatusIndicator extends StatelessWidget {
+  static const String heroTag = "EmoteHostServerStatusIndicator";
   EmoteHostServerStatusIndicator({super.key});
 
   final EmoteHostServer _emoteHostServer = EmoteHostServer.instance;

@@ -14,7 +14,7 @@ class EmoteActivationSlider extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 8),
           child: Text(
-            "Emote activation point",
+            "Ilość emotek do aktywacji",
             style: Theme.of(context).textTheme.caption,
           ),
         ),
