@@ -17,3 +17,7 @@ samples, guidance on mobile development, and a full API reference.
 
 
 [how to get oauth key](https://gist.github.com/hunterbridges/ab095066d40f2e1a243e)
+
+[pixoo api](http://doc.divoom-gz.com/web/#/12?page_id=195)
+
+[7tv emotes api](https://github.com/SevenTV/ServerGo/blob/master/docs/rest-api.md)
