@@ -8,7 +8,7 @@
 PRODUCT_NAME = pixoo_twitch_emotes_displayer
 
 // The application's bundle identifier
-PRODUCT_BUNDLE_IDENTIFIER = com.example.pixooTwitchEmotesDisplayer
+PRODUCT_BUNDLE_IDENTIFIER = matyjb.pixooTwitchEmotesDisplayer
 
 // The copyright displayed in application information
-PRODUCT_COPYRIGHT = Copyright © 2022 com.example. All rights reserved.
+PRODUCT_COPYRIGHT = Copyright © 2023 matyjb. All rights reserved.
