@@ -3,6 +3,7 @@ import 'dart:io';
 
 import 'package:dio/dio.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:pixoo_twitch_emotes_displayer/data/models/pixoo_device.dart';
 import 'package:pixoo_twitch_emotes_displayer/data/models/raw/seventv_emote_raw.dart';
 part 'ttv_emote.freezed.dart';
 part 'ttv_emote.g.dart';
@@ -35,7 +36,7 @@ class TtvEmote with _$TtvEmote {
         maxQualityUrl: raw.urls.last.last,
       );
 
-  String get fileName => "${id}_${provider.name}";
+  String fileName(PixooSize size) => "${id}_${provider.name}_${size.name}";
 
   // download file and return full path to the image
   Future<String> download(String saveDir) async {
