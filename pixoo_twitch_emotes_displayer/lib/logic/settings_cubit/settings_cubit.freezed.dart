@@ -198,14 +198,15 @@ class __$$_SettingsStateCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_SettingsState implements _SettingsState {
+class _$_SettingsState extends _SettingsState {
   const _$_SettingsState(
       {this.apiKey,
       this.channelName,
       this.selectedPixooDevice,
       this.selectedNetworkInterface,
       this.bufferSize = 25,
-      @ThemeModeJsonConverter() this.themeMode = ThemeMode.system});
+      @ThemeModeJsonConverter() this.themeMode = ThemeMode.system})
+      : super._();
 
   factory _$_SettingsState.fromJson(Map<String, dynamic> json) =>
       _$$_SettingsStateFromJson(json);
@@ -269,7 +270,7 @@ class _$_SettingsState implements _SettingsState {
   }
 }
 
-abstract class _SettingsState implements SettingsState {
+abstract class _SettingsState extends SettingsState {
   const factory _SettingsState(
       {final String? apiKey,
       final String? channelName,
@@ -277,6 +278,7 @@ abstract class _SettingsState implements SettingsState {
       final NetInterface? selectedNetworkInterface,
       final int bufferSize,
       @ThemeModeJsonConverter() final ThemeMode themeMode}) = _$_SettingsState;
+  const _SettingsState._() : super._();
 
   factory _SettingsState.fromJson(Map<String, dynamic> json) =
       _$_SettingsState.fromJson;
