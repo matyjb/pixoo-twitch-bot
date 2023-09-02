@@ -43,6 +43,8 @@ dependencies:
   shelf: ^1.4.1
   shelf_static: ^1.1.2
   stream_transform: ^2.1.0
+  system_theme: ^2.3.1
+  url_launcher: ^6.1.14
   web_socket_channel: ^2.4.0
 
 dev_dependencies:

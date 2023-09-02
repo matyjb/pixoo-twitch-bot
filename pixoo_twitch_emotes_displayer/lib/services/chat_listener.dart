@@ -26,7 +26,7 @@ class ChatListener {
     });
 
     socket.sink.add("CAP REQ :twitch.tv/membership");
-    socket.sink.add("PASS oauth:$ttvApiKey");
+    socket.sink.add("PASS $ttvApiKey");
     socket.sink.add("NICK pixoo_displayer");
     socket.sink.add("JOIN #$channel");
     return socket.ready;
