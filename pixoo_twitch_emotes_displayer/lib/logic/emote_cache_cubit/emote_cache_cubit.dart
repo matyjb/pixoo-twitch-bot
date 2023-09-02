@@ -113,6 +113,7 @@ class EmoteCacheCubit extends Cubit<EmoteCacheState> {
   @override
   Future<void> close() {
     _sub.cancel();
+    // TODO: cancel all emotes production
     return super.close();
   }
 }
