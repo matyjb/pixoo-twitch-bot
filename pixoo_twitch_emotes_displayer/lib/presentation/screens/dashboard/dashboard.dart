@@ -5,6 +5,8 @@ import 'package:pixoo_twitch_emotes_displayer/logic/chat_listener_bloc/chat_list
 import 'package:pixoo_twitch_emotes_displayer/logic/emote_cache_cubit/emote_cache_cubit.dart';
 import 'package:pixoo_twitch_emotes_displayer/logic/pixoo_adapter_bloc/pixoo_adapter_bloc.dart';
 import 'package:pixoo_twitch_emotes_displayer/logic/settings_cubit/settings_cubit.dart';
+import 'package:pixoo_twitch_emotes_displayer/presentation/screens/dashboard/widgets/emote_listener_controls.dart';
+import 'package:pixoo_twitch_emotes_displayer/presentation/screens/dashboard/widgets/pixoo_device_adapter_controls.dart';
 
 class DashboardScreen extends StatefulWidget {
   const DashboardScreen({super.key});
@@ -39,6 +41,10 @@ class _DashboardScreenState extends State<DashboardScreen> {
       child: Scaffold(
         appBar: AppBar(
           title: const Text("Dashboard"),
+          actions: const [
+            EmoteListenerControls(),
+            PixooAdapterControls(),
+          ],
         ),
       ),
     );
