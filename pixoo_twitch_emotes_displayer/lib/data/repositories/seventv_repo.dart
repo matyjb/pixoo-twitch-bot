@@ -1,3 +1,5 @@
+import 'package:pixoo_twitch_emotes_displayer/data/models/raw/seventv_emote_raw.dart';
+import 'package:pixoo_twitch_emotes_displayer/data/models/raw/seventv_user_raw.dart';
 import 'package:pixoo_twitch_emotes_displayer/data/models/seventv_user.dart';
 import 'package:pixoo_twitch_emotes_displayer/data/models/ttv_emote.dart';
 import 'package:pixoo_twitch_emotes_displayer/data/providers/seventv_api.dart';
@@ -7,7 +9,7 @@ class SevenTVRepo {
     return SevenTVApi.getUser(login).then((res) {
       if (res.data == null) throw Exception("No data returned");
 
-      return SevenTVUser.fromRaw(res.data!);
+      return SevenTVUser.fromRaw(SevenTVUserRaw.fromJson(res.data!));
     });
   }
 
@@ -15,7 +17,7 @@ class SevenTVRepo {
     return SevenTVApi.getEmote(emote).then((res) {
       if (res.data == null) throw Exception("No data returned");
 
-      return TtvEmote.from7TvRaw(res.data!);
+      return TtvEmote.from7TvRaw(SevenTVEmoteRaw.fromJson(res.data!));
     });
   }
 
@@ -27,7 +29,7 @@ class SevenTVRepo {
       List<TtvEmote> emotes = [];
       for (var res in ress) {
         if (res.data != null) {
-          emotes.addAll(res.data!.map(TtvEmote.from7TvRaw));
+          emotes.addAll(res.data!.map((e) => TtvEmote.from7TvRaw(SevenTVEmoteRaw.fromJson(e))));
         }
       }
       return emotes;

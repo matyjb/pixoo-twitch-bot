@@ -1,7 +1,6 @@
 import 'dart:convert';
 
 import 'package:dio/dio.dart';
-import 'package:pixoo_twitch_emotes_displayer/data/models/raw/find_same_lan_device_response.dart';
 
 // http://doc.divoom-gz.com/web/#/12?page_id=195
 // extension on Never acts as namespace
@@ -20,7 +19,7 @@ extension PixooAPI on Never {
     return _dio.post(pixooDeviceUrl, data: jsonEncode(data));
   }
 
-  static Future<Response<FindSameLANDevicesResponse>> findSameLANDevices() async {
+  static Future<Response<Map<String,dynamic>>> findSameLANDevices() async {
     return _dio.post('https://app.divoom-gz.com/Device/ReturnSameLANDevice');
   }
 }

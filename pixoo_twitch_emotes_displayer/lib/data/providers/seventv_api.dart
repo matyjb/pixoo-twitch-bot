@@ -1,25 +1,23 @@
 import 'package:dio/dio.dart';
-import 'package:pixoo_twitch_emotes_displayer/data/models/raw/seventv_emote_raw.dart';
-import 'package:pixoo_twitch_emotes_displayer/data/models/raw/seventv_user_raw.dart';
 
 const String baseUrl = "https://api.7tv.app/v2";
 
 class SevenTVApi {
   static final Dio _dio = Dio();
 
-  static Future<Response<SevenTVUserRaw>> getUser(String login) {
+  static Future<Response<dynamic>> getUser(String login) {
     return _dio.get("$baseUrl/users/$login");
   }
 
-  static Future<Response<SevenTVEmoteRaw>> getEmote(String emote) {
+  static Future<Response<dynamic>> getEmote(String emote) {
     return _dio.get("$baseUrl/emotes/$emote");
   }
 
-  static Future<Response<List<SevenTVEmoteRaw>>> getChannelEmotes(String login) {
+  static Future<Response<List<dynamic>>> getChannelEmotes(String login) {
     return _dio.get("$baseUrl/users/$login/emotes");
   }
 
-  static Future<Response<List<SevenTVEmoteRaw>>> getGlobalEmotes() {
+  static Future<Response<List<dynamic>>> getGlobalEmotes() {
     return _dio.get("$baseUrl/emotes/global");
   }
 }
