@@ -9,4 +9,5 @@ class ChatListenerState with _$ChatListenerState {
     required List<TtvEmote> emotesOnChannel,
   }) = _Running;
   const factory ChatListenerState.stopped() = _Stopped;
+  const factory ChatListenerState.changingStatus() = _ChangingStatus;
 }

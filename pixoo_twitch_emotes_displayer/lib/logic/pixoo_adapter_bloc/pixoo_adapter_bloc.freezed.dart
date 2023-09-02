@@ -448,6 +448,7 @@ mixin _$PixooAdapterState {
     required TResult Function() initial,
     required TResult Function(TtvEmote? currentEmote) running,
     required TResult Function() stopped,
+    required TResult Function() changingStatus,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -455,6 +456,7 @@ mixin _$PixooAdapterState {
     TResult? Function()? initial,
     TResult? Function(TtvEmote? currentEmote)? running,
     TResult? Function()? stopped,
+    TResult? Function()? changingStatus,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -462,6 +464,7 @@ mixin _$PixooAdapterState {
     TResult Function()? initial,
     TResult Function(TtvEmote? currentEmote)? running,
     TResult Function()? stopped,
+    TResult Function()? changingStatus,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -470,6 +473,7 @@ mixin _$PixooAdapterState {
     required TResult Function(_Initial value) initial,
     required TResult Function(_Running value) running,
     required TResult Function(_Stopped value) stopped,
+    required TResult Function(_ChangingStatus value) changingStatus,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -477,6 +481,7 @@ mixin _$PixooAdapterState {
     TResult? Function(_Initial value)? initial,
     TResult? Function(_Running value)? running,
     TResult? Function(_Stopped value)? stopped,
+    TResult? Function(_ChangingStatus value)? changingStatus,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -484,6 +489,7 @@ mixin _$PixooAdapterState {
     TResult Function(_Initial value)? initial,
     TResult Function(_Running value)? running,
     TResult Function(_Stopped value)? stopped,
+    TResult Function(_ChangingStatus value)? changingStatus,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -547,6 +553,7 @@ class _$_Initial implements _Initial {
     required TResult Function() initial,
     required TResult Function(TtvEmote? currentEmote) running,
     required TResult Function() stopped,
+    required TResult Function() changingStatus,
   }) {
     return initial();
   }
@@ -557,6 +564,7 @@ class _$_Initial implements _Initial {
     TResult? Function()? initial,
     TResult? Function(TtvEmote? currentEmote)? running,
     TResult? Function()? stopped,
+    TResult? Function()? changingStatus,
   }) {
     return initial?.call();
   }
@@ -567,6 +575,7 @@ class _$_Initial implements _Initial {
     TResult Function()? initial,
     TResult Function(TtvEmote? currentEmote)? running,
     TResult Function()? stopped,
+    TResult Function()? changingStatus,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -581,6 +590,7 @@ class _$_Initial implements _Initial {
     required TResult Function(_Initial value) initial,
     required TResult Function(_Running value) running,
     required TResult Function(_Stopped value) stopped,
+    required TResult Function(_ChangingStatus value) changingStatus,
   }) {
     return initial(this);
   }
@@ -591,6 +601,7 @@ class _$_Initial implements _Initial {
     TResult? Function(_Initial value)? initial,
     TResult? Function(_Running value)? running,
     TResult? Function(_Stopped value)? stopped,
+    TResult? Function(_ChangingStatus value)? changingStatus,
   }) {
     return initial?.call(this);
   }
@@ -601,6 +612,7 @@ class _$_Initial implements _Initial {
     TResult Function(_Initial value)? initial,
     TResult Function(_Running value)? running,
     TResult Function(_Stopped value)? stopped,
+    TResult Function(_ChangingStatus value)? changingStatus,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -695,6 +707,7 @@ class _$_Running implements _Running {
     required TResult Function() initial,
     required TResult Function(TtvEmote? currentEmote) running,
     required TResult Function() stopped,
+    required TResult Function() changingStatus,
   }) {
     return running(currentEmote);
   }
@@ -705,6 +718,7 @@ class _$_Running implements _Running {
     TResult? Function()? initial,
     TResult? Function(TtvEmote? currentEmote)? running,
     TResult? Function()? stopped,
+    TResult? Function()? changingStatus,
   }) {
     return running?.call(currentEmote);
   }
@@ -715,6 +729,7 @@ class _$_Running implements _Running {
     TResult Function()? initial,
     TResult Function(TtvEmote? currentEmote)? running,
     TResult Function()? stopped,
+    TResult Function()? changingStatus,
     required TResult orElse(),
   }) {
     if (running != null) {
@@ -729,6 +744,7 @@ class _$_Running implements _Running {
     required TResult Function(_Initial value) initial,
     required TResult Function(_Running value) running,
     required TResult Function(_Stopped value) stopped,
+    required TResult Function(_ChangingStatus value) changingStatus,
   }) {
     return running(this);
   }
@@ -739,6 +755,7 @@ class _$_Running implements _Running {
     TResult? Function(_Initial value)? initial,
     TResult? Function(_Running value)? running,
     TResult? Function(_Stopped value)? stopped,
+    TResult? Function(_ChangingStatus value)? changingStatus,
   }) {
     return running?.call(this);
   }
@@ -749,6 +766,7 @@ class _$_Running implements _Running {
     TResult Function(_Initial value)? initial,
     TResult Function(_Running value)? running,
     TResult Function(_Stopped value)? stopped,
+    TResult Function(_ChangingStatus value)? changingStatus,
     required TResult orElse(),
   }) {
     if (running != null) {
@@ -807,6 +825,7 @@ class _$_Stopped implements _Stopped {
     required TResult Function() initial,
     required TResult Function(TtvEmote? currentEmote) running,
     required TResult Function() stopped,
+    required TResult Function() changingStatus,
   }) {
     return stopped();
   }
@@ -817,6 +836,7 @@ class _$_Stopped implements _Stopped {
     TResult? Function()? initial,
     TResult? Function(TtvEmote? currentEmote)? running,
     TResult? Function()? stopped,
+    TResult? Function()? changingStatus,
   }) {
     return stopped?.call();
   }
@@ -827,6 +847,7 @@ class _$_Stopped implements _Stopped {
     TResult Function()? initial,
     TResult Function(TtvEmote? currentEmote)? running,
     TResult Function()? stopped,
+    TResult Function()? changingStatus,
     required TResult orElse(),
   }) {
     if (stopped != null) {
@@ -841,6 +862,7 @@ class _$_Stopped implements _Stopped {
     required TResult Function(_Initial value) initial,
     required TResult Function(_Running value) running,
     required TResult Function(_Stopped value) stopped,
+    required TResult Function(_ChangingStatus value) changingStatus,
   }) {
     return stopped(this);
   }
@@ -851,6 +873,7 @@ class _$_Stopped implements _Stopped {
     TResult? Function(_Initial value)? initial,
     TResult? Function(_Running value)? running,
     TResult? Function(_Stopped value)? stopped,
+    TResult? Function(_ChangingStatus value)? changingStatus,
   }) {
     return stopped?.call(this);
   }
@@ -861,6 +884,7 @@ class _$_Stopped implements _Stopped {
     TResult Function(_Initial value)? initial,
     TResult Function(_Running value)? running,
     TResult Function(_Stopped value)? stopped,
+    TResult Function(_ChangingStatus value)? changingStatus,
     required TResult orElse(),
   }) {
     if (stopped != null) {
@@ -872,4 +896,118 @@ class _$_Stopped implements _Stopped {
 
 abstract class _Stopped implements PixooAdapterState {
   const factory _Stopped() = _$_Stopped;
+}
+
+/// @nodoc
+abstract class _$$_ChangingStatusCopyWith<$Res> {
+  factory _$$_ChangingStatusCopyWith(
+          _$_ChangingStatus value, $Res Function(_$_ChangingStatus) then) =
+      __$$_ChangingStatusCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$_ChangingStatusCopyWithImpl<$Res>
+    extends _$PixooAdapterStateCopyWithImpl<$Res, _$_ChangingStatus>
+    implements _$$_ChangingStatusCopyWith<$Res> {
+  __$$_ChangingStatusCopyWithImpl(
+      _$_ChangingStatus _value, $Res Function(_$_ChangingStatus) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$_ChangingStatus implements _ChangingStatus {
+  const _$_ChangingStatus();
+
+  @override
+  String toString() {
+    return 'PixooAdapterState.changingStatus()';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$_ChangingStatus);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function(TtvEmote? currentEmote) running,
+    required TResult Function() stopped,
+    required TResult Function() changingStatus,
+  }) {
+    return changingStatus();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initial,
+    TResult? Function(TtvEmote? currentEmote)? running,
+    TResult? Function()? stopped,
+    TResult? Function()? changingStatus,
+  }) {
+    return changingStatus?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function(TtvEmote? currentEmote)? running,
+    TResult Function()? stopped,
+    TResult Function()? changingStatus,
+    required TResult orElse(),
+  }) {
+    if (changingStatus != null) {
+      return changingStatus();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initial value) initial,
+    required TResult Function(_Running value) running,
+    required TResult Function(_Stopped value) stopped,
+    required TResult Function(_ChangingStatus value) changingStatus,
+  }) {
+    return changingStatus(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initial value)? initial,
+    TResult? Function(_Running value)? running,
+    TResult? Function(_Stopped value)? stopped,
+    TResult? Function(_ChangingStatus value)? changingStatus,
+  }) {
+    return changingStatus?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initial value)? initial,
+    TResult Function(_Running value)? running,
+    TResult Function(_Stopped value)? stopped,
+    TResult Function(_ChangingStatus value)? changingStatus,
+    required TResult orElse(),
+  }) {
+    if (changingStatus != null) {
+      return changingStatus(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _ChangingStatus implements PixooAdapterState {
+  const factory _ChangingStatus() = _$_ChangingStatus;
 }

@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:io';
 
+import 'package:async/async.dart';
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:pixoo_twitch_emotes_displayer/data/models/pixoo_device.dart';
@@ -34,7 +35,7 @@ class EmoteCacheCubit extends Cubit<EmoteCacheState> {
     emit(state.copyWith(idProviderPathMap: l));
   }
 
-  addToPrep(TtvEmote emote, Future job) {
+  addToPrep(TtvEmote emote, CancelableOperation job) {
     if (!state.preperingEmotesIds.containsKey(emote)) {
       emit(state.copyWith(
         preperingEmotesIds: Map.from(state.preperingEmotesIds)..putIfAbsent(emote.id, () => job),
@@ -61,7 +62,7 @@ class EmoteCacheCubit extends Cubit<EmoteCacheState> {
     ));
   }
 
-  Future createEmoteFile(TtvEmote emote) {
+  CancelableOperation createEmoteFile(TtvEmote emote) {
     final appState = AppResourcesCubit.i.loadedState;
     if (!state.preperingEmotesIds.containsKey(emote.id)) {
       final String emoteFileName = emote.fileName(PixooSize.x64);
@@ -103,8 +104,9 @@ class EmoteCacheCubit extends Cubit<EmoteCacheState> {
           }
         });
       });
-      addToPrep(emote, job);
-      return job;
+      final operation = CancelableOperation.fromFuture(job);
+      addToPrep(emote, operation);
+      return operation;
     } else {
       return state.preperingEmotesIds[emote.id]!;
     }
@@ -113,7 +115,9 @@ class EmoteCacheCubit extends Cubit<EmoteCacheState> {
   @override
   Future<void> close() {
     _sub.cancel();
-    // TODO: cancel all emotes production
+    for (var job in state.preperingEmotesIds.values) {
+      job.cancel();
+    }
     return super.close();
   }
 }

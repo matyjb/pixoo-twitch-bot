@@ -5,7 +5,7 @@ class EmoteCacheState with _$EmoteCacheState {
   const factory EmoteCacheState({
     // key: $id_$provider, value: path to gif file
     required Map<String, String> idProviderPathMap,
-    required Map<String, Future> preperingEmotesIds,
+    required Map<String, CancelableOperation> preperingEmotesIds,
     required Set<String> failedEmotesIds,
   }) = _EmoteCacheState;
 }

@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:bloc/bloc.dart';
 import 'package:flutter/foundation.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -15,7 +17,8 @@ part 'chat_listener_state.dart';
 part 'chat_listener_bloc.freezed.dart';
 
 class ChatListenerBloc extends Bloc<ChatListenerEvent, ChatListenerState> {
-  late ChatListener _chatListener;
+  final ChatListener _chatListener = ChatListener();
+  StreamSubscription? _chatSub;
 
   ChatListenerBloc(
     // this for checking if emotes exists
@@ -23,51 +26,58 @@ class ChatListenerBloc extends Bloc<ChatListenerEvent, ChatListenerState> {
     // this for sending emote to pixoo
     PixooAdapterBloc pixooAdapterBloc,
   ) : super(const _Initial()) {
-    final settings = SettingsCubit.i.state;
-    _chatListener = ChatListener()..connect(settings.channelName!, settings.apiKey!);
-
-    _chatListener.socket.stream.listen(
-      (message) {
-        final msg = message as String;
-        if (msg.contains(" JOIN ")) {
-          add(const _Start());
-        }
-        if (state is _Running) {
-          final s = state as _Running;
-
-          final TwitchMessage parsedMsg = TwitchMessage.fromLine(msg);
-          if (kDebugMode && parsedMsg.type == MsgType.msg) {
-            // ignore: avoid_print
-            // print(parsedMsg);
-          }
-
-          if (parsedMsg.type == MsgType.msg) {
-            for (final e in s.emotesOnChannel) {
-              if (parsedMsg.content.startsWith("$e ") ||
-                  parsedMsg.content.contains(" $e ") ||
-                  parsedMsg.content.endsWith(" $e") ||
-                  parsedMsg.content == e.name) {
-                add(_ReportEmote(e));
-              }
-            }
-          }
-        }
-      },
-    );
-
     on<_Start>((event, emit) async {
       if (state is _Initial || state is _Stopped) {
+        emit(const _ChangingStatus());
         final settings = SettingsCubit.i.state;
-        emit(_Running(
-          emotesBuffer: [],
-          emotesRanking: [],
-          emotesOnChannel: await SevenTVRepo.getChannelEmotes(settings.channelName!),
-        ));
+        _chatListener.connect(settings.channelName!, settings.apiKey!).then(
+          (_) async {
+            _chatSub = _chatListener.socket.stream.listen(
+              (message) {
+                final msg = message as String;
+                // if (msg.contains(" JOIN ")) {
+                //   add(const _Start());
+                // }
+                if (state is _Running) {
+                  final s = state as _Running;
+
+                  final TwitchMessage parsedMsg = TwitchMessage.fromLine(msg);
+                  if (kDebugMode && parsedMsg.type == MsgType.msg) {
+                    // ignore: avoid_print
+                    // print(parsedMsg);
+                  }
+
+                  if (parsedMsg.type == MsgType.msg) {
+                    for (final e in s.emotesOnChannel) {
+                      if (parsedMsg.content.startsWith("$e ") ||
+                          parsedMsg.content.contains(" $e ") ||
+                          parsedMsg.content.endsWith(" $e") ||
+                          parsedMsg.content == e.name) {
+                        add(_ReportEmote(e));
+                      }
+                    }
+                  }
+                }
+              },
+            );
+            emit(
+              _Running(
+                emotesBuffer: [],
+                emotesRanking: [],
+                emotesOnChannel: await SevenTVRepo.getChannelEmotes(settings.channelName!),
+              ),
+            );
+          },
+        ).onError((error, stackTrace) {
+          emit(state);
+        });
       }
     });
 
     on<_Stop>((event, emit) {
       if (state is _Running) {
+        _chatSub?.cancel();
+        _chatListener.disconnect();
         emit(const _Stopped());
       }
     });
@@ -124,6 +134,7 @@ class ChatListenerBloc extends Bloc<ChatListenerEvent, ChatListenerState> {
 
   @override
   Future<void> close() {
+    _chatSub?.cancel();
     _chatListener.disconnect();
     return super.close();
   }

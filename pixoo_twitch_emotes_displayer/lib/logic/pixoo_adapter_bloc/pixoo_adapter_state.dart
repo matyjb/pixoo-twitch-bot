@@ -7,4 +7,6 @@ class PixooAdapterState with _$PixooAdapterState {
     TtvEmote? currentEmote,
   }) = _Running;
   const factory PixooAdapterState.stopped() = _Stopped;
+  const factory PixooAdapterState.changingStatus() = _ChangingStatus;
+  
 }

@@ -29,13 +29,14 @@ class _DashboardScreenState extends State<DashboardScreen> {
     return MultiBlocProvider(
       providers: [
         BlocProvider.value(
-          value: _pixooAdapter,
+          value: _pixooAdapter..add(const PixooAdapterEvent.start()),
         ),
         BlocProvider.value(
           value: _emoteCache,
         ),
         BlocProvider(
-          create: (context) => ChatListenerBloc(_emoteCache, _pixooAdapter),
+          create: (context) =>
+              ChatListenerBloc(_emoteCache, _pixooAdapter)..add(const ChatListenerEvent.start()),
         ),
       ],
       child: Scaffold(

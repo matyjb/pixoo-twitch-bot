@@ -12,20 +12,24 @@ part 'pixoo_adapter_state.dart';
 part 'pixoo_adapter_bloc.freezed.dart';
 
 class PixooAdapterBloc extends Bloc<PixooAdapterEvent, PixooAdapterState> {
-  late HttpHostServer _server;
+  final HttpHostServer _server = HttpHostServer();
 
   PixooAdapterBloc(String hostDirectory, String localIp) : super(const _Initial()) {
-    _server = HttpHostServer()..start(hostDirectory, localIp).then((_) => add(const _Start()));
-
     on<_Start>((event, emit) {
+      emit(const _ChangingStatus());
       if (state is _Initial || state is _Stopped) {
-        emit(const _Running());
+        _server.start(hostDirectory, localIp).then((_) => emit(const _Running())).onError((error, stackTrace) {
+          emit(state);
+        });
       }
     });
 
     on<_Stop>((event, emit) {
+      emit(const _ChangingStatus());
       if (state is _Running) {
-        emit(const _Stopped());
+        _server.stop().then((_) => emit(const _Stopped())).onError((error, stackTrace) {
+          emit(state);
+        });
       }
     });
 

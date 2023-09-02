@@ -21,6 +21,7 @@ class EmoteListenerControls extends StatelessWidget {
               color: state.map(
                 initial: (_) => Colors.grey,
                 running: (_) => Colors.green,
+                changingStatus: (_) => Colors.yellow,
                 stopped: (_) => Colors.red,
               ),
             ),
@@ -39,6 +40,10 @@ class EmoteListenerControls extends StatelessWidget {
                 onPressed: () {},
                 icon: const Icon(Icons.play_arrow_rounded),
                 tooltip: "Start emote listener",
+              ),
+              changingStatus: (_) => const IconButton.filled(
+                onPressed: null,
+                icon: Icon(Icons.refresh),
               ),
             ),
           ],

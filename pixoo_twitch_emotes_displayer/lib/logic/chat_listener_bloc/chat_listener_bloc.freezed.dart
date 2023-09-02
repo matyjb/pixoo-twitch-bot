@@ -617,6 +617,7 @@ mixin _$ChatListenerState {
             List<TtvEmote> emotesRanking, List<TtvEmote> emotesOnChannel)
         running,
     required TResult Function() stopped,
+    required TResult Function() changingStatus,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -626,6 +627,7 @@ mixin _$ChatListenerState {
             List<TtvEmote> emotesOnChannel)?
         running,
     TResult? Function()? stopped,
+    TResult? Function()? changingStatus,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -635,6 +637,7 @@ mixin _$ChatListenerState {
             List<TtvEmote> emotesOnChannel)?
         running,
     TResult Function()? stopped,
+    TResult Function()? changingStatus,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -643,6 +646,7 @@ mixin _$ChatListenerState {
     required TResult Function(_Initial value) initial,
     required TResult Function(_Running value) running,
     required TResult Function(_Stopped value) stopped,
+    required TResult Function(_ChangingStatus value) changingStatus,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -650,6 +654,7 @@ mixin _$ChatListenerState {
     TResult? Function(_Initial value)? initial,
     TResult? Function(_Running value)? running,
     TResult? Function(_Stopped value)? stopped,
+    TResult? Function(_ChangingStatus value)? changingStatus,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -657,6 +662,7 @@ mixin _$ChatListenerState {
     TResult Function(_Initial value)? initial,
     TResult Function(_Running value)? running,
     TResult Function(_Stopped value)? stopped,
+    TResult Function(_ChangingStatus value)? changingStatus,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -728,6 +734,7 @@ class _$_Initial with DiagnosticableTreeMixin implements _Initial {
             List<TtvEmote> emotesRanking, List<TtvEmote> emotesOnChannel)
         running,
     required TResult Function() stopped,
+    required TResult Function() changingStatus,
   }) {
     return initial();
   }
@@ -740,6 +747,7 @@ class _$_Initial with DiagnosticableTreeMixin implements _Initial {
             List<TtvEmote> emotesOnChannel)?
         running,
     TResult? Function()? stopped,
+    TResult? Function()? changingStatus,
   }) {
     return initial?.call();
   }
@@ -752,6 +760,7 @@ class _$_Initial with DiagnosticableTreeMixin implements _Initial {
             List<TtvEmote> emotesOnChannel)?
         running,
     TResult Function()? stopped,
+    TResult Function()? changingStatus,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -766,6 +775,7 @@ class _$_Initial with DiagnosticableTreeMixin implements _Initial {
     required TResult Function(_Initial value) initial,
     required TResult Function(_Running value) running,
     required TResult Function(_Stopped value) stopped,
+    required TResult Function(_ChangingStatus value) changingStatus,
   }) {
     return initial(this);
   }
@@ -776,6 +786,7 @@ class _$_Initial with DiagnosticableTreeMixin implements _Initial {
     TResult? Function(_Initial value)? initial,
     TResult? Function(_Running value)? running,
     TResult? Function(_Stopped value)? stopped,
+    TResult? Function(_ChangingStatus value)? changingStatus,
   }) {
     return initial?.call(this);
   }
@@ -786,6 +797,7 @@ class _$_Initial with DiagnosticableTreeMixin implements _Initial {
     TResult Function(_Initial value)? initial,
     TResult Function(_Running value)? running,
     TResult Function(_Stopped value)? stopped,
+    TResult Function(_ChangingStatus value)? changingStatus,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -926,6 +938,7 @@ class _$_Running with DiagnosticableTreeMixin implements _Running {
             List<TtvEmote> emotesRanking, List<TtvEmote> emotesOnChannel)
         running,
     required TResult Function() stopped,
+    required TResult Function() changingStatus,
   }) {
     return running(emotesBuffer, emotesRanking, emotesOnChannel);
   }
@@ -938,6 +951,7 @@ class _$_Running with DiagnosticableTreeMixin implements _Running {
             List<TtvEmote> emotesOnChannel)?
         running,
     TResult? Function()? stopped,
+    TResult? Function()? changingStatus,
   }) {
     return running?.call(emotesBuffer, emotesRanking, emotesOnChannel);
   }
@@ -950,6 +964,7 @@ class _$_Running with DiagnosticableTreeMixin implements _Running {
             List<TtvEmote> emotesOnChannel)?
         running,
     TResult Function()? stopped,
+    TResult Function()? changingStatus,
     required TResult orElse(),
   }) {
     if (running != null) {
@@ -964,6 +979,7 @@ class _$_Running with DiagnosticableTreeMixin implements _Running {
     required TResult Function(_Initial value) initial,
     required TResult Function(_Running value) running,
     required TResult Function(_Stopped value) stopped,
+    required TResult Function(_ChangingStatus value) changingStatus,
   }) {
     return running(this);
   }
@@ -974,6 +990,7 @@ class _$_Running with DiagnosticableTreeMixin implements _Running {
     TResult? Function(_Initial value)? initial,
     TResult? Function(_Running value)? running,
     TResult? Function(_Stopped value)? stopped,
+    TResult? Function(_ChangingStatus value)? changingStatus,
   }) {
     return running?.call(this);
   }
@@ -984,6 +1001,7 @@ class _$_Running with DiagnosticableTreeMixin implements _Running {
     TResult Function(_Initial value)? initial,
     TResult Function(_Running value)? running,
     TResult Function(_Stopped value)? stopped,
+    TResult Function(_ChangingStatus value)? changingStatus,
     required TResult orElse(),
   }) {
     if (running != null) {
@@ -1055,6 +1073,7 @@ class _$_Stopped with DiagnosticableTreeMixin implements _Stopped {
             List<TtvEmote> emotesRanking, List<TtvEmote> emotesOnChannel)
         running,
     required TResult Function() stopped,
+    required TResult Function() changingStatus,
   }) {
     return stopped();
   }
@@ -1067,6 +1086,7 @@ class _$_Stopped with DiagnosticableTreeMixin implements _Stopped {
             List<TtvEmote> emotesOnChannel)?
         running,
     TResult? Function()? stopped,
+    TResult? Function()? changingStatus,
   }) {
     return stopped?.call();
   }
@@ -1079,6 +1099,7 @@ class _$_Stopped with DiagnosticableTreeMixin implements _Stopped {
             List<TtvEmote> emotesOnChannel)?
         running,
     TResult Function()? stopped,
+    TResult Function()? changingStatus,
     required TResult orElse(),
   }) {
     if (stopped != null) {
@@ -1093,6 +1114,7 @@ class _$_Stopped with DiagnosticableTreeMixin implements _Stopped {
     required TResult Function(_Initial value) initial,
     required TResult Function(_Running value) running,
     required TResult Function(_Stopped value) stopped,
+    required TResult Function(_ChangingStatus value) changingStatus,
   }) {
     return stopped(this);
   }
@@ -1103,6 +1125,7 @@ class _$_Stopped with DiagnosticableTreeMixin implements _Stopped {
     TResult? Function(_Initial value)? initial,
     TResult? Function(_Running value)? running,
     TResult? Function(_Stopped value)? stopped,
+    TResult? Function(_ChangingStatus value)? changingStatus,
   }) {
     return stopped?.call(this);
   }
@@ -1113,6 +1136,7 @@ class _$_Stopped with DiagnosticableTreeMixin implements _Stopped {
     TResult Function(_Initial value)? initial,
     TResult Function(_Running value)? running,
     TResult Function(_Stopped value)? stopped,
+    TResult Function(_ChangingStatus value)? changingStatus,
     required TResult orElse(),
   }) {
     if (stopped != null) {
@@ -1124,4 +1148,133 @@ class _$_Stopped with DiagnosticableTreeMixin implements _Stopped {
 
 abstract class _Stopped implements ChatListenerState {
   const factory _Stopped() = _$_Stopped;
+}
+
+/// @nodoc
+abstract class _$$_ChangingStatusCopyWith<$Res> {
+  factory _$$_ChangingStatusCopyWith(
+          _$_ChangingStatus value, $Res Function(_$_ChangingStatus) then) =
+      __$$_ChangingStatusCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$_ChangingStatusCopyWithImpl<$Res>
+    extends _$ChatListenerStateCopyWithImpl<$Res, _$_ChangingStatus>
+    implements _$$_ChangingStatusCopyWith<$Res> {
+  __$$_ChangingStatusCopyWithImpl(
+      _$_ChangingStatus _value, $Res Function(_$_ChangingStatus) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$_ChangingStatus
+    with DiagnosticableTreeMixin
+    implements _ChangingStatus {
+  const _$_ChangingStatus();
+
+  @override
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'ChatListenerState.changingStatus()';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+        .add(DiagnosticsProperty('type', 'ChatListenerState.changingStatus'));
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType && other is _$_ChangingStatus);
+  }
+
+  @override
+  int get hashCode => runtimeType.hashCode;
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() initial,
+    required TResult Function(List<TtvEmote> emotesBuffer,
+            List<TtvEmote> emotesRanking, List<TtvEmote> emotesOnChannel)
+        running,
+    required TResult Function() stopped,
+    required TResult Function() changingStatus,
+  }) {
+    return changingStatus();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? initial,
+    TResult? Function(List<TtvEmote> emotesBuffer, List<TtvEmote> emotesRanking,
+            List<TtvEmote> emotesOnChannel)?
+        running,
+    TResult? Function()? stopped,
+    TResult? Function()? changingStatus,
+  }) {
+    return changingStatus?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? initial,
+    TResult Function(List<TtvEmote> emotesBuffer, List<TtvEmote> emotesRanking,
+            List<TtvEmote> emotesOnChannel)?
+        running,
+    TResult Function()? stopped,
+    TResult Function()? changingStatus,
+    required TResult orElse(),
+  }) {
+    if (changingStatus != null) {
+      return changingStatus();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(_Initial value) initial,
+    required TResult Function(_Running value) running,
+    required TResult Function(_Stopped value) stopped,
+    required TResult Function(_ChangingStatus value) changingStatus,
+  }) {
+    return changingStatus(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(_Initial value)? initial,
+    TResult? Function(_Running value)? running,
+    TResult? Function(_Stopped value)? stopped,
+    TResult? Function(_ChangingStatus value)? changingStatus,
+  }) {
+    return changingStatus?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(_Initial value)? initial,
+    TResult Function(_Running value)? running,
+    TResult Function(_Stopped value)? stopped,
+    TResult Function(_ChangingStatus value)? changingStatus,
+    required TResult orElse(),
+  }) {
+    if (changingStatus != null) {
+      return changingStatus(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class _ChangingStatus implements ChatListenerState {
+  const factory _ChangingStatus() = _$_ChangingStatus;
 }

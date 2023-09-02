@@ -19,7 +19,7 @@ mixin _$EmoteCacheState {
 // key: $id_$provider, value: path to gif file
   Map<String, String> get idProviderPathMap =>
       throw _privateConstructorUsedError;
-  Map<String, Future> get preperingEmotesIds =>
+  Map<String, CancelableOperation> get preperingEmotesIds =>
       throw _privateConstructorUsedError;
   Set<String> get failedEmotesIds => throw _privateConstructorUsedError;
 
@@ -36,7 +36,7 @@ abstract class $EmoteCacheStateCopyWith<$Res> {
   @useResult
   $Res call(
       {Map<String, String> idProviderPathMap,
-      Map<String, Future> preperingEmotesIds,
+      Map<String, CancelableOperation> preperingEmotesIds,
       Set<String> failedEmotesIds});
 }
 
@@ -65,7 +65,7 @@ class _$EmoteCacheStateCopyWithImpl<$Res, $Val extends EmoteCacheState>
       preperingEmotesIds: null == preperingEmotesIds
           ? _value.preperingEmotesIds
           : preperingEmotesIds // ignore: cast_nullable_to_non_nullable
-              as Map<String, Future>,
+              as Map<String, CancelableOperation>,
       failedEmotesIds: null == failedEmotesIds
           ? _value.failedEmotesIds
           : failedEmotesIds // ignore: cast_nullable_to_non_nullable
@@ -84,7 +84,7 @@ abstract class _$$_EmoteCacheStateCopyWith<$Res>
   @useResult
   $Res call(
       {Map<String, String> idProviderPathMap,
-      Map<String, Future> preperingEmotesIds,
+      Map<String, CancelableOperation> preperingEmotesIds,
       Set<String> failedEmotesIds});
 }
 
@@ -111,7 +111,7 @@ class __$$_EmoteCacheStateCopyWithImpl<$Res>
       preperingEmotesIds: null == preperingEmotesIds
           ? _value._preperingEmotesIds
           : preperingEmotesIds // ignore: cast_nullable_to_non_nullable
-              as Map<String, Future>,
+              as Map<String, CancelableOperation>,
       failedEmotesIds: null == failedEmotesIds
           ? _value._failedEmotesIds
           : failedEmotesIds // ignore: cast_nullable_to_non_nullable
@@ -125,7 +125,7 @@ class __$$_EmoteCacheStateCopyWithImpl<$Res>
 class _$_EmoteCacheState implements _EmoteCacheState {
   const _$_EmoteCacheState(
       {required final Map<String, String> idProviderPathMap,
-      required final Map<String, Future> preperingEmotesIds,
+      required final Map<String, CancelableOperation> preperingEmotesIds,
       required final Set<String> failedEmotesIds})
       : _idProviderPathMap = idProviderPathMap,
         _preperingEmotesIds = preperingEmotesIds,
@@ -142,9 +142,9 @@ class _$_EmoteCacheState implements _EmoteCacheState {
     return EqualUnmodifiableMapView(_idProviderPathMap);
   }
 
-  final Map<String, Future> _preperingEmotesIds;
+  final Map<String, CancelableOperation> _preperingEmotesIds;
   @override
-  Map<String, Future> get preperingEmotesIds {
+  Map<String, CancelableOperation> get preperingEmotesIds {
     if (_preperingEmotesIds is EqualUnmodifiableMapView)
       return _preperingEmotesIds;
     // ignore: implicit_dynamic_type
@@ -194,13 +194,13 @@ class _$_EmoteCacheState implements _EmoteCacheState {
 abstract class _EmoteCacheState implements EmoteCacheState {
   const factory _EmoteCacheState(
       {required final Map<String, String> idProviderPathMap,
-      required final Map<String, Future> preperingEmotesIds,
+      required final Map<String, CancelableOperation> preperingEmotesIds,
       required final Set<String> failedEmotesIds}) = _$_EmoteCacheState;
 
   @override // key: $id_$provider, value: path to gif file
   Map<String, String> get idProviderPathMap;
   @override
-  Map<String, Future> get preperingEmotesIds;
+  Map<String, CancelableOperation> get preperingEmotesIds;
   @override
   Set<String> get failedEmotesIds;
   @override

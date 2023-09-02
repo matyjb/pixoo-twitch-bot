@@ -22,6 +22,7 @@ class PixooAdapterControls extends StatelessWidget {
                 initial: (_) => Colors.grey,
                 running: (_) => Colors.green,
                 stopped: (_) => Colors.red,
+                changingStatus: (_) => Colors.yellow,
               ),
             ),
             state.map(
@@ -39,6 +40,10 @@ class PixooAdapterControls extends StatelessWidget {
                 onPressed: () {},
                 icon: const Icon(Icons.play_arrow_rounded),
                 tooltip: "Start pixoo adapter",
+              ),
+              changingStatus: (_) => const IconButton.filled(
+                onPressed: null,
+                icon: Icon(Icons.refresh),
               ),
             ),
           ],

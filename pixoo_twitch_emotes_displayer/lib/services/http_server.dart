@@ -27,8 +27,7 @@ class HttpHostServer {
     });
   }
 
-  void stop() {
-    _server?.close(force: true);
-    _server = null;
+  Future stop() async {
+    _server?.close(force: true).then((_) => _server = null);
   }
 }
