@@ -28,17 +28,17 @@ class EmoteListenerControls extends StatelessWidget {
             ),
             state.map(
               initial: (_) => IconButton(
-                onPressed: () {},
+                onPressed: ()=>context.read<ChatListenerBloc>().add(const ChatListenerEvent.start()),
                 icon: const Icon(Icons.play_arrow_rounded),
                 tooltip: "Start emote listener",
               ),
               running: (_) => IconButton(
-                onPressed: () {},
+                onPressed: ()=>context.read<ChatListenerBloc>().add(const ChatListenerEvent.stop()),
                 icon: const Icon(Icons.stop_rounded),
                 tooltip: "Stop emote listener",
               ),
               stopped: (_) => IconButton(
-                onPressed: () {},
+                onPressed: ()=>context.read<ChatListenerBloc>().add(const ChatListenerEvent.start()),
                 icon: const Icon(Icons.play_arrow_rounded),
                 tooltip: "Start emote listener",
               ),

@@ -5,7 +5,6 @@ import 'package:dio/dio.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:pixoo_twitch_emotes_displayer/data/models/pixoo_device.dart';
 import 'package:pixoo_twitch_emotes_displayer/data/models/sevenTvApi/seventv_emote_raw.dart';
-import 'package:pixoo_twitch_emotes_displayer/data/models/tEmotesApi/tEmotes_emote.dart';
 part 'ttv_emote.freezed.dart';
 part 'ttv_emote.g.dart';
 

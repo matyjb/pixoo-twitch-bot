@@ -11,7 +11,7 @@ class HttpHostServer {
   String? get url => _server != null ? "http://${_server!.address.host}:${_server!.port}" : null;
 
   Future start(String directory, String localIp) async {
-    stop();
+    await stop();
     final handler = createStaticHandler(
       directory,
       defaultDocument: 'index.html',
@@ -23,11 +23,14 @@ class HttpHostServer {
       }
       return server;
     }).catchError((err) {
+      if (kDebugMode) {
+        print(err);
+      }
       throw err as Object;
     });
   }
 
   Future stop() async {
-    _server?.close(force: true).then((_) => _server = null);
+    await _server?.close(force: true).then((_) => _server = null);
   }
 }

@@ -17,7 +17,7 @@ part 'chat_listener_state.dart';
 part 'chat_listener_bloc.freezed.dart';
 
 class ChatListenerBloc extends Bloc<ChatListenerEvent, ChatListenerState> {
-  final ChatListener _chatListener = ChatListener();
+  ChatListener? _chatListener;
   StreamSubscription? _chatSub;
 
   ChatListenerBloc(
@@ -30,11 +30,12 @@ class ChatListenerBloc extends Bloc<ChatListenerEvent, ChatListenerState> {
       if (state is _Initial || state is _Stopped) {
         emit(const _ChangingStatus());
         final settings = SettingsCubit.i.state;
-        await _chatListener.connect(settings.channelName!, settings.apiKey!).then(
+        _chatListener?.disconnect();
+        _chatListener = ChatListener();
+        await _chatListener!.connect(settings.channelName!, settings.apiKey!).then(
           (_) async {
-            _chatSub = _chatListener.msgStream.listen(
-              (message) {
-                final msg = message as String;
+            _chatSub = _chatListener!.msgStream.listen(
+              (msg) {
                 // if (msg.contains(" JOIN ")) {
                 //   add(const _Start());
                 // }
@@ -44,7 +45,7 @@ class ChatListenerBloc extends Bloc<ChatListenerEvent, ChatListenerState> {
                   final TwitchMessage parsedMsg = TwitchMessage.fromLine(msg);
                   if (kDebugMode && parsedMsg.type == MsgType.msg) {
                     // ignore: avoid_print
-                    // print(parsedMsg);
+                    print(parsedMsg);
                   }
 
                   if (parsedMsg.type == MsgType.msg) {
@@ -80,7 +81,7 @@ class ChatListenerBloc extends Bloc<ChatListenerEvent, ChatListenerState> {
     on<_Stop>((event, emit) {
       if (state is _Running) {
         _chatSub?.cancel();
-        _chatListener.disconnect();
+        _chatListener?.disconnect();
         emit(const _Stopped());
       }
     });
@@ -138,7 +139,7 @@ class ChatListenerBloc extends Bloc<ChatListenerEvent, ChatListenerState> {
   @override
   Future<void> close() {
     _chatSub?.cancel();
-    _chatListener.disconnect();
+    _chatListener?.disconnect();
     return super.close();
   }
 }

@@ -17,17 +17,20 @@ class PixooAdapterBloc extends Bloc<PixooAdapterEvent, PixooAdapterState> {
 
   PixooAdapterBloc(String hostDirectory, String localIp) : super(const _Initial()) {
     on<_Start>((event, emit) async {
-      emit(const _ChangingStatus());
       if (state is _Initial || state is _Stopped) {
-        await _server.start(hostDirectory, localIp).then((_) => emit(const _Running())).onError((error, stackTrace) {
+        emit(const _ChangingStatus());
+        await _server
+            .start(hostDirectory, localIp)
+            .then((_) => emit(const _Running()))
+            .onError((error, stackTrace) {
           emit(state);
         });
       }
     });
 
     on<_Stop>((event, emit) async {
-      emit(const _ChangingStatus());
       if (state is _Running) {
+        emit(const _ChangingStatus());
         await _server.stop().then((_) => emit(const _Stopped())).onError((error, stackTrace) {
           if (kDebugMode) {
             print(error);
