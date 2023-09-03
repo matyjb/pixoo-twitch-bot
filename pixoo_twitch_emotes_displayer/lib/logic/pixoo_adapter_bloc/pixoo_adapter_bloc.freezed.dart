@@ -96,12 +96,18 @@ class __$$_StartCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_Start implements _Start {
+class _$_Start with DiagnosticableTreeMixin implements _Start {
   const _$_Start();
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'PixooAdapterEvent.start()';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty('type', 'PixooAdapterEvent.start'));
   }
 
   @override
@@ -202,12 +208,18 @@ class __$$_StopCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_Stop implements _Stop {
+class _$_Stop with DiagnosticableTreeMixin implements _Stop {
   const _$_Stop();
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'PixooAdapterEvent.stop()';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty('type', 'PixooAdapterEvent.stop'));
   }
 
   @override
@@ -335,15 +347,23 @@ class __$$_SendEmoteCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_SendEmote implements _SendEmote {
+class _$_SendEmote with DiagnosticableTreeMixin implements _SendEmote {
   const _$_SendEmote(this.emote);
 
   @override
   final TtvEmote emote;
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'PixooAdapterEvent.sendEmote(emote: $emote)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'PixooAdapterEvent.sendEmote'))
+      ..add(DiagnosticsProperty('emote', emote));
   }
 
   @override
@@ -530,12 +550,18 @@ class __$$_InitialCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_Initial implements _Initial {
+class _$_Initial with DiagnosticableTreeMixin implements _Initial {
   const _$_Initial();
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'PixooAdapterState.initial()';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty('type', 'PixooAdapterState.initial'));
   }
 
   @override
@@ -672,15 +698,23 @@ class __$$_RunningCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_Running implements _Running {
+class _$_Running with DiagnosticableTreeMixin implements _Running {
   const _$_Running({this.currentEmote});
 
   @override
   final TtvEmote? currentEmote;
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'PixooAdapterState.running(currentEmote: $currentEmote)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'PixooAdapterState.running'))
+      ..add(DiagnosticsProperty('currentEmote', currentEmote));
   }
 
   @override
@@ -802,12 +836,18 @@ class __$$_StoppedCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_Stopped implements _Stopped {
+class _$_Stopped with DiagnosticableTreeMixin implements _Stopped {
   const _$_Stopped();
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'PixooAdapterState.stopped()';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty('type', 'PixooAdapterState.stopped'));
   }
 
   @override
@@ -916,12 +956,21 @@ class __$$_ChangingStatusCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_ChangingStatus implements _ChangingStatus {
+class _$_ChangingStatus
+    with DiagnosticableTreeMixin
+    implements _ChangingStatus {
   const _$_ChangingStatus();
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'PixooAdapterState.changingStatus()';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+        .add(DiagnosticsProperty('type', 'PixooAdapterState.changingStatus'));
   }
 
   @override

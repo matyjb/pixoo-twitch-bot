@@ -1,6 +1,6 @@
-import 'package:pixoo_twitch_emotes_displayer/data/models/raw/seventv_emote_raw.dart';
-import 'package:pixoo_twitch_emotes_displayer/data/models/raw/seventv_user_raw.dart';
-import 'package:pixoo_twitch_emotes_displayer/data/models/seventv_user.dart';
+import 'package:pixoo_twitch_emotes_displayer/data/models/sevenTvApi/seventv_emote_raw.dart';
+import 'package:pixoo_twitch_emotes_displayer/data/models/sevenTvApi/seventv_user_raw.dart';
+import 'package:pixoo_twitch_emotes_displayer/data/models/sevenTvApi/seventv_user.dart';
 import 'package:pixoo_twitch_emotes_displayer/data/models/ttv_emote.dart';
 import 'package:pixoo_twitch_emotes_displayer/data/providers/seventv_api.dart';
 

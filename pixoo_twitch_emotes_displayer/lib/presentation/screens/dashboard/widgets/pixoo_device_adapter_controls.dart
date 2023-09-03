@@ -8,9 +8,10 @@ class PixooAdapterControls extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 8),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(9999),
-        color: Theme.of(context).cardColor,
+        color: Theme.of(context).highlightColor,
       ),
       child: BlocBuilder<ChatListenerBloc, ChatListenerState>(
         builder: (context, state) => Row(
@@ -26,22 +27,22 @@ class PixooAdapterControls extends StatelessWidget {
               ),
             ),
             state.map(
-              initial: (_) => IconButton.filled(
+              initial: (_) => IconButton(
                 onPressed: () {},
                 icon: const Icon(Icons.play_arrow_rounded),
                 tooltip: "Start pixoo adapter",
               ),
-              running: (_) => IconButton.filled(
+              running: (_) => IconButton(
                 onPressed: () {},
                 icon: const Icon(Icons.stop_rounded),
                 tooltip: "Stop pixoo adapter",
               ),
-              stopped: (_) => IconButton.filled(
+              stopped: (_) => IconButton(
                 onPressed: () {},
                 icon: const Icon(Icons.play_arrow_rounded),
                 tooltip: "Start pixoo adapter",
               ),
-              changingStatus: (_) => const IconButton.filled(
+              changingStatus: (_) => const IconButton(
                 onPressed: null,
                 icon: Icon(Icons.refresh),
               ),

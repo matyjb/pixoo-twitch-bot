@@ -44,7 +44,9 @@ class _DashboardScreenState extends State<DashboardScreen> {
           title: const Text("Dashboard"),
           actions: const [
             EmoteListenerControls(),
+            SizedBox(width: 10,),
             PixooAdapterControls(),
+            SizedBox(width: 10,),
           ],
         ),
       ),

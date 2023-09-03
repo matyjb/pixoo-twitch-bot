@@ -13,6 +13,9 @@ IOWebSocketChannel buildSocket() => IOWebSocketChannel.connect(
 class ChatListener {
   IOWebSocketChannel socket = buildSocket();
   StreamSubscription<dynamic>? _pingpong;
+  final _streamController= StreamController<String>();
+
+  Stream<String> get msgStream => _streamController.stream;
 
   Future connect(String channel, String ttvApiKey) {
     disconnect();
@@ -22,7 +25,10 @@ class ChatListener {
       final msg = message as String;
       if (msg.startsWith("PING")) {
         socket.sink.add(msg.replaceFirst("PING", "PONG"));
+      }else{
+        _streamController.add(message);
       }
+
     });
 
     socket.sink.add("CAP REQ :twitch.tv/membership");

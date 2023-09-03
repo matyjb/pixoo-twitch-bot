@@ -1,6 +1,6 @@
 // ignore_for_file: non_constant_identifier_names
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:pixoo_twitch_emotes_displayer/data/models/raw/seventv_user_raw.dart';
+import 'package:pixoo_twitch_emotes_displayer/data/models/sevenTvApi/seventv_user_raw.dart';
 part 'seventv_emote_raw.freezed.dart';
 part 'seventv_emote_raw.g.dart';
 

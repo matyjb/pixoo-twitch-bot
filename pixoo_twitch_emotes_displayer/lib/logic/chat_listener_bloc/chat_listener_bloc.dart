@@ -30,9 +30,9 @@ class ChatListenerBloc extends Bloc<ChatListenerEvent, ChatListenerState> {
       if (state is _Initial || state is _Stopped) {
         emit(const _ChangingStatus());
         final settings = SettingsCubit.i.state;
-        _chatListener.connect(settings.channelName!, settings.apiKey!).then(
+        await _chatListener.connect(settings.channelName!, settings.apiKey!).then(
           (_) async {
-            _chatSub = _chatListener.socket.stream.listen(
+            _chatSub = _chatListener.msgStream.listen(
               (message) {
                 final msg = message as String;
                 // if (msg.contains(" JOIN ")) {
@@ -69,6 +69,9 @@ class ChatListenerBloc extends Bloc<ChatListenerEvent, ChatListenerState> {
             );
           },
         ).onError((error, stackTrace) {
+          if (kDebugMode) {
+            print(error);
+          }
           emit(state);
         });
       }
