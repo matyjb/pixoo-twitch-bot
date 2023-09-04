@@ -8,7 +8,7 @@ extension PixooAPI on Never {
   static final Dio _dio = Dio();
 
   // max 60 animation frames and 64 by 64 pixels
-  static Future playGifFile(String deviceIp, String emoteUrl) async {
+  static Future<Response> playGifFile(String deviceIp, String emoteUrl) async {
     final String pixooDeviceUrl = 'http://$deviceIp/post';
 
     final dynamic data = {

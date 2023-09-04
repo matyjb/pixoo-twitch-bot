@@ -42,12 +42,19 @@ class PixooAdapterBloc extends Bloc<PixooAdapterEvent, PixooAdapterState> {
 
     on<_SendEmote>((event, emit) {
       if (state is _Running && (state as _Running).currentEmote != event.emote) {
-        emit(PixooAdapterState.running(currentEmote: event.emote));
         final emoteFileName = "${event.emote.fileName(PixooSize.x64)}.gif";
         PixooAPI.playGifFile(
           SettingsCubit.i.state.selectedPixooDevice!.privateIP,
           "${_server.url}/$emoteFileName",
-        );
+        ).then((response) {
+          if (response.statusCode == null ||
+              response.statusCode! >= 400 ||
+              response.statusCode! < 200) {
+            emit((state as _Running).copyWith(error: response));
+          } else {
+            emit(PixooAdapterState.running(currentEmote: event.emote));
+          }
+        });
       }
     }, transformer: debounce(const Duration(milliseconds: 300)));
   }

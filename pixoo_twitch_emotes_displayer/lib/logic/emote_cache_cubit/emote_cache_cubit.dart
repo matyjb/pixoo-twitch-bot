@@ -13,22 +13,34 @@ import 'package:process_run/process_run.dart';
 part 'emote_cache_state.dart';
 part 'emote_cache_cubit.freezed.dart';
 
+// gets filename from full path
+final fileNameRegex = RegExp(r'^.+\\(.+)\.(.+)$');
+
 class EmoteCacheCubit extends Cubit<EmoteCacheState> {
   late StreamSubscription<FileSystemEvent> _sub;
 
-  EmoteCacheCubit(String emotesPath)
+  EmoteCacheCubit(String emotesCacheDir)
       : super(const EmoteCacheState(
           idProviderPathMap: {},
           failedEmotesIds: {},
           preperingEmotesIds: {},
         )) {
-    final correctFileName = RegExp(r'\\(.+)\..+$');
-    _sub = Directory(emotesPath).watch().listen((event) {
-      List<String> paths = Directory(emotesPath).listSync().map((e) => e.path).toList();
-
-      setEmotesList(
-          Map.fromEntries(paths.map((e) => MapEntry(correctFileName.firstMatch(e)!.group(1)!, e))));
+    setEmotesList(_emotesInCache(emotesCacheDir));
+    _sub = Directory(emotesCacheDir).watch().listen((event) {
+      setEmotesList(_emotesInCache(emotesCacheDir));
     });
+  }
+
+  Map<String, String> _emotesInCache(String emotesCacheDir) {
+    List<String> paths = Directory(emotesCacheDir).listSync().map((e) => e.path).toList();
+
+    final fileNames = Map.fromEntries(
+      paths.map(
+        (e) => MapEntry(fileNameRegex.firstMatch(e)!.group(1)!, e),
+      ),
+    );
+
+    return fileNames;
   }
 
   setEmotesList(Map<String, String> l) {
@@ -71,9 +83,10 @@ class EmoteCacheCubit extends Cubit<EmoteCacheState> {
       // 2. run imagick on it
 
       //extension is added after download
-      Future job = emote
-          .download("${appState.cachePath}\\$emoteFileName")
-          .then((String newEmoteFilePath) async {
+      Future job = emote.download(appState.cachePath).catchError((err) {
+        addToFailed(emote);
+        return err;
+      }).then((String newEmoteFilePath) async {
         final String tmpFile = "${appState.cachePath}\\$emoteFileName.tmp.gif";
         final List<String> scriptCmds = await ImagickScripts.getEmotePrepCommands(
           newEmoteFilePath,

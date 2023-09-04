@@ -32,4 +32,5 @@ const _$TtvEmoteProviderEnumMap = {
   TtvEmoteProvider.ttv: 'ttv',
   TtvEmoteProvider.bttv: 'bttv',
   TtvEmoteProvider.ffz: 'ffz',
+  TtvEmoteProvider.unknown: 'unknown',
 };

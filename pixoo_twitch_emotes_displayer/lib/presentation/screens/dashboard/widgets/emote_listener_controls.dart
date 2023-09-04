@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:pixoo_twitch_emotes_displayer/logic/app_resources_cubit/app_resources_cubit.dart';
 import 'package:pixoo_twitch_emotes_displayer/logic/chat_listener_bloc/chat_listener_bloc.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class EmoteListenerControls extends StatelessWidget {
   const EmoteListenerControls({super.key});
@@ -17,6 +19,13 @@ class EmoteListenerControls extends StatelessWidget {
         builder: (context, state) => Row(
           mainAxisSize: MainAxisSize.min,
           children: [
+            IconButton(
+              onPressed: () => context
+                  .read<AppResourcesCubit>()
+                  .state
+                  .mapOrNull(loaded: (s) => launchUrl(Uri.parse("file:${s.docsPath}"))),
+              icon: const Icon(Icons.folder_rounded),
+            ),
             Icon(
               Icons.emoji_emotions_outlined,
               color: state.map(
@@ -28,17 +37,20 @@ class EmoteListenerControls extends StatelessWidget {
             ),
             state.map(
               initial: (_) => IconButton(
-                onPressed: ()=>context.read<ChatListenerBloc>().add(const ChatListenerEvent.start()),
+                onPressed: () =>
+                    context.read<ChatListenerBloc>().add(const ChatListenerEvent.start()),
                 icon: const Icon(Icons.play_arrow_rounded),
                 tooltip: "Start emote listener",
               ),
               running: (_) => IconButton(
-                onPressed: ()=>context.read<ChatListenerBloc>().add(const ChatListenerEvent.stop()),
+                onPressed: () =>
+                    context.read<ChatListenerBloc>().add(const ChatListenerEvent.stop()),
                 icon: const Icon(Icons.stop_rounded),
                 tooltip: "Stop emote listener",
               ),
               stopped: (_) => IconButton(
-                onPressed: ()=>context.read<ChatListenerBloc>().add(const ChatListenerEvent.start()),
+                onPressed: () =>
+                    context.read<ChatListenerBloc>().add(const ChatListenerEvent.start()),
                 icon: const Icon(Icons.play_arrow_rounded),
                 tooltip: "Start emote listener",
               ),

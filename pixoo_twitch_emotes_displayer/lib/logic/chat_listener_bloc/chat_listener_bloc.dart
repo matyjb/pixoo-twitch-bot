@@ -117,7 +117,7 @@ class ChatListenerBloc extends Bloc<ChatListenerEvent, ChatListenerState> {
             .containsKey(event.emote.fileName(PixooSize.x64))) {
           emoteCacheCubit.createEmoteFile(event.emote).then((_) {
             if (state is _Running) {
-              PixooAdapterEvent.sendEmote(event.emote);
+              pixooAdapterBloc.add(PixooAdapterEvent.sendEmote(event.emote));
             }
           });
         } else {

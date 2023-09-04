@@ -466,7 +466,7 @@ mixin _$PixooAdapterState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function(TtvEmote? currentEmote) running,
+    required TResult Function(TtvEmote? currentEmote, dynamic error) running,
     required TResult Function() stopped,
     required TResult Function() changingStatus,
   }) =>
@@ -474,7 +474,7 @@ mixin _$PixooAdapterState {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
-    TResult? Function(TtvEmote? currentEmote)? running,
+    TResult? Function(TtvEmote? currentEmote, dynamic error)? running,
     TResult? Function()? stopped,
     TResult? Function()? changingStatus,
   }) =>
@@ -482,7 +482,7 @@ mixin _$PixooAdapterState {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(TtvEmote? currentEmote)? running,
+    TResult Function(TtvEmote? currentEmote, dynamic error)? running,
     TResult Function()? stopped,
     TResult Function()? changingStatus,
     required TResult orElse(),
@@ -577,7 +577,7 @@ class _$_Initial with DiagnosticableTreeMixin implements _Initial {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function(TtvEmote? currentEmote) running,
+    required TResult Function(TtvEmote? currentEmote, dynamic error) running,
     required TResult Function() stopped,
     required TResult Function() changingStatus,
   }) {
@@ -588,7 +588,7 @@ class _$_Initial with DiagnosticableTreeMixin implements _Initial {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
-    TResult? Function(TtvEmote? currentEmote)? running,
+    TResult? Function(TtvEmote? currentEmote, dynamic error)? running,
     TResult? Function()? stopped,
     TResult? Function()? changingStatus,
   }) {
@@ -599,7 +599,7 @@ class _$_Initial with DiagnosticableTreeMixin implements _Initial {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(TtvEmote? currentEmote)? running,
+    TResult Function(TtvEmote? currentEmote, dynamic error)? running,
     TResult Function()? stopped,
     TResult Function()? changingStatus,
     required TResult orElse(),
@@ -658,7 +658,7 @@ abstract class _$$_RunningCopyWith<$Res> {
           _$_Running value, $Res Function(_$_Running) then) =
       __$$_RunningCopyWithImpl<$Res>;
   @useResult
-  $Res call({TtvEmote? currentEmote});
+  $Res call({TtvEmote? currentEmote, dynamic error});
 
   $TtvEmoteCopyWith<$Res>? get currentEmote;
 }
@@ -674,12 +674,17 @@ class __$$_RunningCopyWithImpl<$Res>
   @override
   $Res call({
     Object? currentEmote = freezed,
+    Object? error = freezed,
   }) {
     return _then(_$_Running(
       currentEmote: freezed == currentEmote
           ? _value.currentEmote
           : currentEmote // ignore: cast_nullable_to_non_nullable
               as TtvEmote?,
+      error: freezed == error
+          ? _value.error
+          : error // ignore: cast_nullable_to_non_nullable
+              as dynamic,
     ));
   }
 
@@ -699,14 +704,16 @@ class __$$_RunningCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_Running with DiagnosticableTreeMixin implements _Running {
-  const _$_Running({this.currentEmote});
+  const _$_Running({this.currentEmote, this.error});
 
   @override
   final TtvEmote? currentEmote;
+  @override
+  final dynamic error;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'PixooAdapterState.running(currentEmote: $currentEmote)';
+    return 'PixooAdapterState.running(currentEmote: $currentEmote, error: $error)';
   }
 
   @override
@@ -714,7 +721,8 @@ class _$_Running with DiagnosticableTreeMixin implements _Running {
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('type', 'PixooAdapterState.running'))
-      ..add(DiagnosticsProperty('currentEmote', currentEmote));
+      ..add(DiagnosticsProperty('currentEmote', currentEmote))
+      ..add(DiagnosticsProperty('error', error));
   }
 
   @override
@@ -723,11 +731,13 @@ class _$_Running with DiagnosticableTreeMixin implements _Running {
         (other.runtimeType == runtimeType &&
             other is _$_Running &&
             (identical(other.currentEmote, currentEmote) ||
-                other.currentEmote == currentEmote));
+                other.currentEmote == currentEmote) &&
+            const DeepCollectionEquality().equals(other.error, error));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, currentEmote);
+  int get hashCode => Object.hash(
+      runtimeType, currentEmote, const DeepCollectionEquality().hash(error));
 
   @JsonKey(ignore: true)
   @override
@@ -739,35 +749,35 @@ class _$_Running with DiagnosticableTreeMixin implements _Running {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function(TtvEmote? currentEmote) running,
+    required TResult Function(TtvEmote? currentEmote, dynamic error) running,
     required TResult Function() stopped,
     required TResult Function() changingStatus,
   }) {
-    return running(currentEmote);
+    return running(currentEmote, error);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
-    TResult? Function(TtvEmote? currentEmote)? running,
+    TResult? Function(TtvEmote? currentEmote, dynamic error)? running,
     TResult? Function()? stopped,
     TResult? Function()? changingStatus,
   }) {
-    return running?.call(currentEmote);
+    return running?.call(currentEmote, error);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(TtvEmote? currentEmote)? running,
+    TResult Function(TtvEmote? currentEmote, dynamic error)? running,
     TResult Function()? stopped,
     TResult Function()? changingStatus,
     required TResult orElse(),
   }) {
     if (running != null) {
-      return running(currentEmote);
+      return running(currentEmote, error);
     }
     return orElse();
   }
@@ -811,9 +821,11 @@ class _$_Running with DiagnosticableTreeMixin implements _Running {
 }
 
 abstract class _Running implements PixooAdapterState {
-  const factory _Running({final TtvEmote? currentEmote}) = _$_Running;
+  const factory _Running({final TtvEmote? currentEmote, final dynamic error}) =
+      _$_Running;
 
   TtvEmote? get currentEmote;
+  dynamic get error;
   @JsonKey(ignore: true)
   _$$_RunningCopyWith<_$_Running> get copyWith =>
       throw _privateConstructorUsedError;
@@ -863,7 +875,7 @@ class _$_Stopped with DiagnosticableTreeMixin implements _Stopped {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function(TtvEmote? currentEmote) running,
+    required TResult Function(TtvEmote? currentEmote, dynamic error) running,
     required TResult Function() stopped,
     required TResult Function() changingStatus,
   }) {
@@ -874,7 +886,7 @@ class _$_Stopped with DiagnosticableTreeMixin implements _Stopped {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
-    TResult? Function(TtvEmote? currentEmote)? running,
+    TResult? Function(TtvEmote? currentEmote, dynamic error)? running,
     TResult? Function()? stopped,
     TResult? Function()? changingStatus,
   }) {
@@ -885,7 +897,7 @@ class _$_Stopped with DiagnosticableTreeMixin implements _Stopped {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(TtvEmote? currentEmote)? running,
+    TResult Function(TtvEmote? currentEmote, dynamic error)? running,
     TResult Function()? stopped,
     TResult Function()? changingStatus,
     required TResult orElse(),
@@ -986,7 +998,7 @@ class _$_ChangingStatus
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function(TtvEmote? currentEmote) running,
+    required TResult Function(TtvEmote? currentEmote, dynamic error) running,
     required TResult Function() stopped,
     required TResult Function() changingStatus,
   }) {
@@ -997,7 +1009,7 @@ class _$_ChangingStatus
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
-    TResult? Function(TtvEmote? currentEmote)? running,
+    TResult? Function(TtvEmote? currentEmote, dynamic error)? running,
     TResult? Function()? stopped,
     TResult? Function()? changingStatus,
   }) {
@@ -1008,7 +1020,7 @@ class _$_ChangingStatus
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(TtvEmote? currentEmote)? running,
+    TResult Function(TtvEmote? currentEmote, dynamic error)? running,
     TResult Function()? stopped,
     TResult Function()? changingStatus,
     required TResult orElse(),

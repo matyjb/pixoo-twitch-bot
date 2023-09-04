@@ -40,19 +40,20 @@ class TtvEmote with _$TtvEmote {
 
   // download file and return full path to the image
   Future<String> download(String saveDir) async {
-    final tmpFilePath = "$saveDir/$fileName";
+    final tmpFilePath = "$saveDir\\$id";
     return Dio().download(maxQualityUrl, tmpFilePath).then((res) {
       final String ct = res.headers.map["content-type"]?.first ?? mime;
-      final String? cd = res.headers.map["content-disposition"]?.first;
-      String originalExtension;
-      final RegExp filenameRegex = RegExp(r'\.\w+');
-      if (cd != null) {
-        originalExtension = filenameRegex.allMatches(cd).last.group(0).toString();
-      } else {
-        originalExtension =
-            filenameRegex.allMatches(ct).last.group(0).toString().replaceAll("/", ".");
-      }
-      final String newFilePath = "$tmpFilePath/$originalExtension";
+      // final String? cd = res.headers.map["content-disposition"]?.first;
+      String originalExtension = ".webp";
+      final RegExp imageMimeRegex = RegExp(r'image\/(\w+)');
+      if (imageMimeRegex.hasMatch(ct)) {
+        originalExtension = imageMimeRegex.allMatches(ct).first.group(1).toString();
+      } 
+      // else {
+      //   originalExtension =
+      //       imageMimeRegex.allMatches(cd).last.group(0).toString().replaceAll("/", ".");
+      // }
+      final String newFilePath = "$tmpFilePath.$originalExtension";
       File(tmpFilePath).renameSync(newFilePath);
       final int? statusCode = res.statusCode;
       if (statusCode != null && statusCode >= 200 && statusCode < 300) {
