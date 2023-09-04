@@ -1,4 +1,7 @@
+import 'dart:io';
+
 import 'package:bloc/bloc.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:pixoo_twitch_emotes_displayer/data/models/pixoo_device.dart';
@@ -40,10 +43,10 @@ class PixooAdapterBloc extends Bloc<PixooAdapterEvent, PixooAdapterState> {
       }
     });
 
-    on<_SendEmote>((event, emit) {
+    on<_SendEmote>((event, emit) async {
       if (state is _Running && (state as _Running).currentEmote != event.emote) {
         final emoteFileName = "${event.emote.fileName(PixooSize.x64)}.gif";
-        PixooAPI.playGifFile(
+        await PixooAPI.playGifFile(
           SettingsCubit.i.state.selectedPixooDevice!.privateIP,
           "${_server.url}/$emoteFileName",
         ).then((response) {
@@ -54,7 +57,16 @@ class PixooAdapterBloc extends Bloc<PixooAdapterEvent, PixooAdapterState> {
           } else {
             emit(PixooAdapterState.running(currentEmote: event.emote));
           }
-        });
+        }).catchError(
+          (err) {
+            if (err.error is SocketException) {
+              emit((state as _Running).copyWith(error: "Pixoo device not found"));
+            } else {
+              emit((state as _Running).copyWith(error: err));
+            }
+          },
+          test: (err) => err is DioException,
+        );
       }
     }, transformer: debounce(const Duration(milliseconds: 300)));
   }

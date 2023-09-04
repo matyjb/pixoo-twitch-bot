@@ -8,7 +8,7 @@ extension PixooAPI on Never {
   static final Dio _dio = Dio();
 
   // max 60 animation frames and 64 by 64 pixels
-  static Future<Response> playGifFile(String deviceIp, String emoteUrl) async {
+  static Future<Response> playGifFile(String deviceIp, String emoteUrl) {
     final String pixooDeviceUrl = 'http://$deviceIp/post';
 
     final dynamic data = {
@@ -19,7 +19,7 @@ extension PixooAPI on Never {
     return _dio.post(pixooDeviceUrl, data: jsonEncode(data));
   }
 
-  static Future<Response<Map<String,dynamic>>> findSameLANDevices() async {
+  static Future<Response<Map<String,dynamic>>> findSameLANDevices() {
     return _dio.post('https://app.divoom-gz.com/Device/ReturnSameLANDevice');
   }
 }
