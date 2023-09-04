@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:pixoo_twitch_emotes_displayer/data/providers/t_emotes_api.dart';
 import 'package:pixoo_twitch_emotes_displayer/logic/app_resources_cubit/app_resources_cubit.dart';
 import 'package:pixoo_twitch_emotes_displayer/logic/chat_listener_bloc/chat_listener_bloc.dart';
 import 'package:pixoo_twitch_emotes_displayer/logic/emote_cache_cubit/emote_cache_cubit.dart';
@@ -8,6 +9,7 @@ import 'package:pixoo_twitch_emotes_displayer/logic/settings_cubit/settings_cubi
 import 'package:pixoo_twitch_emotes_displayer/presentation/screens/dashboard/widgets/emote_card.dart';
 import 'package:pixoo_twitch_emotes_displayer/presentation/screens/dashboard/widgets/emote_listener_controls.dart';
 import 'package:pixoo_twitch_emotes_displayer/presentation/screens/dashboard/widgets/pixoo_device_adapter_controls.dart';
+import 'package:pixoo_twitch_emotes_displayer/presentation/screens/dashboard/widgets/refresh_emotes_button.dart';
 
 class DashboardScreen extends StatefulWidget {
   const DashboardScreen({super.key});
@@ -42,38 +44,78 @@ class _DashboardScreenState extends State<DashboardScreen> {
       ],
       child: Scaffold(
         appBar: AppBar(
-          title: const Text("Dashboard"),
-          actions: const [
-            EmoteListenerControls(),
-            SizedBox(
-              width: 10,
-            ),
-            PixooAdapterControls(),
-            SizedBox(
-              width: 10,
-            ),
+          title: BlocBuilder<SettingsCubit, SettingsState>(
+            builder: (context, settings) => Text(settings.channelName ?? ""),
+          ),
+          actions: [
+            Padding(
+              padding: const EdgeInsets.all(4),
+              child: Hero(
+                tag: "channel_avatar",
+                child: BlocBuilder<SettingsCubit, SettingsState>(
+                  builder: (context, settings) {
+                    return FutureBuilder(
+                        future: TEmotesApi.getUser(settings.channelName ?? "forsen"),
+                        builder: (context, snapshot) {
+                          if (snapshot.hasData) {
+                            final avatar = snapshot.data!.data["avatar"];
+                            return Container(
+                              decoration: BoxDecoration(
+                                shape: BoxShape.circle,
+                                border: Border.all(
+                                  color: Theme.of(context).colorScheme.primary,
+                                  width: 2,
+                                ),
+                              ),
+                              child: CircleAvatar(
+                                backgroundImage: avatar != null ? NetworkImage(avatar) : null,
+                              ),
+                            );
+                          } else {
+                            return Container();
+                          }
+                        });
+                  },
+                ),
+              ),
+            )
           ],
         ),
         body: BlocBuilder<ChatListenerBloc, ChatListenerState>(
           builder: (context, state) => state.map(
             running: (state) => Column(
               children: [
+                const Wrap(
+                  spacing: 10,
+                  runSpacing: 10,
+                  children: [
+                    RefreshEmotesButton(),
+                    EmoteListenerControls(),
+                    PixooAdapterControls(),
+                  ],
+                ),
+                const Divider(
+                  height: 30,
+                ),
                 Row(
                   mainAxisSize: MainAxisSize.max,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    SizedBox(
-                      height: 100,
-                      width: 100,
-                      child: BlocBuilder<PixooAdapterBloc, PixooAdapterState>(
-                        builder: (context, state) {
-                          return state.maybeMap(
-                            orElse: () => Container(),
-                            running: (state) => state.currentEmote != null
-                                ? EmoteCard(emote: state.currentEmote!)
-                                : const Placeholder(),
-                          );
-                        },
+                    Container(
+                      margin: const EdgeInsets.all(16),
+                      child: SizedBox(
+                        height: 100,
+                        width: 100,
+                        child: BlocBuilder<PixooAdapterBloc, PixooAdapterState>(
+                          builder: (context, state) {
+                            return state.maybeMap(
+                              orElse: () => Container(),
+                              running: (state) => state.currentEmote != null
+                                  ? EmoteCard(emote: state.currentEmote!)
+                                  : const Placeholder(),
+                            );
+                          },
+                        ),
                       ),
                     ),
                   ],

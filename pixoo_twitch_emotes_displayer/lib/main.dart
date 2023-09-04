@@ -48,6 +48,7 @@ class _MyAppState extends State<MyApp> {
       ],
       child: SystemThemeBuilder(
         builder: (context, accent) => MaterialApp(
+          debugShowCheckedModeBanner: false,
           title: appName,
           theme: lightTheme(accent),
           darkTheme: darkTheme(accent),
