@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:collection';
 
 import 'package:bloc/bloc.dart';
 import 'package:flutter/foundation.dart';
@@ -7,6 +8,7 @@ import 'package:pixoo_twitch_emotes_displayer/data/models/pixoo_device.dart';
 import 'package:pixoo_twitch_emotes_displayer/data/models/ttv_emote.dart';
 import 'package:pixoo_twitch_emotes_displayer/data/models/twitch_chat_msg.dart';
 import 'package:pixoo_twitch_emotes_displayer/data/repositories/seventv_repo.dart';
+import 'package:pixoo_twitch_emotes_displayer/helpers/math.dart';
 import 'package:pixoo_twitch_emotes_displayer/logic/emote_cache_cubit/emote_cache_cubit.dart';
 import 'package:pixoo_twitch_emotes_displayer/logic/pixoo_adapter_bloc/pixoo_adapter_bloc.dart';
 import 'package:pixoo_twitch_emotes_displayer/logic/settings_cubit/settings_cubit.dart';
@@ -49,23 +51,26 @@ class ChatListenerBloc extends Bloc<ChatListenerEvent, ChatListenerState> {
                   }
 
                   if (parsedMsg.type == MsgType.msg) {
-                    for (final e in s.emotesOnChannel) {
-                      if (parsedMsg.content.startsWith("$e ") ||
-                          parsedMsg.content.contains(" $e ") ||
-                          parsedMsg.content.endsWith(" $e") ||
-                          parsedMsg.content == e.name) {
-                        add(_ReportEmote(e));
+                    Set<TtvEmote> foundEmotes = {};
+                    for (var word in parsedMsg.content.split(' ')) {
+                      if (s.emotesOnChannel.containsKey(word)) {
+                        foundEmotes.add(s.emotesOnChannel[word]!);
                       }
+                    }
+                    if (foundEmotes.isNotEmpty) {
+                      add(_ReportEmotes(foundEmotes));
                     }
                   }
                 }
               },
             );
+            List<TtvEmote> emotes = await SevenTVRepo.getChannelEmotes(settings.channelName!);
             emit(
               _Running(
                 emotesBuffer: [],
                 emotesRanking: [],
-                emotesOnChannel: await SevenTVRepo.getChannelEmotes(settings.channelName!),
+                emotesOnChannel: HashMap.fromEntries(emotes.map((e) => MapEntry(e.name, e))),
+                emotesPoints: {},
               ),
             );
           },
@@ -86,51 +91,48 @@ class ChatListenerBloc extends Bloc<ChatListenerEvent, ChatListenerState> {
       }
     });
 
-    on<_ReportEmote>((event, emit) {
+    on<_ReportEmotes>((event, emit) {
       if (state is _Running) {
         final s = state as _Running;
-        final newEmotesBuffer = List<TtvEmote>.from(s.emotesBuffer)..add(event.emote);
-        // # assuming settings wont change while listening
+
+        // last is the newest emote
+        final newEmotesBuffer = List<TtvEmote>.from(s.emotesBuffer)..addAll(event.emotes);
+
         if (newEmotesBuffer.length > SettingsCubit.i.state.bufferSize) {
-          newEmotesBuffer.removeAt(0);
+          newEmotesBuffer.removeRange(0, newEmotesBuffer.length - SettingsCubit.i.state.bufferSize);
         }
 
         // forza horizon team race point system
-        Map<TtvEmote, int> points = {};
-        Map<TtvEmote, int> counters = {};
-        for (var emote in newEmotesBuffer.reversed) {
-          final pointsForEmote = counters.entries
-              .where((element) => element.key != emote)
-              .fold(0, (previousValue, element) => previousValue + element.value);
-          points.update(emote, (value) => value + pointsForEmote, ifAbsent: () => pointsForEmote);
-          counters.update(emote, (value) => value + 1, ifAbsent: () => 1);
-        }
-        final tmpList = points.entries.toList()..sort((a, b) => a.value.compareTo(b.value));
+        final points = countPoints(newEmotesBuffer);
+        final tmpList = points.entries.toList()..sort((a, b) => b.value.compareTo(a.value));
         final List<TtvEmote> ranking = tmpList.map((e) => e.key).toList();
 
         emit(s.copyWith(
           emotesBuffer: newEmotesBuffer,
           emotesRanking: ranking,
+          emotesPoints: points,
         ));
 
+        final mainEmote = ranking.first;
+
         if (!emoteCacheCubit.state.idProviderPathMap
-            .containsKey(event.emote.fileName(PixooSize.x64))) {
-          emoteCacheCubit.createEmoteFile(event.emote).then((_) {
+            .containsKey(mainEmote.fileName(PixooSize.x64))) {
+          emoteCacheCubit.createEmoteFile(mainEmote).then((_) {
             if (state is _Running) {
-              pixooAdapterBloc.add(PixooAdapterEvent.sendEmote(event.emote));
+              pixooAdapterBloc.add(PixooAdapterEvent.sendEmote(mainEmote));
             }
           });
         } else {
-          pixooAdapterBloc.add(PixooAdapterEvent.sendEmote(event.emote));
+          pixooAdapterBloc.add(PixooAdapterEvent.sendEmote(mainEmote));
         }
       }
     });
-
     on<_RefreshChannelEmotes>((event, emit) async {
       if (state is _Running) {
         final settings = SettingsCubit.i.state;
+        List<TtvEmote> emotes = await SevenTVRepo.getChannelEmotes(settings.channelName!);
         emit((state as _Running).copyWith(
-          emotesOnChannel: await SevenTVRepo.getChannelEmotes(settings.channelName!),
+          emotesOnChannel: HashMap.fromEntries(emotes.map((e) => MapEntry(e.name, e))),
         ));
       }
     });

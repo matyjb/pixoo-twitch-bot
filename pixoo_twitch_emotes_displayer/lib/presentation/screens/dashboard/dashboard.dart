@@ -83,8 +83,9 @@ class _DashboardScreenState extends State<DashboardScreen> {
         ),
         body: BlocBuilder<ChatListenerBloc, ChatListenerState>(
           builder: (context, state) => state.map(
-            running: (state) => Column(
+            running: (chatListenerRunning) => Column(
               children: [
+                const SizedBox(height: 5,),
                 const Wrap(
                   spacing: 10,
                   runSpacing: 10,
@@ -107,12 +108,13 @@ class _DashboardScreenState extends State<DashboardScreen> {
                         height: 100,
                         width: 100,
                         child: BlocBuilder<PixooAdapterBloc, PixooAdapterState>(
-                          builder: (context, state) {
-                            return state.maybeMap(
+                          builder: (context, pixooAdapterState) {
+                            return pixooAdapterState.maybeMap(
                               orElse: () => Container(),
-                              running: (state) => state.currentEmote != null
-                                  ? EmoteCard(emote: state.currentEmote!)
-                                  : const Placeholder(),
+                              running: (pixooAdapterStateRunning) =>
+                                  pixooAdapterStateRunning.currentEmote != null
+                                      ? EmoteCard(emote: pixooAdapterStateRunning.currentEmote!)
+                                      : const Placeholder(),
                             );
                           },
                         ),
@@ -120,12 +122,22 @@ class _DashboardScreenState extends State<DashboardScreen> {
                     ),
                   ],
                 ),
-                Wrap(
-                  spacing: 4,
-                  runSpacing: 4,
-                  children: state.emotesRanking
-                      .map((e) => SizedBox(height: 70, child: EmoteCard(emote: e)))
-                      .toList(),
+                Flexible(
+                  child: SingleChildScrollView(
+                    physics: const BouncingScrollPhysics(),
+                    child: Wrap(
+                      spacing: 4,
+                      runSpacing: 4,
+                      children: chatListenerRunning.emotesRanking
+                          .map((e) => SizedBox(
+                              height: 70,
+                              child: EmoteCard(
+                                emote: e,
+                                caption: chatListenerRunning.emotesPoints[e].toString(),
+                              )))
+                          .toList(),
+                    ),
+                  ),
                 )
               ],
             ),

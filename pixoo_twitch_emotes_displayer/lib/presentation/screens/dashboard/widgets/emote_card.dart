@@ -5,7 +5,12 @@ import 'package:pixoo_twitch_emotes_displayer/logic/emote_cache_cubit/emote_cach
 
 class EmoteCard extends StatelessWidget {
   final TtvEmote emote;
-  const EmoteCard({super.key, required this.emote});
+  final String? caption;
+  const EmoteCard({
+    super.key,
+    required this.emote,
+    this.caption,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -15,6 +20,7 @@ class EmoteCard extends StatelessWidget {
           emote: emote,
           isProcessing: state.preperingEmotesIds.containsKey(emote.id),
           isFailed: state.failedEmotesIds.contains(emote.id),
+          caption: caption,
         );
       },
     );
@@ -25,7 +31,13 @@ class _EmoteCard extends StatelessWidget {
   final TtvEmote emote;
   final bool isProcessing;
   final bool isFailed;
-  const _EmoteCard({required this.emote, this.isProcessing = false, this.isFailed = false});
+  final String? caption;
+  const _EmoteCard({
+    required this.emote,
+    this.isProcessing = false,
+    this.isFailed = false,
+    this.caption,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -57,6 +69,15 @@ class _EmoteCard extends StatelessWidget {
                       color: Colors.red.shade400,
                       size: 19,
                     ),
+            ),
+          ),
+        if (caption != null)
+          Positioned(
+            bottom: 0,
+            left: 0,
+            child: Text(
+              caption!,
+              style: Theme.of(context).textTheme.bodySmall,
             ),
           ),
       ],

@@ -19,50 +19,52 @@ class SettingsScreen extends StatelessWidget {
           return Padding(
             padding: const EdgeInsets.all(32.0),
             child: Center(
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  // Padding(
-                  //   padding: const EdgeInsets.all(8.0),
-                  //   child:
-                  //       Image.network("https://cdn.7tv.app/emote/6252d81b41d1240ad9e4fff1/4x.webp"),
-                  // ),
-                  Card(
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 48,
-                        vertical: 32,
-                      ),
-                      child: Column(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          const ChannelNameTextField(),
-                          const ApiKeyTextField(),
-                          const Divider(height: 40),
-                          const NetInterfaceDropdown(),
-                          const PixooDeviceDropdown(),
-                          const BufferSizeSlider(),
-                        ]
-                            .map((e) => Padding(
-                                  padding: const EdgeInsets.symmetric(vertical: 4.0),
-                                  child: e,
-                                ))
-                            .toList(),
+              child: SingleChildScrollView(
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child:
+                          Image.network("https://cdn.7tv.app/emote/6252d81b41d1240ad9e4fff1/4x.webp"),
+                    ),
+                    Card(
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 48,
+                          vertical: 32,
+                        ),
+                        child: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            const ChannelNameTextField(),
+                            const ApiKeyTextField(),
+                            const Divider(height: 40),
+                            const NetInterfaceDropdown(),
+                            const PixooDeviceDropdown(),
+                            const BufferSizeSlider(),
+                          ]
+                              .map((e) => Padding(
+                                    padding: const EdgeInsets.symmetric(vertical: 4.0),
+                                    child: e,
+                                  ))
+                              .toList(),
+                        ),
                       ),
                     ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(24.0),
-                    child: IconButton.filled(
-                      onPressed: state.isReady
-                          ? () => Navigator.of(context).pushNamed(RouteNames.dashboard)
-                          : null,
-                      tooltip: state.isReady ? "Run service" : "Fill all of the settings",
-                      icon: const Icon(Icons.play_arrow_rounded),
-                      iconSize: 50,
+                    Padding(
+                      padding: const EdgeInsets.all(24.0),
+                      child: IconButton.filled(
+                        onPressed: state.isReady
+                            ? () => Navigator.of(context).pushNamed(RouteNames.dashboard)
+                            : null,
+                        tooltip: state.isReady ? "Run service" : "Fill all of the settings",
+                        icon: const Icon(Icons.play_arrow_rounded),
+                        iconSize: 50,
+                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
           );

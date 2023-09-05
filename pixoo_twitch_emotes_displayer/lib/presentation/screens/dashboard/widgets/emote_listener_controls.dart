@@ -19,13 +19,6 @@ class EmoteListenerControls extends StatelessWidget {
         builder: (context, state) => Row(
           mainAxisSize: MainAxisSize.min,
           children: [
-            IconButton(
-              onPressed: () => context
-                  .read<AppResourcesCubit>()
-                  .state
-                  .mapOrNull(loaded: (s) => launchUrl(Uri.parse("file:${s.docsPath}"))),
-              icon: const Icon(Icons.folder_rounded),
-            ),
             Icon(
               Icons.emoji_emotions_outlined,
               color: state.map(
@@ -34,6 +27,13 @@ class EmoteListenerControls extends StatelessWidget {
                 changingStatus: (_) => Colors.yellow,
                 stopped: (_) => Colors.red,
               ),
+            ),
+            IconButton(
+              onPressed: () => context
+                  .read<AppResourcesCubit>()
+                  .state
+                  .mapOrNull(loaded: (s) => launchUrl(Uri.parse("file:${s.docsPath}"))),
+              icon: const Icon(Icons.folder_rounded),
             ),
             state.map(
               initial: (_) => IconButton(

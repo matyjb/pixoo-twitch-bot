@@ -20,7 +20,7 @@ mixin _$ChatListenerEvent {
   TResult when<TResult extends Object?>({
     required TResult Function() start,
     required TResult Function() stop,
-    required TResult Function(TtvEmote emote) reportEmote,
+    required TResult Function(Iterable<TtvEmote> emotes) reportEmotes,
     required TResult Function() refreshChannelEmotes,
   }) =>
       throw _privateConstructorUsedError;
@@ -28,7 +28,7 @@ mixin _$ChatListenerEvent {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? start,
     TResult? Function()? stop,
-    TResult? Function(TtvEmote emote)? reportEmote,
+    TResult? Function(Iterable<TtvEmote> emotes)? reportEmotes,
     TResult? Function()? refreshChannelEmotes,
   }) =>
       throw _privateConstructorUsedError;
@@ -36,7 +36,7 @@ mixin _$ChatListenerEvent {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? start,
     TResult Function()? stop,
-    TResult Function(TtvEmote emote)? reportEmote,
+    TResult Function(Iterable<TtvEmote> emotes)? reportEmotes,
     TResult Function()? refreshChannelEmotes,
     required TResult orElse(),
   }) =>
@@ -45,7 +45,7 @@ mixin _$ChatListenerEvent {
   TResult map<TResult extends Object?>({
     required TResult Function(_Start value) start,
     required TResult Function(_Stop value) stop,
-    required TResult Function(_ReportEmote value) reportEmote,
+    required TResult Function(_ReportEmotes value) reportEmotes,
     required TResult Function(_RefreshChannelEmotes value) refreshChannelEmotes,
   }) =>
       throw _privateConstructorUsedError;
@@ -53,7 +53,7 @@ mixin _$ChatListenerEvent {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Start value)? start,
     TResult? Function(_Stop value)? stop,
-    TResult? Function(_ReportEmote value)? reportEmote,
+    TResult? Function(_ReportEmotes value)? reportEmotes,
     TResult? Function(_RefreshChannelEmotes value)? refreshChannelEmotes,
   }) =>
       throw _privateConstructorUsedError;
@@ -61,7 +61,7 @@ mixin _$ChatListenerEvent {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Start value)? start,
     TResult Function(_Stop value)? stop,
-    TResult Function(_ReportEmote value)? reportEmote,
+    TResult Function(_ReportEmotes value)? reportEmotes,
     TResult Function(_RefreshChannelEmotes value)? refreshChannelEmotes,
     required TResult orElse(),
   }) =>
@@ -130,7 +130,7 @@ class _$_Start with DiagnosticableTreeMixin implements _Start {
   TResult when<TResult extends Object?>({
     required TResult Function() start,
     required TResult Function() stop,
-    required TResult Function(TtvEmote emote) reportEmote,
+    required TResult Function(Iterable<TtvEmote> emotes) reportEmotes,
     required TResult Function() refreshChannelEmotes,
   }) {
     return start();
@@ -141,7 +141,7 @@ class _$_Start with DiagnosticableTreeMixin implements _Start {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? start,
     TResult? Function()? stop,
-    TResult? Function(TtvEmote emote)? reportEmote,
+    TResult? Function(Iterable<TtvEmote> emotes)? reportEmotes,
     TResult? Function()? refreshChannelEmotes,
   }) {
     return start?.call();
@@ -152,7 +152,7 @@ class _$_Start with DiagnosticableTreeMixin implements _Start {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? start,
     TResult Function()? stop,
-    TResult Function(TtvEmote emote)? reportEmote,
+    TResult Function(Iterable<TtvEmote> emotes)? reportEmotes,
     TResult Function()? refreshChannelEmotes,
     required TResult orElse(),
   }) {
@@ -167,7 +167,7 @@ class _$_Start with DiagnosticableTreeMixin implements _Start {
   TResult map<TResult extends Object?>({
     required TResult Function(_Start value) start,
     required TResult Function(_Stop value) stop,
-    required TResult Function(_ReportEmote value) reportEmote,
+    required TResult Function(_ReportEmotes value) reportEmotes,
     required TResult Function(_RefreshChannelEmotes value) refreshChannelEmotes,
   }) {
     return start(this);
@@ -178,7 +178,7 @@ class _$_Start with DiagnosticableTreeMixin implements _Start {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Start value)? start,
     TResult? Function(_Stop value)? stop,
-    TResult? Function(_ReportEmote value)? reportEmote,
+    TResult? Function(_ReportEmotes value)? reportEmotes,
     TResult? Function(_RefreshChannelEmotes value)? refreshChannelEmotes,
   }) {
     return start?.call(this);
@@ -189,7 +189,7 @@ class _$_Start with DiagnosticableTreeMixin implements _Start {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Start value)? start,
     TResult Function(_Stop value)? stop,
-    TResult Function(_ReportEmote value)? reportEmote,
+    TResult Function(_ReportEmotes value)? reportEmotes,
     TResult Function(_RefreshChannelEmotes value)? refreshChannelEmotes,
     required TResult orElse(),
   }) {
@@ -248,7 +248,7 @@ class _$_Stop with DiagnosticableTreeMixin implements _Stop {
   TResult when<TResult extends Object?>({
     required TResult Function() start,
     required TResult Function() stop,
-    required TResult Function(TtvEmote emote) reportEmote,
+    required TResult Function(Iterable<TtvEmote> emotes) reportEmotes,
     required TResult Function() refreshChannelEmotes,
   }) {
     return stop();
@@ -259,7 +259,7 @@ class _$_Stop with DiagnosticableTreeMixin implements _Stop {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? start,
     TResult? Function()? stop,
-    TResult? Function(TtvEmote emote)? reportEmote,
+    TResult? Function(Iterable<TtvEmote> emotes)? reportEmotes,
     TResult? Function()? refreshChannelEmotes,
   }) {
     return stop?.call();
@@ -270,7 +270,7 @@ class _$_Stop with DiagnosticableTreeMixin implements _Stop {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? start,
     TResult Function()? stop,
-    TResult Function(TtvEmote emote)? reportEmote,
+    TResult Function(Iterable<TtvEmote> emotes)? reportEmotes,
     TResult Function()? refreshChannelEmotes,
     required TResult orElse(),
   }) {
@@ -285,7 +285,7 @@ class _$_Stop with DiagnosticableTreeMixin implements _Stop {
   TResult map<TResult extends Object?>({
     required TResult Function(_Start value) start,
     required TResult Function(_Stop value) stop,
-    required TResult Function(_ReportEmote value) reportEmote,
+    required TResult Function(_ReportEmotes value) reportEmotes,
     required TResult Function(_RefreshChannelEmotes value) refreshChannelEmotes,
   }) {
     return stop(this);
@@ -296,7 +296,7 @@ class _$_Stop with DiagnosticableTreeMixin implements _Stop {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Start value)? start,
     TResult? Function(_Stop value)? stop,
-    TResult? Function(_ReportEmote value)? reportEmote,
+    TResult? Function(_ReportEmotes value)? reportEmotes,
     TResult? Function(_RefreshChannelEmotes value)? refreshChannelEmotes,
   }) {
     return stop?.call(this);
@@ -307,7 +307,7 @@ class _$_Stop with DiagnosticableTreeMixin implements _Stop {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Start value)? start,
     TResult Function(_Stop value)? stop,
-    TResult Function(_ReportEmote value)? reportEmote,
+    TResult Function(_ReportEmotes value)? reportEmotes,
     TResult Function(_RefreshChannelEmotes value)? refreshChannelEmotes,
     required TResult orElse(),
   }) {
@@ -323,93 +323,84 @@ abstract class _Stop implements ChatListenerEvent {
 }
 
 /// @nodoc
-abstract class _$$_ReportEmoteCopyWith<$Res> {
-  factory _$$_ReportEmoteCopyWith(
-          _$_ReportEmote value, $Res Function(_$_ReportEmote) then) =
-      __$$_ReportEmoteCopyWithImpl<$Res>;
+abstract class _$$_ReportEmotesCopyWith<$Res> {
+  factory _$$_ReportEmotesCopyWith(
+          _$_ReportEmotes value, $Res Function(_$_ReportEmotes) then) =
+      __$$_ReportEmotesCopyWithImpl<$Res>;
   @useResult
-  $Res call({TtvEmote emote});
-
-  $TtvEmoteCopyWith<$Res> get emote;
+  $Res call({Iterable<TtvEmote> emotes});
 }
 
 /// @nodoc
-class __$$_ReportEmoteCopyWithImpl<$Res>
-    extends _$ChatListenerEventCopyWithImpl<$Res, _$_ReportEmote>
-    implements _$$_ReportEmoteCopyWith<$Res> {
-  __$$_ReportEmoteCopyWithImpl(
-      _$_ReportEmote _value, $Res Function(_$_ReportEmote) _then)
+class __$$_ReportEmotesCopyWithImpl<$Res>
+    extends _$ChatListenerEventCopyWithImpl<$Res, _$_ReportEmotes>
+    implements _$$_ReportEmotesCopyWith<$Res> {
+  __$$_ReportEmotesCopyWithImpl(
+      _$_ReportEmotes _value, $Res Function(_$_ReportEmotes) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? emote = null,
+    Object? emotes = null,
   }) {
-    return _then(_$_ReportEmote(
-      null == emote
-          ? _value.emote
-          : emote // ignore: cast_nullable_to_non_nullable
-              as TtvEmote,
+    return _then(_$_ReportEmotes(
+      null == emotes
+          ? _value.emotes
+          : emotes // ignore: cast_nullable_to_non_nullable
+              as Iterable<TtvEmote>,
     ));
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $TtvEmoteCopyWith<$Res> get emote {
-    return $TtvEmoteCopyWith<$Res>(_value.emote, (value) {
-      return _then(_value.copyWith(emote: value));
-    });
   }
 }
 
 /// @nodoc
 
-class _$_ReportEmote with DiagnosticableTreeMixin implements _ReportEmote {
-  const _$_ReportEmote(this.emote);
+class _$_ReportEmotes with DiagnosticableTreeMixin implements _ReportEmotes {
+  const _$_ReportEmotes(this.emotes);
 
   @override
-  final TtvEmote emote;
+  final Iterable<TtvEmote> emotes;
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'ChatListenerEvent.reportEmote(emote: $emote)';
+    return 'ChatListenerEvent.reportEmotes(emotes: $emotes)';
   }
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
-      ..add(DiagnosticsProperty('type', 'ChatListenerEvent.reportEmote'))
-      ..add(DiagnosticsProperty('emote', emote));
+      ..add(DiagnosticsProperty('type', 'ChatListenerEvent.reportEmotes'))
+      ..add(DiagnosticsProperty('emotes', emotes));
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_ReportEmote &&
-            (identical(other.emote, emote) || other.emote == emote));
+            other is _$_ReportEmotes &&
+            const DeepCollectionEquality().equals(other.emotes, emotes));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, emote);
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(emotes));
 
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_ReportEmoteCopyWith<_$_ReportEmote> get copyWith =>
-      __$$_ReportEmoteCopyWithImpl<_$_ReportEmote>(this, _$identity);
+  _$$_ReportEmotesCopyWith<_$_ReportEmotes> get copyWith =>
+      __$$_ReportEmotesCopyWithImpl<_$_ReportEmotes>(this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() start,
     required TResult Function() stop,
-    required TResult Function(TtvEmote emote) reportEmote,
+    required TResult Function(Iterable<TtvEmote> emotes) reportEmotes,
     required TResult Function() refreshChannelEmotes,
   }) {
-    return reportEmote(emote);
+    return reportEmotes(emotes);
   }
 
   @override
@@ -417,10 +408,10 @@ class _$_ReportEmote with DiagnosticableTreeMixin implements _ReportEmote {
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? start,
     TResult? Function()? stop,
-    TResult? Function(TtvEmote emote)? reportEmote,
+    TResult? Function(Iterable<TtvEmote> emotes)? reportEmotes,
     TResult? Function()? refreshChannelEmotes,
   }) {
-    return reportEmote?.call(emote);
+    return reportEmotes?.call(emotes);
   }
 
   @override
@@ -428,12 +419,12 @@ class _$_ReportEmote with DiagnosticableTreeMixin implements _ReportEmote {
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? start,
     TResult Function()? stop,
-    TResult Function(TtvEmote emote)? reportEmote,
+    TResult Function(Iterable<TtvEmote> emotes)? reportEmotes,
     TResult Function()? refreshChannelEmotes,
     required TResult orElse(),
   }) {
-    if (reportEmote != null) {
-      return reportEmote(emote);
+    if (reportEmotes != null) {
+      return reportEmotes(emotes);
     }
     return orElse();
   }
@@ -443,10 +434,10 @@ class _$_ReportEmote with DiagnosticableTreeMixin implements _ReportEmote {
   TResult map<TResult extends Object?>({
     required TResult Function(_Start value) start,
     required TResult Function(_Stop value) stop,
-    required TResult Function(_ReportEmote value) reportEmote,
+    required TResult Function(_ReportEmotes value) reportEmotes,
     required TResult Function(_RefreshChannelEmotes value) refreshChannelEmotes,
   }) {
-    return reportEmote(this);
+    return reportEmotes(this);
   }
 
   @override
@@ -454,10 +445,10 @@ class _$_ReportEmote with DiagnosticableTreeMixin implements _ReportEmote {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Start value)? start,
     TResult? Function(_Stop value)? stop,
-    TResult? Function(_ReportEmote value)? reportEmote,
+    TResult? Function(_ReportEmotes value)? reportEmotes,
     TResult? Function(_RefreshChannelEmotes value)? refreshChannelEmotes,
   }) {
-    return reportEmote?.call(this);
+    return reportEmotes?.call(this);
   }
 
   @override
@@ -465,23 +456,24 @@ class _$_ReportEmote with DiagnosticableTreeMixin implements _ReportEmote {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Start value)? start,
     TResult Function(_Stop value)? stop,
-    TResult Function(_ReportEmote value)? reportEmote,
+    TResult Function(_ReportEmotes value)? reportEmotes,
     TResult Function(_RefreshChannelEmotes value)? refreshChannelEmotes,
     required TResult orElse(),
   }) {
-    if (reportEmote != null) {
-      return reportEmote(this);
+    if (reportEmotes != null) {
+      return reportEmotes(this);
     }
     return orElse();
   }
 }
 
-abstract class _ReportEmote implements ChatListenerEvent {
-  const factory _ReportEmote(final TtvEmote emote) = _$_ReportEmote;
+abstract class _ReportEmotes implements ChatListenerEvent {
+  const factory _ReportEmotes(final Iterable<TtvEmote> emotes) =
+      _$_ReportEmotes;
 
-  TtvEmote get emote;
+  Iterable<TtvEmote> get emotes;
   @JsonKey(ignore: true)
-  _$$_ReportEmoteCopyWith<_$_ReportEmote> get copyWith =>
+  _$$_ReportEmotesCopyWith<_$_ReportEmotes> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -534,7 +526,7 @@ class _$_RefreshChannelEmotes
   TResult when<TResult extends Object?>({
     required TResult Function() start,
     required TResult Function() stop,
-    required TResult Function(TtvEmote emote) reportEmote,
+    required TResult Function(Iterable<TtvEmote> emotes) reportEmotes,
     required TResult Function() refreshChannelEmotes,
   }) {
     return refreshChannelEmotes();
@@ -545,7 +537,7 @@ class _$_RefreshChannelEmotes
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? start,
     TResult? Function()? stop,
-    TResult? Function(TtvEmote emote)? reportEmote,
+    TResult? Function(Iterable<TtvEmote> emotes)? reportEmotes,
     TResult? Function()? refreshChannelEmotes,
   }) {
     return refreshChannelEmotes?.call();
@@ -556,7 +548,7 @@ class _$_RefreshChannelEmotes
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? start,
     TResult Function()? stop,
-    TResult Function(TtvEmote emote)? reportEmote,
+    TResult Function(Iterable<TtvEmote> emotes)? reportEmotes,
     TResult Function()? refreshChannelEmotes,
     required TResult orElse(),
   }) {
@@ -571,7 +563,7 @@ class _$_RefreshChannelEmotes
   TResult map<TResult extends Object?>({
     required TResult Function(_Start value) start,
     required TResult Function(_Stop value) stop,
-    required TResult Function(_ReportEmote value) reportEmote,
+    required TResult Function(_ReportEmotes value) reportEmotes,
     required TResult Function(_RefreshChannelEmotes value) refreshChannelEmotes,
   }) {
     return refreshChannelEmotes(this);
@@ -582,7 +574,7 @@ class _$_RefreshChannelEmotes
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(_Start value)? start,
     TResult? Function(_Stop value)? stop,
-    TResult? Function(_ReportEmote value)? reportEmote,
+    TResult? Function(_ReportEmotes value)? reportEmotes,
     TResult? Function(_RefreshChannelEmotes value)? refreshChannelEmotes,
   }) {
     return refreshChannelEmotes?.call(this);
@@ -593,7 +585,7 @@ class _$_RefreshChannelEmotes
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_Start value)? start,
     TResult Function(_Stop value)? stop,
-    TResult Function(_ReportEmote value)? reportEmote,
+    TResult Function(_ReportEmotes value)? reportEmotes,
     TResult Function(_RefreshChannelEmotes value)? refreshChannelEmotes,
     required TResult orElse(),
   }) {
@@ -613,8 +605,11 @@ mixin _$ChatListenerState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function(List<TtvEmote> emotesBuffer,
-            List<TtvEmote> emotesRanking, List<TtvEmote> emotesOnChannel)
+    required TResult Function(
+            List<TtvEmote> emotesBuffer,
+            List<TtvEmote> emotesRanking,
+            HashMap<String, TtvEmote> emotesOnChannel,
+            Map<TtvEmote, int> emotesPoints)
         running,
     required TResult Function() stopped,
     required TResult Function() changingStatus,
@@ -623,8 +618,11 @@ mixin _$ChatListenerState {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
-    TResult? Function(List<TtvEmote> emotesBuffer, List<TtvEmote> emotesRanking,
-            List<TtvEmote> emotesOnChannel)?
+    TResult? Function(
+            List<TtvEmote> emotesBuffer,
+            List<TtvEmote> emotesRanking,
+            HashMap<String, TtvEmote> emotesOnChannel,
+            Map<TtvEmote, int> emotesPoints)?
         running,
     TResult? Function()? stopped,
     TResult? Function()? changingStatus,
@@ -633,8 +631,11 @@ mixin _$ChatListenerState {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(List<TtvEmote> emotesBuffer, List<TtvEmote> emotesRanking,
-            List<TtvEmote> emotesOnChannel)?
+    TResult Function(
+            List<TtvEmote> emotesBuffer,
+            List<TtvEmote> emotesRanking,
+            HashMap<String, TtvEmote> emotesOnChannel,
+            Map<TtvEmote, int> emotesPoints)?
         running,
     TResult Function()? stopped,
     TResult Function()? changingStatus,
@@ -730,8 +731,11 @@ class _$_Initial with DiagnosticableTreeMixin implements _Initial {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function(List<TtvEmote> emotesBuffer,
-            List<TtvEmote> emotesRanking, List<TtvEmote> emotesOnChannel)
+    required TResult Function(
+            List<TtvEmote> emotesBuffer,
+            List<TtvEmote> emotesRanking,
+            HashMap<String, TtvEmote> emotesOnChannel,
+            Map<TtvEmote, int> emotesPoints)
         running,
     required TResult Function() stopped,
     required TResult Function() changingStatus,
@@ -743,8 +747,11 @@ class _$_Initial with DiagnosticableTreeMixin implements _Initial {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
-    TResult? Function(List<TtvEmote> emotesBuffer, List<TtvEmote> emotesRanking,
-            List<TtvEmote> emotesOnChannel)?
+    TResult? Function(
+            List<TtvEmote> emotesBuffer,
+            List<TtvEmote> emotesRanking,
+            HashMap<String, TtvEmote> emotesOnChannel,
+            Map<TtvEmote, int> emotesPoints)?
         running,
     TResult? Function()? stopped,
     TResult? Function()? changingStatus,
@@ -756,8 +763,11 @@ class _$_Initial with DiagnosticableTreeMixin implements _Initial {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(List<TtvEmote> emotesBuffer, List<TtvEmote> emotesRanking,
-            List<TtvEmote> emotesOnChannel)?
+    TResult Function(
+            List<TtvEmote> emotesBuffer,
+            List<TtvEmote> emotesRanking,
+            HashMap<String, TtvEmote> emotesOnChannel,
+            Map<TtvEmote, int> emotesPoints)?
         running,
     TResult Function()? stopped,
     TResult Function()? changingStatus,
@@ -820,7 +830,8 @@ abstract class _$$_RunningCopyWith<$Res> {
   $Res call(
       {List<TtvEmote> emotesBuffer,
       List<TtvEmote> emotesRanking,
-      List<TtvEmote> emotesOnChannel});
+      HashMap<String, TtvEmote> emotesOnChannel,
+      Map<TtvEmote, int> emotesPoints});
 }
 
 /// @nodoc
@@ -836,6 +847,7 @@ class __$$_RunningCopyWithImpl<$Res>
     Object? emotesBuffer = null,
     Object? emotesRanking = null,
     Object? emotesOnChannel = null,
+    Object? emotesPoints = null,
   }) {
     return _then(_$_Running(
       emotesBuffer: null == emotesBuffer
@@ -847,9 +859,13 @@ class __$$_RunningCopyWithImpl<$Res>
           : emotesRanking // ignore: cast_nullable_to_non_nullable
               as List<TtvEmote>,
       emotesOnChannel: null == emotesOnChannel
-          ? _value._emotesOnChannel
+          ? _value.emotesOnChannel
           : emotesOnChannel // ignore: cast_nullable_to_non_nullable
-              as List<TtvEmote>,
+              as HashMap<String, TtvEmote>,
+      emotesPoints: null == emotesPoints
+          ? _value._emotesPoints
+          : emotesPoints // ignore: cast_nullable_to_non_nullable
+              as Map<TtvEmote, int>,
     ));
   }
 }
@@ -860,10 +876,11 @@ class _$_Running with DiagnosticableTreeMixin implements _Running {
   const _$_Running(
       {required final List<TtvEmote> emotesBuffer,
       required final List<TtvEmote> emotesRanking,
-      required final List<TtvEmote> emotesOnChannel})
+      required this.emotesOnChannel,
+      required final Map<TtvEmote, int> emotesPoints})
       : _emotesBuffer = emotesBuffer,
         _emotesRanking = emotesRanking,
-        _emotesOnChannel = emotesOnChannel;
+        _emotesPoints = emotesPoints;
 
   final List<TtvEmote> _emotesBuffer;
   @override
@@ -881,17 +898,19 @@ class _$_Running with DiagnosticableTreeMixin implements _Running {
     return EqualUnmodifiableListView(_emotesRanking);
   }
 
-  final List<TtvEmote> _emotesOnChannel;
   @override
-  List<TtvEmote> get emotesOnChannel {
-    if (_emotesOnChannel is EqualUnmodifiableListView) return _emotesOnChannel;
+  final HashMap<String, TtvEmote> emotesOnChannel;
+  final Map<TtvEmote, int> _emotesPoints;
+  @override
+  Map<TtvEmote, int> get emotesPoints {
+    if (_emotesPoints is EqualUnmodifiableMapView) return _emotesPoints;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_emotesOnChannel);
+    return EqualUnmodifiableMapView(_emotesPoints);
   }
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
-    return 'ChatListenerState.running(emotesBuffer: $emotesBuffer, emotesRanking: $emotesRanking, emotesOnChannel: $emotesOnChannel)';
+    return 'ChatListenerState.running(emotesBuffer: $emotesBuffer, emotesRanking: $emotesRanking, emotesOnChannel: $emotesOnChannel, emotesPoints: $emotesPoints)';
   }
 
   @override
@@ -901,7 +920,8 @@ class _$_Running with DiagnosticableTreeMixin implements _Running {
       ..add(DiagnosticsProperty('type', 'ChatListenerState.running'))
       ..add(DiagnosticsProperty('emotesBuffer', emotesBuffer))
       ..add(DiagnosticsProperty('emotesRanking', emotesRanking))
-      ..add(DiagnosticsProperty('emotesOnChannel', emotesOnChannel));
+      ..add(DiagnosticsProperty('emotesOnChannel', emotesOnChannel))
+      ..add(DiagnosticsProperty('emotesPoints', emotesPoints));
   }
 
   @override
@@ -914,7 +934,9 @@ class _$_Running with DiagnosticableTreeMixin implements _Running {
             const DeepCollectionEquality()
                 .equals(other._emotesRanking, _emotesRanking) &&
             const DeepCollectionEquality()
-                .equals(other._emotesOnChannel, _emotesOnChannel));
+                .equals(other.emotesOnChannel, emotesOnChannel) &&
+            const DeepCollectionEquality()
+                .equals(other._emotesPoints, _emotesPoints));
   }
 
   @override
@@ -922,7 +944,8 @@ class _$_Running with DiagnosticableTreeMixin implements _Running {
       runtimeType,
       const DeepCollectionEquality().hash(_emotesBuffer),
       const DeepCollectionEquality().hash(_emotesRanking),
-      const DeepCollectionEquality().hash(_emotesOnChannel));
+      const DeepCollectionEquality().hash(emotesOnChannel),
+      const DeepCollectionEquality().hash(_emotesPoints));
 
   @JsonKey(ignore: true)
   @override
@@ -934,41 +957,52 @@ class _$_Running with DiagnosticableTreeMixin implements _Running {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function(List<TtvEmote> emotesBuffer,
-            List<TtvEmote> emotesRanking, List<TtvEmote> emotesOnChannel)
+    required TResult Function(
+            List<TtvEmote> emotesBuffer,
+            List<TtvEmote> emotesRanking,
+            HashMap<String, TtvEmote> emotesOnChannel,
+            Map<TtvEmote, int> emotesPoints)
         running,
     required TResult Function() stopped,
     required TResult Function() changingStatus,
   }) {
-    return running(emotesBuffer, emotesRanking, emotesOnChannel);
+    return running(emotesBuffer, emotesRanking, emotesOnChannel, emotesPoints);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
-    TResult? Function(List<TtvEmote> emotesBuffer, List<TtvEmote> emotesRanking,
-            List<TtvEmote> emotesOnChannel)?
+    TResult? Function(
+            List<TtvEmote> emotesBuffer,
+            List<TtvEmote> emotesRanking,
+            HashMap<String, TtvEmote> emotesOnChannel,
+            Map<TtvEmote, int> emotesPoints)?
         running,
     TResult? Function()? stopped,
     TResult? Function()? changingStatus,
   }) {
-    return running?.call(emotesBuffer, emotesRanking, emotesOnChannel);
+    return running?.call(
+        emotesBuffer, emotesRanking, emotesOnChannel, emotesPoints);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(List<TtvEmote> emotesBuffer, List<TtvEmote> emotesRanking,
-            List<TtvEmote> emotesOnChannel)?
+    TResult Function(
+            List<TtvEmote> emotesBuffer,
+            List<TtvEmote> emotesRanking,
+            HashMap<String, TtvEmote> emotesOnChannel,
+            Map<TtvEmote, int> emotesPoints)?
         running,
     TResult Function()? stopped,
     TResult Function()? changingStatus,
     required TResult orElse(),
   }) {
     if (running != null) {
-      return running(emotesBuffer, emotesRanking, emotesOnChannel);
+      return running(
+          emotesBuffer, emotesRanking, emotesOnChannel, emotesPoints);
     }
     return orElse();
   }
@@ -1015,11 +1049,13 @@ abstract class _Running implements ChatListenerState {
   const factory _Running(
       {required final List<TtvEmote> emotesBuffer,
       required final List<TtvEmote> emotesRanking,
-      required final List<TtvEmote> emotesOnChannel}) = _$_Running;
+      required final HashMap<String, TtvEmote> emotesOnChannel,
+      required final Map<TtvEmote, int> emotesPoints}) = _$_Running;
 
   List<TtvEmote> get emotesBuffer;
   List<TtvEmote> get emotesRanking;
-  List<TtvEmote> get emotesOnChannel;
+  HashMap<String, TtvEmote> get emotesOnChannel;
+  Map<TtvEmote, int> get emotesPoints;
   @JsonKey(ignore: true)
   _$$_RunningCopyWith<_$_Running> get copyWith =>
       throw _privateConstructorUsedError;
@@ -1069,8 +1105,11 @@ class _$_Stopped with DiagnosticableTreeMixin implements _Stopped {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function(List<TtvEmote> emotesBuffer,
-            List<TtvEmote> emotesRanking, List<TtvEmote> emotesOnChannel)
+    required TResult Function(
+            List<TtvEmote> emotesBuffer,
+            List<TtvEmote> emotesRanking,
+            HashMap<String, TtvEmote> emotesOnChannel,
+            Map<TtvEmote, int> emotesPoints)
         running,
     required TResult Function() stopped,
     required TResult Function() changingStatus,
@@ -1082,8 +1121,11 @@ class _$_Stopped with DiagnosticableTreeMixin implements _Stopped {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
-    TResult? Function(List<TtvEmote> emotesBuffer, List<TtvEmote> emotesRanking,
-            List<TtvEmote> emotesOnChannel)?
+    TResult? Function(
+            List<TtvEmote> emotesBuffer,
+            List<TtvEmote> emotesRanking,
+            HashMap<String, TtvEmote> emotesOnChannel,
+            Map<TtvEmote, int> emotesPoints)?
         running,
     TResult? Function()? stopped,
     TResult? Function()? changingStatus,
@@ -1095,8 +1137,11 @@ class _$_Stopped with DiagnosticableTreeMixin implements _Stopped {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(List<TtvEmote> emotesBuffer, List<TtvEmote> emotesRanking,
-            List<TtvEmote> emotesOnChannel)?
+    TResult Function(
+            List<TtvEmote> emotesBuffer,
+            List<TtvEmote> emotesRanking,
+            HashMap<String, TtvEmote> emotesOnChannel,
+            Map<TtvEmote, int> emotesPoints)?
         running,
     TResult Function()? stopped,
     TResult Function()? changingStatus,
@@ -1198,8 +1243,11 @@ class _$_ChangingStatus
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function(List<TtvEmote> emotesBuffer,
-            List<TtvEmote> emotesRanking, List<TtvEmote> emotesOnChannel)
+    required TResult Function(
+            List<TtvEmote> emotesBuffer,
+            List<TtvEmote> emotesRanking,
+            HashMap<String, TtvEmote> emotesOnChannel,
+            Map<TtvEmote, int> emotesPoints)
         running,
     required TResult Function() stopped,
     required TResult Function() changingStatus,
@@ -1211,8 +1259,11 @@ class _$_ChangingStatus
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? initial,
-    TResult? Function(List<TtvEmote> emotesBuffer, List<TtvEmote> emotesRanking,
-            List<TtvEmote> emotesOnChannel)?
+    TResult? Function(
+            List<TtvEmote> emotesBuffer,
+            List<TtvEmote> emotesRanking,
+            HashMap<String, TtvEmote> emotesOnChannel,
+            Map<TtvEmote, int> emotesPoints)?
         running,
     TResult? Function()? stopped,
     TResult? Function()? changingStatus,
@@ -1224,8 +1275,11 @@ class _$_ChangingStatus
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(List<TtvEmote> emotesBuffer, List<TtvEmote> emotesRanking,
-            List<TtvEmote> emotesOnChannel)?
+    TResult Function(
+            List<TtvEmote> emotesBuffer,
+            List<TtvEmote> emotesRanking,
+            HashMap<String, TtvEmote> emotesOnChannel,
+            Map<TtvEmote, int> emotesPoints)?
         running,
     TResult Function()? stopped,
     TResult Function()? changingStatus,

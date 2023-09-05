@@ -10,9 +10,18 @@ import 'package:pixoo_twitch_emotes_displayer/logic/settings_cubit/settings_cubi
 import 'package:pixoo_twitch_emotes_displayer/router.dart';
 import 'package:pixoo_twitch_emotes_displayer/theme.dart';
 import 'package:system_theme/system_theme.dart';
+import 'package:window_manager/window_manager.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  if (isDesktop) {
+    await WindowManager.instance.ensureInitialized();
+    windowManager.waitUntilReadyToShow().then((_) async {
+      await windowManager.setSize(const Size(500, 800));
+      await windowManager.setMinimumSize(const Size(400, 600));
+      await windowManager.show();
+    });
+  }
   HydratedBloc.storage = await HydratedStorage.build(
     storageDirectory:
         Directory("${(await getApplicationDocumentsDirectory()).path}\\$documentsDirectoryName")
