@@ -48,9 +48,12 @@ class _EmoteCard extends StatelessWidget {
         AnimatedPadding(
           duration: const Duration(milliseconds: 200),
           padding: EdgeInsets.all(withStatus ? 5.0 : 0),
-          child: Image.network(
-            emote.maxQualityUrl,
-            fit: BoxFit.cover,
+          child: Tooltip(
+            message: emote.name,
+            child: Image.network(
+              emote.maxQualityUrl,
+              fit: BoxFit.cover,
+            ),
           ),
         ),
         if (withStatus)

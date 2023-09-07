@@ -9,6 +9,7 @@ import 'package:pixoo_twitch_emotes_displayer/logic/settings_cubit/settings_cubi
 import 'package:pixoo_twitch_emotes_displayer/presentation/screens/dashboard/widgets/emote_card.dart';
 import 'package:pixoo_twitch_emotes_displayer/presentation/screens/dashboard/widgets/emote_listener_controls.dart';
 import 'package:pixoo_twitch_emotes_displayer/presentation/screens/dashboard/widgets/pixoo_device_adapter_controls.dart';
+import 'package:pixoo_twitch_emotes_displayer/presentation/screens/dashboard/widgets/ranking_row.dart';
 import 'package:pixoo_twitch_emotes_displayer/presentation/screens/dashboard/widgets/refresh_emotes_button.dart';
 
 class DashboardScreen extends StatefulWidget {
@@ -85,7 +86,9 @@ class _DashboardScreenState extends State<DashboardScreen> {
           builder: (context, state) => state.map(
             running: (chatListenerRunning) => Column(
               children: [
-                const SizedBox(height: 5,),
+                const SizedBox(
+                  height: 5,
+                ),
                 const Wrap(
                   spacing: 10,
                   runSpacing: 10,
@@ -122,23 +125,14 @@ class _DashboardScreenState extends State<DashboardScreen> {
                     ),
                   ],
                 ),
-                Flexible(
+                const Divider(),
+                const RankingRow(amount: 6),
+                const Divider(),
+                const Flexible(
                   child: SingleChildScrollView(
-                    physics: const BouncingScrollPhysics(),
-                    child: Wrap(
-                      spacing: 4,
-                      runSpacing: 4,
-                      children: chatListenerRunning.emotesRanking
-                          .map((e) => SizedBox(
-                              height: 70,
-                              child: EmoteCard(
-                                emote: e,
-                                caption: chatListenerRunning.emotesPoints[e].toString(),
-                              )))
-                          .toList(),
-                    ),
+                    child: Text("todo: log"),
                   ),
-                )
+                  ),
               ],
             ),
             initial: (_) => const Center(
