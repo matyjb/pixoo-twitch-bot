@@ -9,6 +9,7 @@ import 'package:pixoo_twitch_emotes_displayer/logic/settings_cubit/settings_cubi
 import 'package:pixoo_twitch_emotes_displayer/presentation/screens/dashboard/widgets/emote_card.dart';
 import 'package:pixoo_twitch_emotes_displayer/presentation/screens/dashboard/widgets/emote_listener_controls.dart';
 import 'package:pixoo_twitch_emotes_displayer/presentation/screens/dashboard/widgets/pixoo_device_adapter_controls.dart';
+import 'package:pixoo_twitch_emotes_displayer/presentation/screens/dashboard/widgets/pixoo_emote_card.dart';
 import 'package:pixoo_twitch_emotes_displayer/presentation/screens/dashboard/widgets/ranking_row.dart';
 import 'package:pixoo_twitch_emotes_displayer/presentation/screens/dashboard/widgets/refresh_emotes_button.dart';
 
@@ -116,7 +117,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                               orElse: () => Container(),
                               running: (pixooAdapterStateRunning) =>
                                   pixooAdapterStateRunning.currentEmote != null
-                                      ? EmoteCard(emote: pixooAdapterStateRunning.currentEmote!)
+                                      ? PixooEmoteCard(emote: pixooAdapterStateRunning.currentEmote!)
                                       : const Placeholder(),
                             );
                           },
