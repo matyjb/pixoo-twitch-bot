@@ -1,43 +1,78 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
-import 'package:get_storage/get_storage.dart';
-import 'package:pixoo_twitch_emotes_displayer/pages/app_config/app_config_page.dart';
-import 'package:pixoo_twitch_emotes_displayer/store/app_resources.dart';
-import 'package:pixoo_twitch_emotes_displayer/store/user_settings.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hydrated_bloc/hydrated_bloc.dart';
+import 'package:path_provider/path_provider.dart';
+import 'package:pixoo_twitch_emotes_displayer/helpers/constants.dart';
+import 'package:pixoo_twitch_emotes_displayer/logic/app_resources_cubit/app_resources_cubit.dart';
+import 'package:pixoo_twitch_emotes_displayer/logic/settings_cubit/settings_cubit.dart';
+import 'package:pixoo_twitch_emotes_displayer/router.dart';
+import 'package:pixoo_twitch_emotes_displayer/theme.dart';
+import 'package:system_theme/system_theme.dart';
+import 'package:window_manager/window_manager.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await GetStorage.init("UserSettings");
-  await AppResources.init();
-  UserSettings.instance.load();
+  if (isDesktop) {
+    await WindowManager.instance.ensureInitialized();
+    windowManager.waitUntilReadyToShow().then((_) async {
+      await windowManager.setSize(const Size(500, 800));
+      await windowManager.setMinimumSize(const Size(400, 600));
+      await windowManager.show();
+    });
+  }
+  HydratedBloc.storage = await HydratedStorage.build(
+    storageDirectory:
+        Directory("${(await getApplicationDocumentsDirectory()).path}\\$documentsDirectoryName")
+          ..createSync(),
+  );
+  SystemTheme.fallbackColor = Colors.green[300]!;
+  await SystemTheme.accentColor.load();
+  await AppResourcesCubit.i.init();
   runApp(const MyApp());
 }
 
-const title = 'Emote Pixoo Displayer';
+class MyApp extends StatefulWidget {
 
-class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  final _appRouter = AppRouter();
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: title,
-      theme: ThemeData.dark(useMaterial3: true),
-      home: const MyHomePage(),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider.value(
+          value: AppResourcesCubit.i,
+        ),
+        BlocProvider.value(
+          value: SettingsCubit.i,
+        ),
+      ],
+      child: SystemThemeBuilder(
+        builder: (context, accent) => MaterialApp(
+          debugShowCheckedModeBanner: false,
+          title: appName,
+          theme: lightTheme(accent),
+          darkTheme: darkTheme(accent),
+          themeMode: ThemeMode.system,
+          onGenerateRoute: _appRouter.onGenerateRoute,
+          initialRoute: RouteNames.settings,
+        ),
+      ),
     );
   }
-}
-
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key});
 
   @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  @override
-  Widget build(BuildContext context) {
-    return const AppConfigPage();
+  void dispose() {
+    AppResourcesCubit.i.close();
+    SettingsCubit.i.close();
+    super.dispose();
   }
 }

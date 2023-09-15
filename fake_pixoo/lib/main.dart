@@ -16,9 +16,16 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Fake Pixoo',
+      themeMode: ThemeMode.system,
       debugShowCheckedModeBanner: false,
       theme: ThemeData.from(
-          colorScheme: const ColorScheme.dark(background: Colors.black)),
+        useMaterial3: true,
+        colorScheme: const ColorScheme.dark(background: Colors.black),
+      ),
+      darkTheme: ThemeData.from(
+        useMaterial3: true,
+        colorScheme: const ColorScheme.dark(background: Colors.black),
+      ),
       home: const MyHomePage(title: 'Fake Pixoo'),
     );
   }
