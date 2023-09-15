@@ -65,28 +65,3 @@ class AppResourcesCubit extends Cubit<AppResourcesState> {
     emit(loadedState.copyWith(pixooDevices: pixooDevices));
   }
 }
-
-// ############################
-// ############################
-// ############################
-// ############################
-const List<PixooDevice> debugPixooDevices = [
-  PixooDevice(
-    name: "P64",
-    id: 4324324,
-    privateIP: "192.168.1.40:8081",
-    macAdress: "e4324324gf",
-  ),
-  PixooDevice(
-    name: "P64",
-    id: 5435436,
-    privateIP: "192.168.1.57:8081",
-    macAdress: "eghfds654645",
-  ),
-  PixooDevice(
-    name: "P64",
-    id: 4365524,
-    privateIP: "192.168.1.12:8081",
-    macAdress: "e43243424gf",
-  ),
-];
