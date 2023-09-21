@@ -6,8 +6,9 @@ import 'package:flutter/foundation.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:pixoo_twitch_emotes_displayer/data/models/pixoo_device.dart';
 import 'package:pixoo_twitch_emotes_displayer/data/models/ttv_emote.dart';
+import 'package:pixoo_twitch_emotes_displayer/data/models/ttv_user.dart';
 import 'package:pixoo_twitch_emotes_displayer/data/models/twitch_chat_msg.dart';
-import 'package:pixoo_twitch_emotes_displayer/data/repositories/seventv_repo.dart';
+import 'package:pixoo_twitch_emotes_displayer/data/repositories/temotes_repo.dart';
 import 'package:pixoo_twitch_emotes_displayer/helpers/math.dart';
 import 'package:pixoo_twitch_emotes_displayer/logic/emote_cache_cubit/emote_cache_cubit.dart';
 import 'package:pixoo_twitch_emotes_displayer/logic/pixoo_adapter_bloc/pixoo_adapter_bloc.dart';
@@ -27,6 +28,7 @@ class ChatListenerBloc extends Bloc<ChatListenerEvent, ChatListenerState> {
     EmoteCacheCubit emoteCacheCubit,
     // this for sending emote to pixoo
     PixooAdapterBloc pixooAdapterBloc,
+    TtvUser user,
   ) : super(const _Initial()) {
     on<_Start>((event, emit) async {
       if (state is _Initial || state is _Stopped) {
@@ -64,7 +66,7 @@ class ChatListenerBloc extends Bloc<ChatListenerEvent, ChatListenerState> {
                 }
               },
             );
-            List<TtvEmote> emotes = await SevenTVRepo.getChannelEmotes(settings.channelName!);
+            List<TtvEmote> emotes = await TEmotesRepo.getChannelEmotes(user.login);
             emit(
               _Running(
                 emotesBuffer: [],
@@ -129,8 +131,7 @@ class ChatListenerBloc extends Bloc<ChatListenerEvent, ChatListenerState> {
     });
     on<_RefreshChannelEmotes>((event, emit) async {
       if (state is _Running) {
-        final settings = SettingsCubit.i.state;
-        List<TtvEmote> emotes = await SevenTVRepo.getChannelEmotes(settings.channelName!);
+        List<TtvEmote> emotes = await TEmotesRepo.getChannelEmotes(user.id);
         emit((state as _Running).copyWith(
           emotesOnChannel: HashMap.fromEntries(emotes.map((e) => MapEntry(e.name, e))),
         ));

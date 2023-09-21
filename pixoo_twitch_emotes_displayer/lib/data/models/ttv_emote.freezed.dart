@@ -21,6 +21,7 @@ TtvEmote _$TtvEmoteFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$TtvEmote {
   String get id => throw _privateConstructorUsedError;
+  @TtvEmoteProviderConverter()
   TtvEmoteProvider get provider => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
   String get mime => throw _privateConstructorUsedError;
@@ -41,7 +42,7 @@ abstract class $TtvEmoteCopyWith<$Res> {
   @useResult
   $Res call(
       {String id,
-      TtvEmoteProvider provider,
+      @TtvEmoteProviderConverter() TtvEmoteProvider provider,
       String name,
       String mime,
       int origMaxWidth,
@@ -112,7 +113,7 @@ abstract class _$$_TtvEmoteCopyWith<$Res> implements $TtvEmoteCopyWith<$Res> {
   @useResult
   $Res call(
       {String id,
-      TtvEmoteProvider provider,
+      @TtvEmoteProviderConverter() TtvEmoteProvider provider,
       String name,
       String mime,
       int origMaxWidth,
@@ -177,7 +178,7 @@ class __$$_TtvEmoteCopyWithImpl<$Res>
 class _$_TtvEmote extends _TtvEmote {
   const _$_TtvEmote(
       {required this.id,
-      required this.provider,
+      @TtvEmoteProviderConverter() required this.provider,
       required this.name,
       required this.mime,
       required this.origMaxWidth,
@@ -191,6 +192,7 @@ class _$_TtvEmote extends _TtvEmote {
   @override
   final String id;
   @override
+  @TtvEmoteProviderConverter()
   final TtvEmoteProvider provider;
   @override
   final String name;
@@ -248,7 +250,7 @@ class _$_TtvEmote extends _TtvEmote {
 abstract class _TtvEmote extends TtvEmote {
   const factory _TtvEmote(
       {required final String id,
-      required final TtvEmoteProvider provider,
+      @TtvEmoteProviderConverter() required final TtvEmoteProvider provider,
       required final String name,
       required final String mime,
       required final int origMaxWidth,
@@ -261,6 +263,7 @@ abstract class _TtvEmote extends TtvEmote {
   @override
   String get id;
   @override
+  @TtvEmoteProviderConverter()
   TtvEmoteProvider get provider;
   @override
   String get name;
