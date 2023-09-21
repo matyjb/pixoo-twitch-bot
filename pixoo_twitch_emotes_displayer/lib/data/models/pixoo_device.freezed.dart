@@ -20,9 +20,13 @@ PixooDevice _$PixooDeviceFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$PixooDevice {
+  @JsonKey(name: "DeviceName")
   String get name => throw _privateConstructorUsedError;
+  @JsonKey(name: "DeviceId")
   int get id => throw _privateConstructorUsedError;
+  @JsonKey(name: "DevicePrivateIP")
   String get privateIP => throw _privateConstructorUsedError;
+  @JsonKey(name: "DeviceMac")
   String get macAdress => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -37,7 +41,11 @@ abstract class $PixooDeviceCopyWith<$Res> {
           PixooDevice value, $Res Function(PixooDevice) then) =
       _$PixooDeviceCopyWithImpl<$Res, PixooDevice>;
   @useResult
-  $Res call({String name, int id, String privateIP, String macAdress});
+  $Res call(
+      {@JsonKey(name: "DeviceName") String name,
+      @JsonKey(name: "DeviceId") int id,
+      @JsonKey(name: "DevicePrivateIP") String privateIP,
+      @JsonKey(name: "DeviceMac") String macAdress});
 }
 
 /// @nodoc
@@ -87,7 +95,11 @@ abstract class _$$_PixooDeviceCopyWith<$Res>
       __$$_PixooDeviceCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String name, int id, String privateIP, String macAdress});
+  $Res call(
+      {@JsonKey(name: "DeviceName") String name,
+      @JsonKey(name: "DeviceId") int id,
+      @JsonKey(name: "DevicePrivateIP") String privateIP,
+      @JsonKey(name: "DeviceMac") String macAdress});
 }
 
 /// @nodoc
@@ -131,21 +143,25 @@ class __$$_PixooDeviceCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_PixooDevice implements _PixooDevice {
   const _$_PixooDevice(
-      {required this.name,
-      required this.id,
-      required this.privateIP,
-      required this.macAdress});
+      {@JsonKey(name: "DeviceName") required this.name,
+      @JsonKey(name: "DeviceId") required this.id,
+      @JsonKey(name: "DevicePrivateIP") required this.privateIP,
+      @JsonKey(name: "DeviceMac") required this.macAdress});
 
   factory _$_PixooDevice.fromJson(Map<String, dynamic> json) =>
       _$$_PixooDeviceFromJson(json);
 
   @override
+  @JsonKey(name: "DeviceName")
   final String name;
   @override
+  @JsonKey(name: "DeviceId")
   final int id;
   @override
+  @JsonKey(name: "DevicePrivateIP")
   final String privateIP;
   @override
+  @JsonKey(name: "DeviceMac")
   final String macAdress;
 
   @override
@@ -186,21 +202,26 @@ class _$_PixooDevice implements _PixooDevice {
 
 abstract class _PixooDevice implements PixooDevice {
   const factory _PixooDevice(
-      {required final String name,
-      required final int id,
-      required final String privateIP,
-      required final String macAdress}) = _$_PixooDevice;
+          {@JsonKey(name: "DeviceName") required final String name,
+          @JsonKey(name: "DeviceId") required final int id,
+          @JsonKey(name: "DevicePrivateIP") required final String privateIP,
+          @JsonKey(name: "DeviceMac") required final String macAdress}) =
+      _$_PixooDevice;
 
   factory _PixooDevice.fromJson(Map<String, dynamic> json) =
       _$_PixooDevice.fromJson;
 
   @override
+  @JsonKey(name: "DeviceName")
   String get name;
   @override
+  @JsonKey(name: "DeviceId")
   int get id;
   @override
+  @JsonKey(name: "DevicePrivateIP")
   String get privateIP;
   @override
+  @JsonKey(name: "DeviceMac")
   String get macAdress;
   @override
   @JsonKey(ignore: true)

@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'seventv_emote_raw.dart';
+part of 'seventv_emote.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -14,15 +14,15 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
-SevenTVEmoteRaw _$SevenTVEmoteRawFromJson(Map<String, dynamic> json) {
-  return _SevenTVEmoteRaw.fromJson(json);
+SevenTVEmote _$SevenTVEmoteFromJson(Map<String, dynamic> json) {
+  return _SevenTVEmote.fromJson(json);
 }
 
 /// @nodoc
-mixin _$SevenTVEmoteRaw {
+mixin _$SevenTVEmote {
   String get id => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
-  SevenTVUserRaw get owner => throw _privateConstructorUsedError;
+  SevenTVUser get owner => throw _privateConstructorUsedError;
   int get visibility => throw _privateConstructorUsedError;
   List<dynamic> get visibility_simple => throw _privateConstructorUsedError;
   String get mime => throw _privateConstructorUsedError;
@@ -34,20 +34,20 @@ mixin _$SevenTVEmoteRaw {
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  $SevenTVEmoteRawCopyWith<SevenTVEmoteRaw> get copyWith =>
+  $SevenTVEmoteCopyWith<SevenTVEmote> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $SevenTVEmoteRawCopyWith<$Res> {
-  factory $SevenTVEmoteRawCopyWith(
-          SevenTVEmoteRaw value, $Res Function(SevenTVEmoteRaw) then) =
-      _$SevenTVEmoteRawCopyWithImpl<$Res, SevenTVEmoteRaw>;
+abstract class $SevenTVEmoteCopyWith<$Res> {
+  factory $SevenTVEmoteCopyWith(
+          SevenTVEmote value, $Res Function(SevenTVEmote) then) =
+      _$SevenTVEmoteCopyWithImpl<$Res, SevenTVEmote>;
   @useResult
   $Res call(
       {String id,
       String name,
-      SevenTVUserRaw owner,
+      SevenTVUser owner,
       int visibility,
       List<dynamic> visibility_simple,
       String mime,
@@ -57,13 +57,13 @@ abstract class $SevenTVEmoteRawCopyWith<$Res> {
       List<int> height,
       List<List<String>> urls});
 
-  $SevenTVUserRawCopyWith<$Res> get owner;
+  $SevenTVUserCopyWith<$Res> get owner;
 }
 
 /// @nodoc
-class _$SevenTVEmoteRawCopyWithImpl<$Res, $Val extends SevenTVEmoteRaw>
-    implements $SevenTVEmoteRawCopyWith<$Res> {
-  _$SevenTVEmoteRawCopyWithImpl(this._value, this._then);
+class _$SevenTVEmoteCopyWithImpl<$Res, $Val extends SevenTVEmote>
+    implements $SevenTVEmoteCopyWith<$Res> {
+  _$SevenTVEmoteCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -97,7 +97,7 @@ class _$SevenTVEmoteRawCopyWithImpl<$Res, $Val extends SevenTVEmoteRaw>
       owner: null == owner
           ? _value.owner
           : owner // ignore: cast_nullable_to_non_nullable
-              as SevenTVUserRaw,
+              as SevenTVUser,
       visibility: null == visibility
           ? _value.visibility
           : visibility // ignore: cast_nullable_to_non_nullable
@@ -135,25 +135,25 @@ class _$SevenTVEmoteRawCopyWithImpl<$Res, $Val extends SevenTVEmoteRaw>
 
   @override
   @pragma('vm:prefer-inline')
-  $SevenTVUserRawCopyWith<$Res> get owner {
-    return $SevenTVUserRawCopyWith<$Res>(_value.owner, (value) {
+  $SevenTVUserCopyWith<$Res> get owner {
+    return $SevenTVUserCopyWith<$Res>(_value.owner, (value) {
       return _then(_value.copyWith(owner: value) as $Val);
     });
   }
 }
 
 /// @nodoc
-abstract class _$$_SevenTVEmoteRawCopyWith<$Res>
-    implements $SevenTVEmoteRawCopyWith<$Res> {
-  factory _$$_SevenTVEmoteRawCopyWith(
-          _$_SevenTVEmoteRaw value, $Res Function(_$_SevenTVEmoteRaw) then) =
-      __$$_SevenTVEmoteRawCopyWithImpl<$Res>;
+abstract class _$$_SevenTVEmoteCopyWith<$Res>
+    implements $SevenTVEmoteCopyWith<$Res> {
+  factory _$$_SevenTVEmoteCopyWith(
+          _$_SevenTVEmote value, $Res Function(_$_SevenTVEmote) then) =
+      __$$_SevenTVEmoteCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
       {String id,
       String name,
-      SevenTVUserRaw owner,
+      SevenTVUser owner,
       int visibility,
       List<dynamic> visibility_simple,
       String mime,
@@ -164,15 +164,15 @@ abstract class _$$_SevenTVEmoteRawCopyWith<$Res>
       List<List<String>> urls});
 
   @override
-  $SevenTVUserRawCopyWith<$Res> get owner;
+  $SevenTVUserCopyWith<$Res> get owner;
 }
 
 /// @nodoc
-class __$$_SevenTVEmoteRawCopyWithImpl<$Res>
-    extends _$SevenTVEmoteRawCopyWithImpl<$Res, _$_SevenTVEmoteRaw>
-    implements _$$_SevenTVEmoteRawCopyWith<$Res> {
-  __$$_SevenTVEmoteRawCopyWithImpl(
-      _$_SevenTVEmoteRaw _value, $Res Function(_$_SevenTVEmoteRaw) _then)
+class __$$_SevenTVEmoteCopyWithImpl<$Res>
+    extends _$SevenTVEmoteCopyWithImpl<$Res, _$_SevenTVEmote>
+    implements _$$_SevenTVEmoteCopyWith<$Res> {
+  __$$_SevenTVEmoteCopyWithImpl(
+      _$_SevenTVEmote _value, $Res Function(_$_SevenTVEmote) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -190,7 +190,7 @@ class __$$_SevenTVEmoteRawCopyWithImpl<$Res>
     Object? height = null,
     Object? urls = null,
   }) {
-    return _then(_$_SevenTVEmoteRaw(
+    return _then(_$_SevenTVEmote(
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
@@ -202,7 +202,7 @@ class __$$_SevenTVEmoteRawCopyWithImpl<$Res>
       owner: null == owner
           ? _value.owner
           : owner // ignore: cast_nullable_to_non_nullable
-              as SevenTVUserRaw,
+              as SevenTVUser,
       visibility: null == visibility
           ? _value.visibility
           : visibility // ignore: cast_nullable_to_non_nullable
@@ -241,8 +241,8 @@ class __$$_SevenTVEmoteRawCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_SevenTVEmoteRaw implements _SevenTVEmoteRaw {
-  const _$_SevenTVEmoteRaw(
+class _$_SevenTVEmote implements _SevenTVEmote {
+  const _$_SevenTVEmote(
       {required this.id,
       required this.name,
       required this.owner,
@@ -260,15 +260,15 @@ class _$_SevenTVEmoteRaw implements _SevenTVEmoteRaw {
         _height = height,
         _urls = urls;
 
-  factory _$_SevenTVEmoteRaw.fromJson(Map<String, dynamic> json) =>
-      _$$_SevenTVEmoteRawFromJson(json);
+  factory _$_SevenTVEmote.fromJson(Map<String, dynamic> json) =>
+      _$$_SevenTVEmoteFromJson(json);
 
   @override
   final String id;
   @override
   final String name;
   @override
-  final SevenTVUserRaw owner;
+  final SevenTVUser owner;
   @override
   final int visibility;
   final List<dynamic> _visibility_simple;
@@ -318,14 +318,14 @@ class _$_SevenTVEmoteRaw implements _SevenTVEmoteRaw {
 
   @override
   String toString() {
-    return 'SevenTVEmoteRaw(id: $id, name: $name, owner: $owner, visibility: $visibility, visibility_simple: $visibility_simple, mime: $mime, status: $status, tags: $tags, width: $width, height: $height, urls: $urls)';
+    return 'SevenTVEmote(id: $id, name: $name, owner: $owner, visibility: $visibility, visibility_simple: $visibility_simple, mime: $mime, status: $status, tags: $tags, width: $width, height: $height, urls: $urls)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_SevenTVEmoteRaw &&
+            other is _$_SevenTVEmote &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.name, name) || other.name == name) &&
             (identical(other.owner, owner) || other.owner == owner) &&
@@ -360,22 +360,22 @@ class _$_SevenTVEmoteRaw implements _SevenTVEmoteRaw {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_SevenTVEmoteRawCopyWith<_$_SevenTVEmoteRaw> get copyWith =>
-      __$$_SevenTVEmoteRawCopyWithImpl<_$_SevenTVEmoteRaw>(this, _$identity);
+  _$$_SevenTVEmoteCopyWith<_$_SevenTVEmote> get copyWith =>
+      __$$_SevenTVEmoteCopyWithImpl<_$_SevenTVEmote>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_SevenTVEmoteRawToJson(
+    return _$$_SevenTVEmoteToJson(
       this,
     );
   }
 }
 
-abstract class _SevenTVEmoteRaw implements SevenTVEmoteRaw {
-  const factory _SevenTVEmoteRaw(
+abstract class _SevenTVEmote implements SevenTVEmote {
+  const factory _SevenTVEmote(
       {required final String id,
       required final String name,
-      required final SevenTVUserRaw owner,
+      required final SevenTVUser owner,
       required final int visibility,
       required final List<dynamic> visibility_simple,
       required final String mime,
@@ -383,17 +383,17 @@ abstract class _SevenTVEmoteRaw implements SevenTVEmoteRaw {
       required final List<String> tags,
       required final List<int> width,
       required final List<int> height,
-      required final List<List<String>> urls}) = _$_SevenTVEmoteRaw;
+      required final List<List<String>> urls}) = _$_SevenTVEmote;
 
-  factory _SevenTVEmoteRaw.fromJson(Map<String, dynamic> json) =
-      _$_SevenTVEmoteRaw.fromJson;
+  factory _SevenTVEmote.fromJson(Map<String, dynamic> json) =
+      _$_SevenTVEmote.fromJson;
 
   @override
   String get id;
   @override
   String get name;
   @override
-  SevenTVUserRaw get owner;
+  SevenTVUser get owner;
   @override
   int get visibility;
   @override
@@ -412,6 +412,6 @@ abstract class _SevenTVEmoteRaw implements SevenTVEmoteRaw {
   List<List<String>> get urls;
   @override
   @JsonKey(ignore: true)
-  _$$_SevenTVEmoteRawCopyWith<_$_SevenTVEmoteRaw> get copyWith =>
+  _$$_SevenTVEmoteCopyWith<_$_SevenTVEmote> get copyWith =>
       throw _privateConstructorUsedError;
 }

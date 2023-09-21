@@ -4,7 +4,7 @@ import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:pixoo_twitch_emotes_displayer/data/models/pixoo_device.dart';
-import 'package:pixoo_twitch_emotes_displayer/data/models/sevenTvApi/seventv_emote_raw.dart';
+import 'package:pixoo_twitch_emotes_displayer/data/models/sevenTvApi/seventv_emote.dart';
 part 'ttv_emote.freezed.dart';
 part 'ttv_emote.g.dart';
 
@@ -26,14 +26,14 @@ class TtvEmote with _$TtvEmote {
 
   factory TtvEmote.fromJson(Map<String, Object?> json) => _$TtvEmoteFromJson(json);
 
-  factory TtvEmote.from7TvRaw(SevenTVEmoteRaw raw) => TtvEmote(
-        id: "${raw.id}_${TtvEmoteProvider.sevenTv.name}",
+  factory TtvEmote.from7Tv(SevenTVEmote sevenTVEmote) => TtvEmote(
+        id: "${sevenTVEmote.id}_${TtvEmoteProvider.sevenTv.name}",
         provider: TtvEmoteProvider.sevenTv,
-        name: raw.name,
-        mime: raw.mime,
-        origMaxWidth: raw.width.last,
-        origMaxHeight: raw.height.last,
-        maxQualityUrl: raw.urls.last.last,
+        name: sevenTVEmote.name,
+        mime: sevenTVEmote.mime,
+        origMaxWidth: sevenTVEmote.width.last,
+        origMaxHeight: sevenTVEmote.height.last,
+        maxQualityUrl: sevenTVEmote.urls.last.last,
       );
 
   String fileName(PixooSize size) => "${id}_${size.name}";

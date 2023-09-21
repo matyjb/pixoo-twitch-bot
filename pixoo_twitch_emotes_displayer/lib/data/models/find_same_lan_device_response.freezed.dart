@@ -21,9 +21,12 @@ FindSameLANDevicesResponse _$FindSameLANDevicesResponseFromJson(
 
 /// @nodoc
 mixin _$FindSameLANDevicesResponse {
-  int get ReturnCode => throw _privateConstructorUsedError;
-  String get ReturnMessage => throw _privateConstructorUsedError;
-  List<PixooDeviceRaw> get DeviceList => throw _privateConstructorUsedError;
+  @JsonKey(name: "ReturnCode")
+  int get returnCode => throw _privateConstructorUsedError;
+  @JsonKey(name: "ReturnMessage")
+  String get returnMessage => throw _privateConstructorUsedError;
+  @JsonKey(name: "DeviceList")
+  List<PixooDevice> get deviceList => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -39,7 +42,9 @@ abstract class $FindSameLANDevicesResponseCopyWith<$Res> {
           FindSameLANDevicesResponse>;
   @useResult
   $Res call(
-      {int ReturnCode, String ReturnMessage, List<PixooDeviceRaw> DeviceList});
+      {@JsonKey(name: "ReturnCode") int returnCode,
+      @JsonKey(name: "ReturnMessage") String returnMessage,
+      @JsonKey(name: "DeviceList") List<PixooDevice> deviceList});
 }
 
 /// @nodoc
@@ -56,23 +61,23 @@ class _$FindSameLANDevicesResponseCopyWithImpl<$Res,
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? ReturnCode = null,
-    Object? ReturnMessage = null,
-    Object? DeviceList = null,
+    Object? returnCode = null,
+    Object? returnMessage = null,
+    Object? deviceList = null,
   }) {
     return _then(_value.copyWith(
-      ReturnCode: null == ReturnCode
-          ? _value.ReturnCode
-          : ReturnCode // ignore: cast_nullable_to_non_nullable
+      returnCode: null == returnCode
+          ? _value.returnCode
+          : returnCode // ignore: cast_nullable_to_non_nullable
               as int,
-      ReturnMessage: null == ReturnMessage
-          ? _value.ReturnMessage
-          : ReturnMessage // ignore: cast_nullable_to_non_nullable
+      returnMessage: null == returnMessage
+          ? _value.returnMessage
+          : returnMessage // ignore: cast_nullable_to_non_nullable
               as String,
-      DeviceList: null == DeviceList
-          ? _value.DeviceList
-          : DeviceList // ignore: cast_nullable_to_non_nullable
-              as List<PixooDeviceRaw>,
+      deviceList: null == deviceList
+          ? _value.deviceList
+          : deviceList // ignore: cast_nullable_to_non_nullable
+              as List<PixooDevice>,
     ) as $Val);
   }
 }
@@ -87,7 +92,9 @@ abstract class _$$_FindSameLANDevicesResponseCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {int ReturnCode, String ReturnMessage, List<PixooDeviceRaw> DeviceList});
+      {@JsonKey(name: "ReturnCode") int returnCode,
+      @JsonKey(name: "ReturnMessage") String returnMessage,
+      @JsonKey(name: "DeviceList") List<PixooDevice> deviceList});
 }
 
 /// @nodoc
@@ -103,23 +110,23 @@ class __$$_FindSameLANDevicesResponseCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? ReturnCode = null,
-    Object? ReturnMessage = null,
-    Object? DeviceList = null,
+    Object? returnCode = null,
+    Object? returnMessage = null,
+    Object? deviceList = null,
   }) {
     return _then(_$_FindSameLANDevicesResponse(
-      ReturnCode: null == ReturnCode
-          ? _value.ReturnCode
-          : ReturnCode // ignore: cast_nullable_to_non_nullable
+      returnCode: null == returnCode
+          ? _value.returnCode
+          : returnCode // ignore: cast_nullable_to_non_nullable
               as int,
-      ReturnMessage: null == ReturnMessage
-          ? _value.ReturnMessage
-          : ReturnMessage // ignore: cast_nullable_to_non_nullable
+      returnMessage: null == returnMessage
+          ? _value.returnMessage
+          : returnMessage // ignore: cast_nullable_to_non_nullable
               as String,
-      DeviceList: null == DeviceList
-          ? _value._DeviceList
-          : DeviceList // ignore: cast_nullable_to_non_nullable
-              as List<PixooDeviceRaw>,
+      deviceList: null == deviceList
+          ? _value._deviceList
+          : deviceList // ignore: cast_nullable_to_non_nullable
+              as List<PixooDevice>,
     ));
   }
 }
@@ -128,29 +135,32 @@ class __$$_FindSameLANDevicesResponseCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_FindSameLANDevicesResponse implements _FindSameLANDevicesResponse {
   const _$_FindSameLANDevicesResponse(
-      {required this.ReturnCode,
-      required this.ReturnMessage,
-      required final List<PixooDeviceRaw> DeviceList})
-      : _DeviceList = DeviceList;
+      {@JsonKey(name: "ReturnCode") required this.returnCode,
+      @JsonKey(name: "ReturnMessage") required this.returnMessage,
+      @JsonKey(name: "DeviceList") required final List<PixooDevice> deviceList})
+      : _deviceList = deviceList;
 
   factory _$_FindSameLANDevicesResponse.fromJson(Map<String, dynamic> json) =>
       _$$_FindSameLANDevicesResponseFromJson(json);
 
   @override
-  final int ReturnCode;
+  @JsonKey(name: "ReturnCode")
+  final int returnCode;
   @override
-  final String ReturnMessage;
-  final List<PixooDeviceRaw> _DeviceList;
+  @JsonKey(name: "ReturnMessage")
+  final String returnMessage;
+  final List<PixooDevice> _deviceList;
   @override
-  List<PixooDeviceRaw> get DeviceList {
-    if (_DeviceList is EqualUnmodifiableListView) return _DeviceList;
+  @JsonKey(name: "DeviceList")
+  List<PixooDevice> get deviceList {
+    if (_deviceList is EqualUnmodifiableListView) return _deviceList;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_DeviceList);
+    return EqualUnmodifiableListView(_deviceList);
   }
 
   @override
   String toString() {
-    return 'FindSameLANDevicesResponse(ReturnCode: $ReturnCode, ReturnMessage: $ReturnMessage, DeviceList: $DeviceList)';
+    return 'FindSameLANDevicesResponse(returnCode: $returnCode, returnMessage: $returnMessage, deviceList: $deviceList)';
   }
 
   @override
@@ -158,18 +168,18 @@ class _$_FindSameLANDevicesResponse implements _FindSameLANDevicesResponse {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_FindSameLANDevicesResponse &&
-            (identical(other.ReturnCode, ReturnCode) ||
-                other.ReturnCode == ReturnCode) &&
-            (identical(other.ReturnMessage, ReturnMessage) ||
-                other.ReturnMessage == ReturnMessage) &&
+            (identical(other.returnCode, returnCode) ||
+                other.returnCode == returnCode) &&
+            (identical(other.returnMessage, returnMessage) ||
+                other.returnMessage == returnMessage) &&
             const DeepCollectionEquality()
-                .equals(other._DeviceList, _DeviceList));
+                .equals(other._deviceList, _deviceList));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, ReturnCode, ReturnMessage,
-      const DeepCollectionEquality().hash(_DeviceList));
+  int get hashCode => Object.hash(runtimeType, returnCode, returnMessage,
+      const DeepCollectionEquality().hash(_deviceList));
 
   @JsonKey(ignore: true)
   @override
@@ -189,20 +199,24 @@ class _$_FindSameLANDevicesResponse implements _FindSameLANDevicesResponse {
 abstract class _FindSameLANDevicesResponse
     implements FindSameLANDevicesResponse {
   const factory _FindSameLANDevicesResponse(
-          {required final int ReturnCode,
-          required final String ReturnMessage,
-          required final List<PixooDeviceRaw> DeviceList}) =
+          {@JsonKey(name: "ReturnCode") required final int returnCode,
+          @JsonKey(name: "ReturnMessage") required final String returnMessage,
+          @JsonKey(name: "DeviceList")
+          required final List<PixooDevice> deviceList}) =
       _$_FindSameLANDevicesResponse;
 
   factory _FindSameLANDevicesResponse.fromJson(Map<String, dynamic> json) =
       _$_FindSameLANDevicesResponse.fromJson;
 
   @override
-  int get ReturnCode;
+  @JsonKey(name: "ReturnCode")
+  int get returnCode;
   @override
-  String get ReturnMessage;
+  @JsonKey(name: "ReturnMessage")
+  String get returnMessage;
   @override
-  List<PixooDeviceRaw> get DeviceList;
+  @JsonKey(name: "DeviceList")
+  List<PixooDevice> get deviceList;
   @override
   @JsonKey(ignore: true)
   _$$_FindSameLANDevicesResponseCopyWith<_$_FindSameLANDevicesResponse>

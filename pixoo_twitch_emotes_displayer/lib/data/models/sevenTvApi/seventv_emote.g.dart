@@ -1,16 +1,16 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'seventv_emote_raw.dart';
+part of 'seventv_emote.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_SevenTVEmoteRaw _$$_SevenTVEmoteRawFromJson(Map<String, dynamic> json) =>
-    _$_SevenTVEmoteRaw(
+_$_SevenTVEmote _$$_SevenTVEmoteFromJson(Map<String, dynamic> json) =>
+    _$_SevenTVEmote(
       id: json['id'] as String,
       name: json['name'] as String,
-      owner: SevenTVUserRaw.fromJson(json['owner'] as Map<String, dynamic>),
+      owner: SevenTVUser.fromJson(json['owner'] as Map<String, dynamic>),
       visibility: json['visibility'] as int,
       visibility_simple: json['visibility_simple'] as List<dynamic>,
       mime: json['mime'] as String,
@@ -23,7 +23,7 @@ _$_SevenTVEmoteRaw _$$_SevenTVEmoteRawFromJson(Map<String, dynamic> json) =>
           .toList(),
     );
 
-Map<String, dynamic> _$$_SevenTVEmoteRawToJson(_$_SevenTVEmoteRaw instance) =>
+Map<String, dynamic> _$$_SevenTVEmoteToJson(_$_SevenTVEmote instance) =>
     <String, dynamic>{
       'id': instance.id,
       'name': instance.name,

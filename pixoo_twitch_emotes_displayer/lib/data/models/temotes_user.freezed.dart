@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'seventv_user.dart';
+part of 'temotes_user.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -14,42 +14,41 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
-SevenTVUser _$SevenTVUserFromJson(Map<String, dynamic> json) {
-  return _SevenTVUser.fromJson(json);
+TEmotesUser _$TEmotesUserFromJson(Map<String, dynamic> json) {
+  return _TEmotesUser.fromJson(json);
 }
 
 /// @nodoc
-mixin _$SevenTVUser {
-  String get id => throw _privateConstructorUsedError;
-  @JsonKey(name: "twitch_id")
-  String get twitchId => throw _privateConstructorUsedError;
+mixin _$TEmotesUser {
+  int get id => throw _privateConstructorUsedError;
   String get login => throw _privateConstructorUsedError;
   @JsonKey(name: "display_name")
   String get displayName => throw _privateConstructorUsedError;
+  String get avatar => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
-  $SevenTVUserCopyWith<SevenTVUser> get copyWith =>
+  $TEmotesUserCopyWith<TEmotesUser> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $SevenTVUserCopyWith<$Res> {
-  factory $SevenTVUserCopyWith(
-          SevenTVUser value, $Res Function(SevenTVUser) then) =
-      _$SevenTVUserCopyWithImpl<$Res, SevenTVUser>;
+abstract class $TEmotesUserCopyWith<$Res> {
+  factory $TEmotesUserCopyWith(
+          TEmotesUser value, $Res Function(TEmotesUser) then) =
+      _$TEmotesUserCopyWithImpl<$Res, TEmotesUser>;
   @useResult
   $Res call(
-      {String id,
-      @JsonKey(name: "twitch_id") String twitchId,
+      {int id,
       String login,
-      @JsonKey(name: "display_name") String displayName});
+      @JsonKey(name: "display_name") String displayName,
+      String avatar});
 }
 
 /// @nodoc
-class _$SevenTVUserCopyWithImpl<$Res, $Val extends SevenTVUser>
-    implements $SevenTVUserCopyWith<$Res> {
-  _$SevenTVUserCopyWithImpl(this._value, this._then);
+class _$TEmotesUserCopyWithImpl<$Res, $Val extends TEmotesUser>
+    implements $TEmotesUserCopyWith<$Res> {
+  _$TEmotesUserCopyWithImpl(this._value, this._then);
 
   // ignore: unused_field
   final $Val _value;
@@ -60,19 +59,15 @@ class _$SevenTVUserCopyWithImpl<$Res, $Val extends SevenTVUser>
   @override
   $Res call({
     Object? id = null,
-    Object? twitchId = null,
     Object? login = null,
     Object? displayName = null,
+    Object? avatar = null,
   }) {
     return _then(_value.copyWith(
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as String,
-      twitchId: null == twitchId
-          ? _value.twitchId
-          : twitchId // ignore: cast_nullable_to_non_nullable
-              as String,
+              as int,
       login: null == login
           ? _value.login
           : login // ignore: cast_nullable_to_non_nullable
@@ -80,51 +75,51 @@ class _$SevenTVUserCopyWithImpl<$Res, $Val extends SevenTVUser>
       displayName: null == displayName
           ? _value.displayName
           : displayName // ignore: cast_nullable_to_non_nullable
+              as String,
+      avatar: null == avatar
+          ? _value.avatar
+          : avatar // ignore: cast_nullable_to_non_nullable
               as String,
     ) as $Val);
   }
 }
 
 /// @nodoc
-abstract class _$$_SevenTVUserCopyWith<$Res>
-    implements $SevenTVUserCopyWith<$Res> {
-  factory _$$_SevenTVUserCopyWith(
-          _$_SevenTVUser value, $Res Function(_$_SevenTVUser) then) =
-      __$$_SevenTVUserCopyWithImpl<$Res>;
+abstract class _$$_TEmotesUserCopyWith<$Res>
+    implements $TEmotesUserCopyWith<$Res> {
+  factory _$$_TEmotesUserCopyWith(
+          _$_TEmotesUser value, $Res Function(_$_TEmotesUser) then) =
+      __$$_TEmotesUserCopyWithImpl<$Res>;
   @override
   @useResult
   $Res call(
-      {String id,
-      @JsonKey(name: "twitch_id") String twitchId,
+      {int id,
       String login,
-      @JsonKey(name: "display_name") String displayName});
+      @JsonKey(name: "display_name") String displayName,
+      String avatar});
 }
 
 /// @nodoc
-class __$$_SevenTVUserCopyWithImpl<$Res>
-    extends _$SevenTVUserCopyWithImpl<$Res, _$_SevenTVUser>
-    implements _$$_SevenTVUserCopyWith<$Res> {
-  __$$_SevenTVUserCopyWithImpl(
-      _$_SevenTVUser _value, $Res Function(_$_SevenTVUser) _then)
+class __$$_TEmotesUserCopyWithImpl<$Res>
+    extends _$TEmotesUserCopyWithImpl<$Res, _$_TEmotesUser>
+    implements _$$_TEmotesUserCopyWith<$Res> {
+  __$$_TEmotesUserCopyWithImpl(
+      _$_TEmotesUser _value, $Res Function(_$_TEmotesUser) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? id = null,
-    Object? twitchId = null,
     Object? login = null,
     Object? displayName = null,
+    Object? avatar = null,
   }) {
-    return _then(_$_SevenTVUser(
+    return _then(_$_TEmotesUser(
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as String,
-      twitchId: null == twitchId
-          ? _value.twitchId
-          : twitchId // ignore: cast_nullable_to_non_nullable
-              as String,
+              as int,
       login: null == login
           ? _value.login
           : login // ignore: cast_nullable_to_non_nullable
@@ -132,6 +127,10 @@ class __$$_SevenTVUserCopyWithImpl<$Res>
       displayName: null == displayName
           ? _value.displayName
           : displayName // ignore: cast_nullable_to_non_nullable
+              as String,
+      avatar: null == avatar
+          ? _value.avatar
+          : avatar // ignore: cast_nullable_to_non_nullable
               as String,
     ));
   }
@@ -139,87 +138,82 @@ class __$$_SevenTVUserCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
-class _$_SevenTVUser implements _SevenTVUser {
-  const _$_SevenTVUser(
+class _$_TEmotesUser implements _TEmotesUser {
+  const _$_TEmotesUser(
       {required this.id,
-      @JsonKey(name: "twitch_id") required this.twitchId,
       required this.login,
-      @JsonKey(name: "display_name") required this.displayName});
+      @JsonKey(name: "display_name") required this.displayName,
+      required this.avatar});
 
-  factory _$_SevenTVUser.fromJson(Map<String, dynamic> json) =>
-      _$$_SevenTVUserFromJson(json);
+  factory _$_TEmotesUser.fromJson(Map<String, dynamic> json) =>
+      _$$_TEmotesUserFromJson(json);
 
   @override
-  final String id;
-  @override
-  @JsonKey(name: "twitch_id")
-  final String twitchId;
+  final int id;
   @override
   final String login;
   @override
   @JsonKey(name: "display_name")
   final String displayName;
+  @override
+  final String avatar;
 
   @override
   String toString() {
-    return 'SevenTVUser(id: $id, twitchId: $twitchId, login: $login, displayName: $displayName)';
+    return 'TEmotesUser(id: $id, login: $login, displayName: $displayName, avatar: $avatar)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$_SevenTVUser &&
+            other is _$_TEmotesUser &&
             (identical(other.id, id) || other.id == id) &&
-            (identical(other.twitchId, twitchId) ||
-                other.twitchId == twitchId) &&
             (identical(other.login, login) || other.login == login) &&
             (identical(other.displayName, displayName) ||
-                other.displayName == displayName));
+                other.displayName == displayName) &&
+            (identical(other.avatar, avatar) || other.avatar == avatar));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, id, twitchId, login, displayName);
+  int get hashCode => Object.hash(runtimeType, id, login, displayName, avatar);
 
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$_SevenTVUserCopyWith<_$_SevenTVUser> get copyWith =>
-      __$$_SevenTVUserCopyWithImpl<_$_SevenTVUser>(this, _$identity);
+  _$$_TEmotesUserCopyWith<_$_TEmotesUser> get copyWith =>
+      __$$_TEmotesUserCopyWithImpl<_$_TEmotesUser>(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$_SevenTVUserToJson(
+    return _$$_TEmotesUserToJson(
       this,
     );
   }
 }
 
-abstract class _SevenTVUser implements SevenTVUser {
-  const factory _SevenTVUser(
-          {required final String id,
-          @JsonKey(name: "twitch_id") required final String twitchId,
-          required final String login,
-          @JsonKey(name: "display_name") required final String displayName}) =
-      _$_SevenTVUser;
+abstract class _TEmotesUser implements TEmotesUser {
+  const factory _TEmotesUser(
+      {required final int id,
+      required final String login,
+      @JsonKey(name: "display_name") required final String displayName,
+      required final String avatar}) = _$_TEmotesUser;
 
-  factory _SevenTVUser.fromJson(Map<String, dynamic> json) =
-      _$_SevenTVUser.fromJson;
+  factory _TEmotesUser.fromJson(Map<String, dynamic> json) =
+      _$_TEmotesUser.fromJson;
 
   @override
-  String get id;
-  @override
-  @JsonKey(name: "twitch_id")
-  String get twitchId;
+  int get id;
   @override
   String get login;
   @override
   @JsonKey(name: "display_name")
   String get displayName;
   @override
+  String get avatar;
+  @override
   @JsonKey(ignore: true)
-  _$$_SevenTVUserCopyWith<_$_SevenTVUser> get copyWith =>
+  _$$_TEmotesUserCopyWith<_$_TEmotesUser> get copyWith =>
       throw _privateConstructorUsedError;
 }
