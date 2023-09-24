@@ -8,7 +8,7 @@ class TEmotesApi {
   static final Dio _dio = Dio();
 
   static Future<Response<dynamic>> getUser(String channelName) {
-    return _dio.get("$baseUrl/channel/$channelName/id");
+    return _dio.get("$baseUrl/channel/$channelName/id"); // on quick second request there is 404 error
   }
 
   static Future<Response<List<dynamic>>> getChannelEmotes(String channelName) {

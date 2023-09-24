@@ -2,7 +2,6 @@ import 'package:pixoo_twitch_emotes_displayer/data/models/sevenTvApi/seventv_emo
 import 'package:pixoo_twitch_emotes_displayer/data/models/sevenTvApi/seventv_user.dart';
 import 'package:pixoo_twitch_emotes_displayer/data/models/ttv_emote.dart';
 import 'package:pixoo_twitch_emotes_displayer/data/providers/seventv_api.dart';
-import 'package:pixoo_twitch_emotes_displayer/data/providers/t_emotes_api.dart';
 
 class SevenTVRepo {
   static Future<SevenTVUser> getUser(int userId) async {
@@ -21,11 +20,9 @@ class SevenTVRepo {
   //   });
   // }
 
-  static Future<List<TtvEmote>> getChannelEmotes(String channelName) async {
-    final int userId = await TEmotesApi.getUser(channelName).then((value) => value.data["id"]);
-
+  static Future<List<TtvEmote>> getChannelEmotes(int userId) async {
     return Future.wait([
-      SevenTVApi.getChannelEmotes(userId.toString()),
+      SevenTVApi.getChannelEmotes(userId),
       SevenTVApi.getGlobalEmotes(),
     ]).then((ress) {
       List<TtvEmote> emotes = [];

@@ -1,3 +1,5 @@
+import 'dart:collection';
+
 import 'package:flutter/foundation.dart';
 import 'package:pixoo_twitch_emotes_displayer/data/models/pixoo_device.dart';
 
@@ -34,3 +36,26 @@ const List<PixooDevice> debugPixooDevices = [
     macAdress: "e43243424gf",
   ),
 ];
+
+final HashSet<String> forbiddenChars = HashSet.of({
+  "<",
+  ">",
+  ":",
+  '"',
+  "/",
+  "\\",
+  "|",
+  "?",
+  "*",
+});
+String encodeFileName(String name) {
+  StringBuffer result = StringBuffer();
+  for (final c in name.split("")) {
+    if (forbiddenChars.contains(c)) {
+      result.write("[${c.codeUnitAt(0)}]");
+    } else {
+      result.write(c);
+    }
+  }
+  return result.toString();
+}

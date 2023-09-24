@@ -5,7 +5,7 @@ const String baseUrl = "https://api.7tv.app/v2";
 class SevenTVApi {
   static final Dio _dio = Dio();
 
-  static Future<Response<dynamic>> getUser(String userId) {
+  static Future<Response<dynamic>> getUser(int userId) {
     return _dio.get("$baseUrl/users/$userId");
   }
 
@@ -13,7 +13,7 @@ class SevenTVApi {
     return _dio.get("$baseUrl/emotes/$emoteId");
   }
 
-  static Future<Response<List<dynamic>>> getChannelEmotes(String userId) {
+  static Future<Response<List<dynamic>>> getChannelEmotes(int userId) {
     return _dio.get("$baseUrl/users/$userId/emotes");
   }
 

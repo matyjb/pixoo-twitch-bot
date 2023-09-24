@@ -35,7 +35,7 @@ class AppResourcesCubit extends Cubit<AppResourcesState> {
       return path;
     });
     final networkInterfaces = await NetworkInterface.list(type: InternetAddressType.IPv4);
-    final pixooDevices = await PixooDeviceRepo.getSameLANDevices();
+    final pixooDevices = List<PixooDevice>.from(await PixooDeviceRepo.getSameLANDevices());
 
     if (kDebugMode) {
       pixooDevices.addAll(debugPixooDevices);

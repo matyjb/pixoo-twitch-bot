@@ -1,4 +1,3 @@
-// ignore_for_file: non_constant_identifier_names
 import 'package:freezed_annotation/freezed_annotation.dart';
 part 'temotes_user.freezed.dart';
 part 'temotes_user.g.dart';
