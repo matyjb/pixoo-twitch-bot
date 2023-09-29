@@ -6,6 +6,7 @@ import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:pixoo_twitch_emotes_displayer/helpers/constants.dart';
 import 'package:pixoo_twitch_emotes_displayer/logic/app_resources_cubit/app_resources_cubit.dart';
+import 'package:pixoo_twitch_emotes_displayer/logic/logs_cubit/logs_cubit.dart';
 import 'package:pixoo_twitch_emotes_displayer/logic/settings_cubit/settings_cubit.dart';
 import 'package:pixoo_twitch_emotes_displayer/router.dart';
 import 'package:pixoo_twitch_emotes_displayer/theme.dart';
@@ -49,6 +50,9 @@ class _MyAppState extends State<MyApp> {
     return MultiBlocProvider(
       providers: [
         BlocProvider.value(
+          value: LogsCubit.i,
+        ),
+        BlocProvider.value(
           value: AppResourcesCubit.i,
         ),
         BlocProvider.value(
@@ -73,6 +77,7 @@ class _MyAppState extends State<MyApp> {
   void dispose() {
     AppResourcesCubit.i.close();
     SettingsCubit.i.close();
+    LogsCubit.i.close();
     super.dispose();
   }
 }

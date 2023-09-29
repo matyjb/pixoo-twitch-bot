@@ -9,6 +9,7 @@ import 'package:pixoo_twitch_emotes_displayer/logic/emote_cache_cubit/emote_cach
 import 'package:pixoo_twitch_emotes_displayer/logic/pixoo_adapter_bloc/pixoo_adapter_bloc.dart';
 import 'package:pixoo_twitch_emotes_displayer/logic/settings_cubit/settings_cubit.dart';
 import 'package:pixoo_twitch_emotes_displayer/presentation/screens/dashboard/widgets/emote_listener_controls.dart';
+import 'package:pixoo_twitch_emotes_displayer/presentation/screens/dashboard/widgets/logs_list_view.dart';
 import 'package:pixoo_twitch_emotes_displayer/presentation/screens/dashboard/widgets/pixoo_device_adapter_controls.dart';
 import 'package:pixoo_twitch_emotes_displayer/presentation/screens/dashboard/widgets/pixoo_emote_card.dart';
 import 'package:pixoo_twitch_emotes_displayer/presentation/screens/dashboard/widgets/ranking_row.dart';
@@ -131,11 +132,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                             child: const RankingRow(amount: 6),
                           ),
                           const Divider(),
-                          const Flexible(
-                            child: SingleChildScrollView(
-                              child: Text("todo: log"),
-                            ),
-                          ),
+                          const Expanded(child: LogsListView()),
                         ],
                       ),
                       initial: (_) => const Center(
