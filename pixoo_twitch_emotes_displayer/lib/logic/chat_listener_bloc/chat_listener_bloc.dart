@@ -4,6 +4,7 @@ import 'dart:collection';
 import 'package:bloc/bloc.dart';
 import 'package:flutter/foundation.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:pixoo_twitch_emotes_displayer/data/models/log_entry.dart';
 import 'package:pixoo_twitch_emotes_displayer/data/models/pixoo_device.dart';
 import 'package:pixoo_twitch_emotes_displayer/data/models/ttv_emote.dart';
 import 'package:pixoo_twitch_emotes_displayer/data/models/ttv_user.dart';
@@ -11,6 +12,7 @@ import 'package:pixoo_twitch_emotes_displayer/data/models/twitch_chat_msg.dart';
 import 'package:pixoo_twitch_emotes_displayer/data/repositories/temotes_repo.dart';
 import 'package:pixoo_twitch_emotes_displayer/helpers/math.dart';
 import 'package:pixoo_twitch_emotes_displayer/logic/emote_cache_cubit/emote_cache_cubit.dart';
+import 'package:pixoo_twitch_emotes_displayer/logic/logs_cubit/logs_cubit.dart';
 import 'package:pixoo_twitch_emotes_displayer/logic/pixoo_adapter_bloc/pixoo_adapter_bloc.dart';
 import 'package:pixoo_twitch_emotes_displayer/logic/settings_cubit/settings_cubit.dart';
 import 'package:pixoo_twitch_emotes_displayer/services/chat_listener.dart';
@@ -18,6 +20,8 @@ import 'package:pixoo_twitch_emotes_displayer/services/chat_listener.dart';
 part 'chat_listener_event.dart';
 part 'chat_listener_state.dart';
 part 'chat_listener_bloc.freezed.dart';
+
+_writeToLog(LogEntryType type, String message) => writeToLog(type, "Chat listener service", message);
 
 class ChatListenerBloc extends Bloc<ChatListenerEvent, ChatListenerState> {
   ChatListener? _chatListener;
@@ -131,7 +135,9 @@ class ChatListenerBloc extends Bloc<ChatListenerEvent, ChatListenerState> {
     });
     on<_RefreshChannelEmotes>((event, emit) async {
       if (state is _Running) {
+        _writeToLog(LogEntryType.action, "Refreshing emotes list on channel");
         List<TtvEmote> emotes = await TEmotesRepo.getChannelEmotes(user.id);
+        _writeToLog(LogEntryType.info, "Refreshed emotes list (${emotes.length} emotes)");
         emit((state as _Running).copyWith(
           emotesOnChannel: HashMap.fromEntries(emotes.map((e) => MapEntry(e.name, e))),
         ));

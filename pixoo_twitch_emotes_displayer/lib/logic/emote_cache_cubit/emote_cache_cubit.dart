@@ -4,10 +4,12 @@ import 'dart:io';
 import 'package:async/async.dart';
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:pixoo_twitch_emotes_displayer/data/models/log_entry.dart';
 import 'package:pixoo_twitch_emotes_displayer/data/models/pixoo_device.dart';
 import 'package:pixoo_twitch_emotes_displayer/data/models/ttv_emote.dart';
 import 'package:pixoo_twitch_emotes_displayer/data/providers/imagick_scripts.dart';
 import 'package:pixoo_twitch_emotes_displayer/logic/app_resources_cubit/app_resources_cubit.dart';
+import 'package:pixoo_twitch_emotes_displayer/logic/logs_cubit/logs_cubit.dart';
 import 'package:process_run/process_run.dart';
 
 part 'emote_cache_state.dart';
@@ -15,6 +17,8 @@ part 'emote_cache_cubit.freezed.dart';
 
 // gets filename from full path
 final fileNameRegex = RegExp(r'^.+\\(.+)\.(.+)$');
+
+_writeToLog(LogEntryType type, String message) => writeToLog(type, "Emotes cache", message);
 
 class EmoteCacheCubit extends Cubit<EmoteCacheState> {
   late StreamSubscription<FileSystemEvent> _sub;
@@ -60,7 +64,11 @@ class EmoteCacheCubit extends Cubit<EmoteCacheState> {
     }
   }
 
-  addToFailed(TtvEmote emote) {
+  addToFailed(TtvEmote emote, dynamic err) {
+    _writeToLog(
+      LogEntryType.error,
+      "Emote ${emote.name} file generation failed\n${err.toString()}",
+    );
     emit(state.copyWith(
       preperingEmotesIds: Map.from(state.preperingEmotesIds)..remove(emote.id),
       failedEmotesIds: Set.from(state.failedEmotesIds)..add(emote.id),
@@ -68,6 +76,7 @@ class EmoteCacheCubit extends Cubit<EmoteCacheState> {
   }
 
   complete(TtvEmote emote) {
+    _writeToLog(LogEntryType.info, "Emote ${emote.name} file generated");
     emit(state.copyWith(
       preperingEmotesIds: Map.from(state.preperingEmotesIds)..remove(emote.id),
       failedEmotesIds: Set.from(state.failedEmotesIds)..remove(emote.id),
@@ -84,7 +93,7 @@ class EmoteCacheCubit extends Cubit<EmoteCacheState> {
 
       //extension is added after download
       Future job = emote.download(appState.cachePath).catchError((err) {
-        addToFailed(emote);
+        addToFailed(emote, err);
         return err;
       }).then((String newEmoteFilePath) async {
         final String tmpFile = "${appState.cachePath}\\$emoteFileName.tmp.gif";
@@ -93,6 +102,7 @@ class EmoteCacheCubit extends Cubit<EmoteCacheState> {
           tmpFile,
           emoteFilePath,
         );
+        _writeToLog(LogEntryType.action, "Generating emote ${emote.name} file...");
         return run(scriptCmds.join("\n")).then((List<ProcessResult> procResults) {
           final Iterable<ProcessResult> errors = procResults.where((element) {
             final dynamic err = element.stderr;
@@ -103,7 +113,7 @@ class EmoteCacheCubit extends Cubit<EmoteCacheState> {
             throw errors.join('\n');
           }
         }).catchError((err) {
-          addToFailed(emote);
+          addToFailed(emote, err);
           return err;
         }).then((err) {
           // clean up temp files
