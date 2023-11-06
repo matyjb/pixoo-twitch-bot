@@ -1,20 +1,12 @@
 # pixoo_twitch_emotes_displayer
 
-A new Flutter project.
+Tool for Divoom Pixoo screens that sends emotes from Twitch chat based on activity 
 
-## Getting Started
+## How to use
+1. Install [ImageMagick](https://imagemagick.org/)\
+2. Run, fill out the form and click play button
 
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
-
+--------------------
 
 [how to get oauth key](https://gist.github.com/hunterbridges/ab095066d40f2e1a243e)
 
