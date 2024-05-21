@@ -12,4 +12,4 @@ It converts emotes to Pixoo supported format so expect compression and lower fra
 5. You can adjust how big the buffer for emotes is. It controlls what emote will be selected to display.
    - smaller buffer will make most recent emotes more important
    - bigger buffer will be better to remember about most recent "emote spam" and will display that emote instead of the most recent once
-6. Run it
+6. Run the services and enjoy emotes on your pixoo 🚀
